@@ -1,0 +1,46 @@
+Objectif TER:
+- création d'un logiciel de gestion de tournois "agil"
+
+Spécification du tournois:
+- Poules avec répartition par la méthode du Serpentin
+- niveau moyen des équipes (Système d'étoile /5 pour chaque joueur)
+- application locale
+
+Logiciel:
+- Application Simulpage → Local storage (mysql lite/ nosql ? )
+- JSON
+- storage no sql (no4js ?????)
+- point de sauvgarde → choix user (permettre de synchro quand connexion wifi et user le veut)
+Evénement:
+- possède plusieurs tournoix
+
+Tours: 
+- possibilité d'inscrire des équipes à certain tour 
+	(ex: si un équipe prévient arriver plus tard, l'inscrire au 2nd tours et exempte du 1er)
+- fonctionnement par poules
+
+1. Choix de la configuration
+2. Saisie scores
+3. Phase Eliminatoire
+ → sortie pdf des feuilles de match et résultats
+
+-----------------------------------------------------------------------------
+Exemple d'utilisation:
+- Un USER crée un événement sur le site avec des dates limites d'inscriptions aux différents tournois
+	si payant alors gérer l'inscription définitive lors du paiement (en ligne ou IRL ou les deux)
+- Le jour du tournois, USER télécharge le tournois (avec toutes les infos d'inscription)
+- Le jour du tounois, confirmation de présence soit par paiements soit par on verra + tard
+- à partir d'une certaine heure cloture des inscriptions (sauf si les inscriptions se font uniquement en ligne avant la date limite spécifié pour l'événement).
+- Logiciel propose une formation de poule. validation ou modification par USER
+	→ Choisir à partir de quand élimination commencent (et donc 8e de final etc)
+- répartition des équipes (méthode Serpentin). Validation ou modification par USER
+	(possibilité d'avoir des équipes exemptées du 1er/2nd tour)
+- Début du tounois: 
+	1er tour → Logiciel doit sortir les feuilles de match
+		  → Saisie des résultats par USER
+		  → Calcul du 2e tour. Validation ou modification par USER
+
+Inscription:
+- Une équipe: nom, niveau moyen en fonction des niveau des joueurs
+- joueur: nom, prénom, niveau (étoiles)
+
