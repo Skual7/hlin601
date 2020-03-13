@@ -1,0 +1,13 @@
+<li [ngClass]="{ 'list-group-item': true,
+                'list-group-item-success': inscrit === 'oui',
+                'list-group-item-danger': inscrit === 'non'}">
+    <h4 [ngStyle] = "{color: getColor()}">Tournoi: {{ name }} -- Inscrit: {{ getInscrit() }}</h4>
+    <input type="text" class="form-control" [(ngModel)] = "name">
+    <button class="btn btn-success"
+    (click) = "onInscrire()"
+    [disabled]="inscrit === 'oui'">S'inscrire</button>
+    <button class="btn btn-danger"
+    (click) = "onDesinscrire()"
+    [disabled]= "inscrit === 'non'">Se désinscrire</button>
+<a [routerLink] = "[id]">Détails</a>
+</li>

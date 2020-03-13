@@ -1,0 +1,11 @@
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let user of users">
+        <h3> {{ user.firstName }} {{ user.lastName }} </h3>
+        <p>{{ user.email }} </p>
+        <p>Cette personne à un niveau: {{ user.niveau }}/5</p>
+        <p *ngIf="user.tournoisInscrit && user.tournoisInscrit.length > 0">
+            Cette personne participe à:
+            <span *ngFor="let tournois of user.tournoisInscrit">{{ tournois }} - </span>
+        </p>
+    </li>
+</ul>
