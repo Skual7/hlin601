@@ -1,0 +1,60 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { EventComponent } from './event/event.component';
+
+
+import { EventService } from './services/event.service';
+import { EventViewComponent } from './event-view/event-view.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ConnectionComponent } from './connection/connection.component';
+import { UserService } from './services/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SingleEventComponent } from './single-event/single-event.component';
+import { ConnectionService } from './services/connection.service';
+import { HomeComponent } from './home/home.component';
+import { ConnectionGuard } from './services/connection-guard.service';
+import { TournamentComponent } from './tournament/tournament.component';
+
+
+
+const appRoutes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'events', canActivate:[ConnectionGuard], component: EventViewComponent},
+  {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
+  { path: 'connection', component: ConnectionComponent},
+  { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
+  { path: '', component: HomeComponent},
+  { path: '**', redirectTo: '/home'}
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    EventComponent,
+    EventViewComponent,
+    ConnectionComponent,
+    UserProfileComponent,
+    SingleEventComponent,
+    HomeComponent,
+    TournamentComponent,
+
+  ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
+
+  ],
+  providers: [
+    EventService,
+    UserService,
+    ConnectionService,
+    ConnectionGuard
+
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

@@ -1,0 +1,45 @@
+<div class="col-sm-8 col-sm-offset-2">
+    <h2>{{ userService.user.firstName}} {{ userService.user.lastName }} </h2>
+    <p>Date de naissance: {{ userService.user.birthday }} </p>
+    <p>Votre email: {{ userService.user.email }}</p>
+    <p>Votre niveau: {{ userService.user.niveau }} /5</p>
+    <p>Vous êtes inscrit à : {{ userService.user.tournoisInscrit }} </p>
+    <button class="btn btn-primary" (click)="modifying = true;">Modifier vos informations</button>
+
+</div>
+
+
+<div *ngIf="modifying" class="col-sm-8 col-sm-offset-2">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+        <div class="form-group">
+            <label for="firstName">Prénom</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Nom</label>
+            <input type="text" class="form-control" id="lastName" formControlName= "lastName">
+        </div>
+        <div class="form-group">
+            <label for="birthday">Date de naissance</label>
+            <input type="text" class="form-control" id="birthday" value="{{userService.user.birthday}}" disabled>
+        </div>
+        <div class="form-group">
+            <label for="email">Adresse Mail</label>
+            <input type="text" class="form-control" id="email" formControlName= "email">
+        </div>
+        <div class="form-group">
+            <label for="niveau">Quel niveau avez-vous ? /5</label>
+            <select  id="niveau" class="form-control" formControlName= "niveau">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <p>ATTENTION: La modification de votre date de naissance est impossible. On ne naît qu'une fois !</p>
+        </div>
+        <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">Enregistrer</button>
+    </form>
+</div>

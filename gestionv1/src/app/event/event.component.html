@@ -1,0 +1,12 @@
+<li class="list-group-item"
+    [ngStyle] = "{ color: getColor() }">
+    <h4>Nom: {{ name }}</h4>
+    <p>Date: {{ dateEv }} </p>
+    <p>Date limite inscritpion: {{ dateLimite}}</p>
+ <!--   <p>Tournois: {{ tournois }} </p> -->
+ <p><a [routerLink] = "[name]">Détails</a> </p>
+ <p *ngIf="participe">Vous partitipez</p>
+    <button class="btn btn-success" (click)="registerTeam()">Inscrire équipe</button>
+    <button class="btn btn-danger"(click)="unregisterTeam()">Désinscrire équipe</button>
+    
+</li>
