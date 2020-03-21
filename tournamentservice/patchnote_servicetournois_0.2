@@ -1,0 +1,32 @@
+V.0.2 (fonctionnel) :
+Ajouts de fonctionnalité des tours (round), poule (pool) et match.
+
+-> modification fichier README.
+
+-> Modifications dans tournois.service.ts dans projet-test/src/app :
+	Corrections de la déclarations des attributs dans les méthodes (le type des attributs n'était pas 		précisé).
+	Méthodes :
+	--general--
+	errorm1()
+	--Team--
+	+getTeamNumber()
+	(fix)getTeam() : renvoie l'équipe et plus le numéro d'équipe dans le cas où l'attribut était un 	string.
+
+	--Round--
+	+getRounds()
+	+addRound()
+
+	--Pool--
+	+getPoolsFromRound()
+	+getPoolFromRound()
+	+addPoolToRound()
+	+addTeamToPool()
+
+	--Pool/Match--
+	%getScoresFromPool()
+	+addMatchToPool()
+	+getMatchNumberFromTeam()
+	+addSetScoreToPool()
+	+whoWonMatch()
+	
+	
