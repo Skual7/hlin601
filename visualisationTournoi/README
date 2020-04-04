@@ -25,6 +25,9 @@ JSON.parse(window.localStorage.getItem('tournament')[1][4][2][3][0]
 
 tournamentInit(tournamentName) : initialise le tournois avec un nom. Cette méthode est activée par le bouton sont des tests activées par le 'Start Tournois !' dans app.component.html. Sert de base pour les tests.
 
+----------- Methode generale --------------------
+errorm1(string message) : renvoie un message d'erreur lorsqu'une méthode renvoie -1.
+
 ----------- Methodes pour tournois -----------------
 getTournament() : retourne la valeur du tournois "parse".
 
@@ -34,10 +37,13 @@ setTournamentName(string tournamentName) : mets tournamentName en place 0 de de 
 
 getTournamentName() : renvoie le nom du tournois.
 
+
 ---------- Methodes gestion équipe ------------------
 getTeams() : renvoie l'array qui contient toutes les équipes du tournois.
 
 getTeamNumberByName(string teamN) : renvoie l'index de teamN dans l'array contenant la liste des équipes.
+
+getTeamNumber(string/number teamN) : renvoie l'index de teamN dans l'array contenant la liste des équipes, que teamN soit un string ou un number.
 
 getTeam(string/number teamN) : renvoie l'array correspondant à teamN.
 
@@ -47,6 +53,7 @@ removeTeam(string/number teamN) : supprime l'équipe ayant pour nom/index teamN.
 
 setTeamLevel(string/number teamN, number teamLevel) : attribue teamLevel comme niveau à l'équipe teamN.
 
+
 ---------- Methodes gestion joueur ------------------
 
 getTeamPlayers(string/number teamN) : renvoie l'array contenant les joueurs de l'équipe teamN.
@@ -54,5 +61,37 @@ getTeamPlayers(string/number teamN) : renvoie l'array contenant les joueurs de l
 addPlayer(string/number teamN, string playerName, number playerLevel) : ajoute un joueur à l'équipe teamN ayant pour nom playerName et niveau playerLevel. Actualise le niveau moyen de l'équipe.
 
 removePlayer(string/number teamN, string playerName) : supprime le joueur ayant pour nom playerName.
+
+
+---------- Methodes gestion Tour ---------------------
+getRounds() : renvoie l'array contenant tous les rounds.
+
+addRound() : ajoute un round à la suite.
+
+
+---------- Methodes gestions Poule ---------------------
+getPoolsFromRound(number roundN) : renvoie l'array des poules du tour roundN.
+
+getPoolFromRound(number roundN, number poolN) : renvoie la poule poolN du tour roundN.
+
+addPoolToRound(number roundN) : ajoute une poule à la suite au tour roundN.
+
+addTeamToPool(any teamN, number roundN, number poolN) :  ajoute une équipe à une poule et ajoute les confrontations nouvelles.
+
+
+---------- Methode gestion Poule/Match -------------------
+getScoresFromPool(?) : ?
+
+addMatchToPool(number roundN, number poolN, any team1N, any team2N) : ajoute le match team1N vs team2N à la poule poolN du tour roundN.
+
+getMatchNumberFromTeam(any pool, any teamN1, any teamN2) : renvoie l'index du match opposant teamN1 et teamN2 dans pool.
+
+addSetScoreToPool(number roundN, number poolN, any team1N, any team2N, number score1, number score2) : ajoute un set au match team1N vs team2N avec le score.
+
+whoWonMatch(number roundN, number poolN, any team1N, any team2N) : renvoie l'index de l'équipe ayant gagné le match.
+
+
+
+
 
 

@@ -1,0 +1,5 @@
+<button class="btn btn-success" (click)="renvoie()">tape moi dessus</button>
+<p>{{ rounds }}</p>
+<div *ngFor="let item of rounds;index as i">
+    <app-round [pouleArray]="rounds[i]"></app-round>
+</div>

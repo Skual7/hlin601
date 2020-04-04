@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { element } from 'protractor';
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class TournoisService {
 
   constructor() {
@@ -256,6 +262,33 @@ export class TournoisService {
     }
     return team1>team2?this.getTeamNumber(team1N):this.getTeamNumber(team2N);
 
+  }
+
+  // Gestion de la programmation des tours suivants
+  
+
+  getQualified(nbQualifByPool,numRound){
+    var qualified=[];
+    var pools = this.getPoolsFromRound(numRound);
+    for(var i in pools){
+      //mettre les qualifiés dans le tableau qualified
+    }
+    return qualified;
+  }
+
+  nextRandRound(nbPool,nbTeamByPool){
+    this.addRound();
+    var numRound = this.getRounds().length-1;
+    var qualified = this.getQualified(nbTeamByPool,numRound-1);
+    for(var i=0;i<nbPool;i++){
+      this.addPoolToRound(numRound);
+      for(var j=0;j<nbTeamByPool;j++){
+        var t = getRandomInt(qualified.length);
+        var team = qualified[t];
+        this.addTeamToPool(team,numRound,i);
+        qualified.splice(t,1);
+      }
+    }
   }
 
 }
