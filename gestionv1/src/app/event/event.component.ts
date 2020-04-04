@@ -12,25 +12,14 @@ export class EventComponent implements OnInit {
   @Input() name: string;
   @Input() dateEv: Date;
   @Input() dateLimite: Date;
-  @Input() tournois: any[];
-  @Input() participe:  boolean;
+  @Input() tournois: string[];
   @Input() indexEvent: number; // pr *ngFor et (un)registerTeam
-
+  @Input() description: string[];
+  
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
   }
-  getColor(){
-    if(this.participe) return 'green';
-    else return 'red';
-  }
 
-  
-  registerTeam(){
-    this.eventService.registerTeam(this.indexEvent);
-  }
-  unregisterTeam(){
-    this.eventService.unregisterTeam(this.indexEvent);
-  }
 
 }

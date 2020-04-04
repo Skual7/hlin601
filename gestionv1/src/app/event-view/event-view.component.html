@@ -2,13 +2,13 @@
     <div class="row">
     <h3> Les événements</h3>
       <ul class="list-group">
-        <app-event *ngFor="let event of events; let i = index"
+        <app-event *ngFor="let event of events; let i = index "
         [indexEvent] = "i"
         [name] = "event.name"
         [dateEv] = "event.dateEv"
         [dateLimite] = "event.dateLimite"
         [tournois] = "event.tournois" 
-        [participe]= "event.participe">
+        [description] = "event.description">
       </app-event>
       </ul>
     </div> 

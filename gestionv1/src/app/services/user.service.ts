@@ -6,15 +6,15 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
     //userSubject = new Subject<User>();
-    user = new User("Thomas","caprio","01/07/1998",
-    "thomas@caprio.fr",3,["Tournoi de Cajou", "Coronatournoi"]);
+    user = new User("Moi","monNomdeFmaille","01/01/1000",
+    "adresse@email.fr",3,["Tournoi de Cajou", "Coronatournoi"]);
 
     userTest = [
         {
-            firstName: "Thomas", 
-            lastName: "Caprio",
-            birthday: "01/071998",
-            email: "thomas@caprio.fr",
+            firstName: "Moi", 
+            lastName: "monNomdeFmaille",
+            birthday: "01/01/1000",
+            email: "adresse@email.fr",
             niveau: 2,
             tournoisInscrit: [ 'tournois au pif', 'tournois chez moi']
         }
@@ -25,6 +25,5 @@ export class UserService {
         this.userSubject.next(this.userTest.slice());
     }
     */
-    //+ faire une mth pour charger user from serveur qd connection
 
 }

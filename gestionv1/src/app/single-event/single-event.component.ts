@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { ActivatedRoute } from '@angular/router';
+import { TournamentService } from '../services/tournament.service';
+import { Subscription } from 'rxjs';
+import { Tournament } from '../models/tournament.interface';
+
 
 @Component({
   selector: 'app-single-event',
@@ -8,26 +12,48 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./single-event.component.scss']
 })
 export class SingleEventComponent implements OnInit {
-  @Input() name: string;
-  @Input() dateEv: string;
-  @Input() dateLimite: string;
-  @Input() tournois: any[];
-  @Input() participe:  boolean;
-  
- // @Input() indexEvent: number;
 
+  name: string;
+  dateEv: string;
+  dateLimite: string;
+  tournois: any[];
+  description: String[];
+
+  currentTournament: Tournament;
+
+  descTourn = false;
 
 
   constructor(private eventService: EventService,
-            private route : ActivatedRoute) { }
+            private route : ActivatedRoute,
+            private tournamentService: TournamentService) { }
 
-  ngOnInit() {
+  ngOnInit(){
     const name = this.route.snapshot.params['id']; //=nom event
     this.name = this.eventService.getEventByName(name).name;
     this.dateEv = this.eventService.getEventByName(name).dateEv;
     this.dateLimite = this.eventService.getEventByName(name).dateLimite;
     this.tournois = this.eventService.getEventByName(name).tournois;
-    this.participe = this.eventService.getEventByName(name).participe;
+    this.description = this.eventService.getEventByName(name).description;
+
+  }
+  onClickTournament(nameT: string){
+    //console.log(nameT);
+    this.currentTournament = this.tournamentService.getTournamentById(nameT+this.dateEv);
+   // console.log(this.currentTournament.id);
+    this.tournamentService.setTournament(nameT+this.dateEv);
+    this.descTourn = true;
+    //console.log(this.tournamentService.tournament);
   }
 
+
+
+
+
+
+
+
+
+
 }
+

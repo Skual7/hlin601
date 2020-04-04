@@ -5,17 +5,32 @@
             <h2>{{name}} </h2>
             <p>Date de l'événement: {{ dateEv }} </p>
             <p>Date limite pour les inscriptions: {{ dateLimite }}</p>
-            <p>Tournois présent: {{ tournois }}</p>
+            <p>Tournois présent: </p>
+            
+            <ul class="form-group">
+                <li *ngFor="let tournoi of tournois">
+                    <a (click)="onClickTournament(tournoi)">{{ tournoi}}</a>
+                </li>
+            </ul>
         </div>
-        <div class="col-md-5" style="border: solid 1px black;">
-            ok je comprend pas bcp bootstrap mais ça je commmence à 
+        <div class="col-md-5">
+            <p>Description: </p>
+            <p *ngFor="let desc of description">
+                - {{desc }}
+            </p>
         </div>
-        <div class="col-md-2" style="border: solid 1px black;">
-            capté et c'est cooll enfin je suis pas sur mais on verrabien la po
-            l'instant je fais jsute des tests.
-        </div>
-
     </div>
+    <div class="row" *ngIf="descTourn">
+        <app-tournament 
+            [id] = "currentTournament.id"
+            [nameT] = "currentTournament.nameT"
+            [format] = "currentTournament.format"
+            [teamRegistered] = "currentTournament.teamRegistered"
+            [winner] = "currentTournament.winner"
+            [participe] = "currentTournament.participe">
+        </app-tournament>
+    </div>
+    
 </div>
 
 

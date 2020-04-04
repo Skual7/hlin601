@@ -1,5 +1,5 @@
 export class ConnectionService {
-    isConnected = false;
+    isConnected = true;
     // simulation appel http pr asynchronisme
     signIn(){
         return new Promise(

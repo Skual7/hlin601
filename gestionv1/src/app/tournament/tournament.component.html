@@ -1,1 +1,15 @@
-<p>tournament works!</p>
+<div class="container" >
+    <div class="row">
+        <div class="col-md-5" style="border: 1px solid black;">
+            <h3 style="text-align: center;">{{nameT}}</h3>
+        <p>Format de jeu: {{format}} x {{ format }}</p>
+        <p>Equipes inscrites: {{ teamRegistered }}</p>
+        <button class="btn btn-primary" (click)="onClickInscrire()" >
+            Inscrire son équipe
+        </button>
+        </div>
+        <div class="col-md-5" *ngIf="inscritpion">
+            <app-new-team></app-new-team>
+        </div>
+    </div>
+</div>
