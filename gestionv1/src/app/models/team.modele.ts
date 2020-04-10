@@ -1,8 +1,8 @@
 export class Team {
     constructor(
-        public tournament: string,
+        public tournamentId: string,
         public teamName: string,
-        public players: string[][],
-        //public playersLevel: number[]
+        public players: string[],
+        public playersLevel: number[]
         ){}
 }

@@ -38,7 +38,7 @@ export class SingleEventComponent implements OnInit {
 
   }
   onClickTournament(nameT: string){
-    //console.log(nameT);
+    // 
     this.currentTournament = this.tournamentService.getTournamentById(nameT+this.dateEv);
    // console.log(this.currentTournament.id);
     this.tournamentService.setTournament(nameT+this.dateEv);

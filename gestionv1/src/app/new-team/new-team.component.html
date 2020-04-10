@@ -1,29 +1,38 @@
 <div class="col-sm-8 col-sm-offset-2">
     <form [formGroup]="teamForm" (ngSubmit) = "onSubmitForm()">
+    
         <div class="form-group">
             <label for="teamName">Nom d'équipe</label>
-            <input type="text" class="form-control" id="teamName" formControlName="teamName">   
+            <input type="text" class="form-control" id="teamName" formControlName="teamName">
+            
+            <p *ngIf="teamName.errors?.pattern && teamName.touched">Autorisé: Majuscules, Minuscules, chiffre.</p>
+            <div *ngIf="teamName.errors?.minlength && teamName.touched">min: 5 lettres</div>
+            <div *ngIf="teamName.errors?.maxlength && teamName.touched">max: 20 lettres.</div>
         </div>
+        <!--  -->
         <div formArrayName='players'>
             <h3>Joueurs: </h3>
-            <div class="form-group" *ngFor='let playerControl of getPlayers().controls; let i = index'>
-                <input type="text" class="form-control" [formControlName]="i">
+            <div class="input-group mb-3" 
+                *ngFor='let player of getPlayers().controls; let i = index'
+                [formGroupName]="i">
+                <input type="text" class="form-control" formControlName="name" placeholder="Prénom">
+                  <!--  <p *ngIf="name.errors?.pattern && name.touched"> 
+                    min: 3 lettres, pas de chiffre !
+                    </p> -->
+                <input type="text" class="form-control" formControlName="level" placeholder="Niveau">
+
+                <button type="button" class="btn btn-danger" (click)="onDeletePlayer(i)">Supprimer le joueur</button>
             </div>
-            <button type="button" class="btn btn-success" (click)="onAddPlayers()">Ajouter un joueur</button>
+            <button type="button" class="btn btn-success" (click)="onAddPlayer() ">Ajouter un joueur</button>
         </div>
-     <!--    
-        <div formArrayName='playersLevel'>
-            <h3>Niveaux: </h3>
-            <div class="form-group" *ngFor='let playerLevelControl of getPlayersLevel().controls; let i = index'>
-                <input type="number" class="form-control" [formControlName]="i" min="0" max="5">
-            </div>
-            <button type="button" class="btn btn-success" (click)="onAddPlayersLevel()">Ajouter un joueur</button>
+
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" formControlName="selfInsc">
+            <label class="form-check-label">Cochez si vous faites partie de l'équipe.</label>
         </div>
-       -->  
-        <button class="btn btn-primary" type="submit" [disabled]="teamForm.invalid">Continuer</button>
+        <button class="btn btn-primary" type="submit" [disabled]="teamForm.invalid" >Continuer</button>
     </form>
 
 </div> 
-<!-- 
-    corriger le fait que min 3 joueurs 
- -->
+
+

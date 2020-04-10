@@ -18,9 +18,9 @@ import { HomeComponent } from './home/home.component';
 import { ConnectionGuard } from './services/connection-guard.service';
 import { TournamentComponent } from './tournament/tournament.component';
 import { TournamentService } from './services/tournament.service';
-import { TeamListComponent } from './team-list/team-list.component';
 import { NewTeamComponent } from './new-team/new-team.component';
 import { TeamService } from './services/team.service';
+import { TeamComponent } from './team/team.component';
 
 
 
@@ -45,8 +45,8 @@ const appRoutes: Routes = [
     SingleEventComponent,
     HomeComponent,
     TournamentComponent,
-    TeamListComponent,
     NewTeamComponent,
+    TeamComponent
 
   ],
   imports: [

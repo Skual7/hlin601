@@ -13,7 +13,7 @@ export const EVENTS : Event[] =
         name: "Green tour de Montpellier",
         dateEv: "27/06/20",
         dateLimite: "26/06/20",
-        tournois: ["tournois de cajou"],
+        tournois: ["Elite G"],
         description: ["Lieu: GGL Stadium","Fin des inscriptions: 9:30","Début des tournois à 10:30"]
     }
 ];

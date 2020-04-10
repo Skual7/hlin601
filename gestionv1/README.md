@@ -1,3 +1,9 @@
+
+# NB
+L'ajout d'équipe n'est pas terminé ce n'est qu'une version que je vais reprendre entièrement car 
+pas de vérification d'intégrité des données.
+
+
 # Gestionv1
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.

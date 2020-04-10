@@ -6,7 +6,7 @@ export const TOURNAMENTS: Tournament[] =
             id: "Elite G20/06/20",
             nameT: "Elite G",
             format: 3, // pr 3x3 
-            teamRegistered: 3,
+            teamRegistered: ["TheTeam"],
             winner: "",
             participe: false
         },
@@ -14,15 +14,15 @@ export const TOURNAMENTS: Tournament[] =
             id: "Elite F20/06/20",
             nameT: "Elite F",
             format: 3, // pr 3x3 
-            teamRegistered: 0,
+            teamRegistered: [],
             winner: "",
             participe: false
         },
         {
             id: "Elite G27/06/20",
-            nameT: "tournois de cajou",
+            nameT: "Elite G",
             format: 4,
-            teamRegistered: 0,
+            teamRegistered: [],
             winner: "",
             participe: false
         }

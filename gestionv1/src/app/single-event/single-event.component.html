@@ -20,7 +20,7 @@
             </p>
         </div>
     </div>
-    <div class="row" *ngIf="descTourn">
+    <div class="row" *ngIf="descTourn===true">
         <app-tournament 
             [id] = "currentTournament.id"
             [nameT] = "currentTournament.nameT"

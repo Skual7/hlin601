@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
     //userSubject = new Subject<User>();
-    user = new User("Moi","monNomdeFmaille","01/01/1000",
+    user = new User("Marie","Joana","01/01/1000",
     "adresse@email.fr",3,["Tournoi de Cajou", "Coronatournoi"]);
 
     userTest = [
         {
-            firstName: "Moi", 
-            lastName: "monNomdeFmaille",
+            firstName: "Tommy", 
+            lastName: "Shelby",
             birthday: "01/01/1000",
             email: "adresse@email.fr",
             niveau: 2,

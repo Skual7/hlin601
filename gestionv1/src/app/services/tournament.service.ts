@@ -2,6 +2,7 @@ import { Subject } from 'rxjs'
 import { Injectable, OnInit } from '@angular/core';
 import { Tournament } from '../models/tournament.interface';
 import { TOURNAMENTS } from '../pseudoBDD/tournaments-list';
+import { TeamService } from './team.service';
 
 @Injectable()
 export class TournamentService {
@@ -16,10 +17,10 @@ export class TournamentService {
     tournament: Tournament; // tournois courrant
 
 
-    constructor(){
+    constructor(private teamService: TeamService){
     }
 
-
+ 
 
     // inutile ?? 
     getTournaments(): Tournament[] {
