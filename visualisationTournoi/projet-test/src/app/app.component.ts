@@ -10,18 +10,17 @@ import { QualifServiceService } from './qualif-service.service'
 export class AppComponent {
   title = 'projet-test';
   tournois:any[];
-
+  tournoisService;
   constructor(/*private tournoisService: TournoisService*/){}
 
   ngOnInit(): void {
+    if(window.localStorage.getItem('tournament') == null){
+      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
+    }
   }
 
   clearStorage(){
       localStorage.clear();
       window.location.reload();
-  }
-
-  tournoisStart(){
-   // this.tournoisService.tournamentInit('Tournois du Samedi Soir');
   }
 }

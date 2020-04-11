@@ -9,6 +9,7 @@ export class RoundComponent implements OnInit {
   @Input() pouleArray : Array<object>;
   constructor() { }
 
+
   ngOnInit(): void {
   }
 

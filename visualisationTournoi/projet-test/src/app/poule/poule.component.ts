@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TournoisService } from '../tournois.service';
 
 @Component({
   selector: 'app-poule',
@@ -7,7 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class PouleComponent implements OnInit {
   @Input() teamArray: Array<object>;
-  constructor() { }
+  constructor(/*private tournoiService: TournoisService*/) {
+   }
+   tournoiService = new TournoisService;
+  getTeamName(num){
+    var teamName='';
+    let t=this.tournoiService.getTeam("coucou",num);
+    teamName = t[0];
+    
+    return teamName;
+  }
 
   ngOnInit(): void {
   }

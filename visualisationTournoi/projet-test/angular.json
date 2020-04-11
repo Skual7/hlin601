@@ -27,7 +27,9 @@
               "../projet-test/node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+	    	"../projet-test/node_modules/jquery/dist/jquery.min.js"
+	    ]
           },
           "configurations": {
             "production": {
