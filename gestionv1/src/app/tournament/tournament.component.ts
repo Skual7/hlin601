@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TournamentService } from '../services/tournament.service';
-import { Tournament } from '../models/tournament.interface';
+import { Tournament } from '../models/tournament.modele';
 import { TeamService } from '../services/team.service';
 import { ThrowStmt } from '@angular/compiler';
+import { Team } from '../models/team.modele';
 
 @Component({
   selector: 'app-tournament',
@@ -18,38 +19,46 @@ export class TournamentComponent implements OnInit {
   @Input() winner: string; 
   @Input() participe: boolean;
 
+  teams: Team[];
   
   inscritpion : boolean = false;
   listerEquipe : boolean = false;
+
   constructor(private tournamentService: TournamentService,
               private teamService : TeamService) { }
 
   ngOnInit() {
-    this.setThisTournament();
-    console.log('bordel ngOnInit se fait qu une fois dans tournamentComponents');
-  
+    this.teams = this.getTeams();
   }
 
-  setThisTournament(){
-    this.id = this.tournamentService.tournament.id;
-    this.nameT = this.tournamentService.tournament.nameT;
-    this.format = this.tournamentService.tournament.format;
-    this.teamRegistered = this.tournamentService.tournament.teamRegistered;
-    this.winner = this.tournamentService.tournament.winner;
-    this.participe = this.tournamentService.tournament.participe;
-  }
-  onClickInscrire(){
-    this.inscritpion = true;
-  }
 
-  
+  onClickInscrire(id: string){
+    if(this.inscritpion) this.inscritpion = !this.inscritpion;
+    else this.inscritpion = !this.inscritpion;
+    this.tournamentService.setTournament(id); // init tournois courant ds service correspondant
+  }
+  // gère l'affichage/désaffichage des équipes // 
   displayTeams(){
-    console.log('dans displayTEams de tournamentcompo');
-    this.teamService.tournamentid = this.id;
-    this.listerEquipe = true;
-  
+    
+    if(this.listerEquipe) this.listerEquipe = false
+    else this.listerEquipe = !this.listerEquipe;
+    this.teamRegistered.forEach(name => {
+      let x = this.teamService.getTeamByName(name);
+     // console.log("Dans duisplaysTEams de tournament: "+x.teamName+" "+x.players+" "+ x.playersLevel);
+    });
   }
-  get NbTeamRegistered(){
+  // retourne les équipes inscrite au tournois //
+  getTeams(){
+    const teams : Team[] = [];
+    this.teamRegistered.forEach(name => {
+      let x = this.teamService.getTeamByName(name);
+      teams.push(x);
+     // console.log("Dans getTeam() de tournament: "+x.teamName+" "+x.players+" "+ x.playersLevel);
+    });
+    return teams;
+  }
+  // retourne le nombre d'équipes incrites // 
+  get nbTeam(){
     return this.teamRegistered.length;
   }
 

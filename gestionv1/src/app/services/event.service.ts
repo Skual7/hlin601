@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-import { Event } from "../models/event.interface";
+import { EventVB } from "../models/event.modele";
 import { EVENTS } from '../pseudoBDD/events-list';
 
 @Injectable()
@@ -8,7 +7,7 @@ export class EventService {
 
     //eventSubject = new Subject<any[]>();
  
-    events : Event[] = EVENTS;
+    events : EventVB[] = EVENTS;
     constructor(){}
 
 
@@ -19,6 +18,9 @@ export class EventService {
             }
         );
         return event;
+    }
+    addEvent(E: EventVB){
+        // rajouter les instruction pour rajouter dans la BDD
     }
 
 }

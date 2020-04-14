@@ -9,11 +9,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+
   userForm: FormGroup;
   modifying = false;
 
   birthday : string;
-  tournoisInscrit : string[];
+  //tournoisInscrit : string[]; // à rempl
+  //teams 
 
   constructor(public userService: UserService,
               private formBuilder: FormBuilder) { }
@@ -21,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.birthday = this.userService.user.birthday;
-    this.tournoisInscrit = this.userService.user.tournoisInscrit;
+   
   }
   initForm(){
     this.userForm = this.formBuilder.group(
@@ -33,12 +35,13 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-
+/*
   onSubmitForm(){
     const formValue = this.userForm.value;
     const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, formValue['email'], formValue['niveau'], this.tournoisInscrit);
     this.userService.user = newUser;
     this.modifying = false;
   }
+  */
 
 } 

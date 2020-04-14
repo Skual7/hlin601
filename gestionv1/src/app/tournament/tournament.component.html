@@ -1,24 +1,30 @@
-<div class="container" >
-    <div class="row">
-        <div class="col-md-5" style="border: 1px solid black;">
-            <h3 style="text-align: center;">{{nameT}}</h3>
-            <p>Format de jeu: {{format}} x {{ format }}</p>
-            <p>Equipes inscrites: {{ NbTeamRegistered }}</p>
-            <label >Afficher les équipe inscrites
-            <button class="btn btn-primary" (click)="displayTeams()">Afficher</button></label><br>
-            <button class="btn btn-success" (click)="onClickInscrire()" >Inscrire son équipe</button>
-        </div>
-        <div class="col-md-5" *ngIf="inscritpion">
-            <app-new-team></app-new-team>
-        </div>
-    </div>
-    <div class="row" *ngIf="listerEquipe === true">
-        <div class="col-md-5" style="border: 1px solid black;">
-            <!-- <app-team *ngFor="let team of teams; let i = index"
-            [tournamentId] = "">
-            </app-team> -->
-            <app-team></app-team>
-        </div>
-    </div>
+<div class="col-md-6">
+    <li class="list-group-item">
+        <h3 style="text-align: center;">{{nameT}}</h3>
+        <p>Format de jeu: {{format}} x {{ format }}</p>
+        <p>Equipes inscrites: {{ NbTeamRegistered }}</p>
+        <label *ngIf="listerEquipe === false" >Afficher les équipe inscrites
+        <button class="btn btn-primary" *ngIf="listerEquipe === false" (click)="displayTeams()">Afficher</button></label>
+        <label *ngIf="listerEquipe === true"> Cacher les équipes inscrites
+        <button class="btn btn-primary" *ngIf="listerEquipe === true" (click)="displayTeams()">Cacher</button></label><br>
+        <button class="btn btn-success" *ngIf="inscritpion === false"(click)="onClickInscrire(id)" >Inscrire son équipe</button>
+        <button class="btn btn-success" *ngIf="inscritpion === true"(click)="onClickInscrire(id)" >Annuler</button>
+    </li>
 </div>
+<div class="col-md-6" *ngIf="inscritpion">
+    <app-new-team></app-new-team>
+</div>
+<div class="row" >
+    <div class="col-md-6"  *ngIf="listerEquipe === true">
+        <ul class="list-group">
+            <app-team *ngFor="let team of teams"
+            [tournamentid]="team.tournamentid"
+            [teamName]="team.teamName"
+            [players] ="team.players"
+            [playersLevel]="team.playersLevel">
+            </app-team>
+        </ul>  
+    </div>
+</div>    
+
 

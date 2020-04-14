@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
-import { Subscription } from 'rxjs';
-import { Event } from '../models/event.interface';
-import { ThrowStmt } from '@angular/compiler';
+import { EventVB } from '../models/event.modele';
+
 
 @Component({
   selector: 'app-event-view',
@@ -10,9 +9,10 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./event-view.component.scss']
 })
 export class EventViewComponent implements OnInit {
+  //importation via le service d'events du tableau
+  // des events contenu dans events-list
+  events : EventVB[];
 
-  events : Event[];
-  // eventSubscription: Subscription;
 
   constructor(private eventService: EventService) { }
   ngOnInit(){
@@ -20,8 +20,10 @@ export class EventViewComponent implements OnInit {
   }
 
 }
-/*
 
+
+/*
+  eventSubscription: Subscription;
   ngOnInit() {
     this.eventSubscription = this.eventService.eventSubject.subscribe(
       (events) => { this.events = events;}

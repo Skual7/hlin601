@@ -3,7 +3,7 @@ import { EventService } from '../services/event.service';
 import { ActivatedRoute } from '@angular/router';
 import { TournamentService } from '../services/tournament.service';
 import { Subscription } from 'rxjs';
-import { Tournament } from '../models/tournament.interface';
+import { Tournament } from '../models/tournament.modele';
 
 
 @Component({
@@ -19,9 +19,9 @@ export class SingleEventComponent implements OnInit {
   tournois: any[];
   description: String[];
 
-  currentTournament: Tournament;
+  Tournaments: Tournament[];
 
-  descTourn = false;
+  // descTourn = false;
 
 
   constructor(private eventService: EventService,
@@ -35,18 +35,26 @@ export class SingleEventComponent implements OnInit {
     this.dateLimite = this.eventService.getEventByName(name).dateLimite;
     this.tournois = this.eventService.getEventByName(name).tournois;
     this.description = this.eventService.getEventByName(name).description;
+    this.Tournaments = this.getTournaments();
+  }
 
+  getTournaments(){
+    const T : Tournament[] = [];
+    this.tournois.forEach(tournoisName => {
+        //console.log(tournoisName);
+        //console.log(this.tournamentService.getTournamentById(tournoisName+this.dateEv));
+        T.push(this.tournamentService.getTournamentById(tournoisName+this.dateEv));
+    })
+    return T;
   }
   onClickTournament(nameT: string){
     // 
-    this.currentTournament = this.tournamentService.getTournamentById(nameT+this.dateEv);
+    this.Tournaments = this.getTournaments();
    // console.log(this.currentTournament.id);
-    this.tournamentService.setTournament(nameT+this.dateEv);
-    this.descTourn = true;
+  //  this.tournamentService.setTournament(nameT+this.dateEv);
+    // this.descTourn = true;
     //console.log(this.tournamentService.tournament);
   }
-
-
 
 
 

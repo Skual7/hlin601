@@ -1,32 +1,17 @@
-import { Subject } from 'rxjs'
 import { Injectable, OnInit } from '@angular/core';
-import { Tournament } from '../models/tournament.interface';
+import { Tournament } from '../models/tournament.modele';
 import { TOURNAMENTS } from '../pseudoBDD/tournaments-list';
 import { TeamService } from './team.service';
+import { Team } from '../models/team.modele';
 
 @Injectable()
 export class TournamentService {
-    // devra être remplacé par un download du serveur
-    tournaments : Tournament[] = TOURNAMENTS;
-    // ------------------ Implementer les subject après -------
-    tournamentSubject = new Subject<Tournament[]>();
-    emitTournamentSubject(){
-        this.tournamentSubject.next(this.tournaments.slice());
-    }
-    // ---------------------------------------------------------
+    // IMPORT du tableau des tournois /pseudoBDD/tournament-list // 
+    // devra être remplacé par un download du serveur // 
+    tournaments : Tournament[] = TOURNAMENTS; // "tous les tournois"
     tournament: Tournament; // tournois courrant
 
-
-    constructor(private teamService: TeamService){
-    }
-
- 
-
-    // inutile ?? 
-    getTournaments(): Tournament[] {
-        return TOURNAMENTS;
-    }
-
+    constructor(private teamService: TeamService){}
     getTournamentById(id: string){
         const tournament = this.tournaments.find(
             (tournamentObj) => {
@@ -35,21 +20,20 @@ export class TournamentService {
         );
         return tournament;
     }
+    // initialise tournois courant pr inscription quand clique sur inscrire //
+    // pout que new-team puisse récupérer les informations du tournois // 
     setTournament(id){
         this.tournament = this.getTournamentById(id);
+    }
+    addTournament(T: Tournament){
+        // Rajouter les instructions pour ajouter le tournois à la bdd
     }
 
 }
 
-/*
-
-
-    tournaments: Tournament[];
-
-
-    constructor(){}
-    
-
-    getTournaments(): 
-
-    */
+    // ------------------ Implementer les subject après si mieux compris -------
+    // tournamentSubject = new Subject<Tournament[]>();
+    // emitTournamentSubject(){
+    //     this.tournamentSubject.next(this.tournaments.slice());
+    // }
+    // ---------------------------------------------------------

@@ -1,6 +1,6 @@
-import { Event } from "../models/event.interface";
+import { EventVB } from "../models/event.modele";
 
-export const EVENTS : Event[] = 
+export const EVENTS : EventVB[] = 
 [
     {
         name: "Green tour de Gignac",

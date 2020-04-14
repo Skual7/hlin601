@@ -21,14 +21,15 @@ import { TournamentService } from './services/tournament.service';
 import { NewTeamComponent } from './new-team/new-team.component';
 import { TeamService } from './services/team.service';
 import { TeamComponent } from './team/team.component';
+import { NewEventComponent } from './new-event/new-event.component';
 
 
 
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: 'events', canActivate:[ConnectionGuard], component: EventViewComponent},
+  {path: 'events', component: EventViewComponent},
+  {path: 'events/new-event', canActivate:[ConnectionGuard], component: NewEventComponent},
   {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
-//  {path: 'new-team', canActivate:[ConnectionGuard], component: NewTeamComponent},
   { path: 'connection', component: ConnectionComponent},
   { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
   { path: '', component: HomeComponent},
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     HomeComponent,
     TournamentComponent,
     NewTeamComponent,
-    TeamComponent
+    TeamComponent,
+    NewEventComponent
 
   ],
   imports: [

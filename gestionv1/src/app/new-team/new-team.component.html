@@ -9,14 +9,14 @@
             <div *ngIf="teamName.errors?.minlength && teamName.touched">min: 5 lettres</div>
             <div *ngIf="teamName.errors?.maxlength && teamName.touched">max: 20 lettres.</div>
         </div>
-        <!--  -->
+        <!-- Partie ajout des joueurs  -->
         <div formArrayName='players'>
             <h3>Joueurs: </h3>
             <div class="input-group mb-3" 
                 *ngFor='let player of getPlayers().controls; let i = index'
                 [formGroupName]="i">
                 <input type="text" class="form-control" formControlName="name" placeholder="Prénom">
-                  <!--  <p *ngIf="name.errors?.pattern && name.touched"> 
+                  <!--  <p *ngIf="name.errors?.pattern && name.touched">  à revoir avec validators
                     min: 3 lettres, pas de chiffre !
                     </p> -->
                 <input type="text" class="form-control" formControlName="level" placeholder="Niveau">

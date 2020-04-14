@@ -2,9 +2,5 @@
     <h4>Nom: {{ name }}</h4>
     <p>Date: {{ dateEv }} </p>
     <p>Date limite inscritpion sur le site: {{ dateLimite}}</p>
- <p><a [routerLink] = "[name]">Détails</a> </p>
- <p *ngIf="participe">Vous partitipez</p>
-    <button class="btn btn-success" (click)="registerTeam()">Inscrire équipe</button>
-    <button class="btn btn-danger"(click)="unregisterTeam()">Désinscrire équipe</button>
-    
+ <p><a [routerLink] = "[name]">Détails et tournois</a> </p>    
 </li>

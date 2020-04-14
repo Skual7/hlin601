@@ -3,9 +3,21 @@ import { Team } from "../models/team.modele";
 export const TEAMS: Team[] = 
 [
   {
-    tournamentId: "Elite G20/06/20",
+    tournamentid: "Elite G20/06/20",
     teamName: "TheTeam",
-    players: [ "Personnage1", "Personnage2", "Personnage3"],
-    playersLevel: [ 5,2,3]
+    players: [ "Thomas", "Louis", "Solal"],
+    playersLevel: [ 3,2,3]
+  },
+  {
+    tournamentid: "Elite G20/06/20",
+    teamName: "Teamhaute",
+    players: [ "Romain", "Victor", "Damien"],
+    playersLevel: [ 2,1,3]
+  },
+  {
+    tournamentid: "Elite F20/06/20",
+    teamName: "TeamTest",
+    players: [ "Jean", "Perre", "laBoule", "Marie"],
+    playersLevel: [ 2,1,3 ,4]
   }
 ]
