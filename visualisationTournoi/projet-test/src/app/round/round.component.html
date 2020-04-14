@@ -1,2 +1,3 @@
-<p>round works!</p>
-<p>{{pouleArray}}</p>
+<div *ngFor="let item of pouleArray;index as i">
+    <app-poule [teamArray]=pouleArray[i][0]></app-poule>
+</div>

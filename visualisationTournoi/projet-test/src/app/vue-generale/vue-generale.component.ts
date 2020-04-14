@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TournoisService } from '../tournois.service';
 import { TestObject } from 'protractor/built/driverProviders';
+import * as $ from 'jquery'
 
 @Component({
   selector: 'app-vue-generale',
@@ -10,23 +11,44 @@ import { TestObject } from 'protractor/built/driverProviders';
 
 export class VueGeneraleComponent implements OnInit {
 
-  constructor(private tournoiService: TournoisService) { }
+  tournoiService;
+  constructor() { }
 
   ngOnInit(): void {
   }
-  rounds=this.tournoiService.getRounds();
+
+  rounds;
+
+  monStyle(){
+    let taille = 100/this.rounds.length
+    console.log(100/this.rounds.length)
+    return {
+      'width': taille+'%',
+      'height': '100%',
+      'display':'inline-block',
+      'text-align':'center'
+    }
+  }
+
   renvoie(){
-//    localStorage.clear();
-  //  window.location.reload();
-    this.tournoiService.tournamentInit("monTournoi");
-    this.tournoiService.addRound();
-    this.rounds=this.tournoiService.getRounds();
- //   this.tournoiService.addTeam("yooooooo");
-   // return this.tournoiService.getTeamNumber(0);
+    this.tournoiService = new TournoisService();
+    this.tournoiService.addTournament("coucou");
+    this.tournoiService.addTeam("coucou",'Dragons Bleus');
+    this.tournoiService.addTeam("coucou",'Dragons Rouge');
+    this.tournoiService.addRound("coucou");
+    this.tournoiService.addPoolToRound("coucou",0);
+    this.tournoiService.addTeamToPool("coucou",'Dragons Bleus',0,0);
+    this.tournoiService.addTeamToPool("coucou",'Dragons Rouge',0,0);
+    this.rounds=this.tournoiService.getRounds("coucou");
+  }
+
+  ajout(){
+    this.tournoiService.addRound("coucou");
+    this.rounds=this.tournoiService.getRounds("coucou");
   }
 
   test(){
-    return this.tournoiService.getTeams().length;
+    return this.tournoiService.getTeams("coucou").length;
   }
 
 }

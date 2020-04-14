@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { element } from 'protractor';
 
 function getRandomInt(max) {
@@ -13,32 +13,21 @@ function getRandomInt(max) {
 export class TournoisService {
 
   constructor() {
-    window.localStorage.setItem('tournament',JSON.stringify(['',[],[]]));
   }
 
-  tournamentInit(tournamentName){
-    this.setTournamentName(tournamentName);
-    this.getTournamentName();
-    this.addTeam('Dragons Rouges');
-    this.addTeam('Dragons Bleus');
-    this.addTeam('Dragons Jaunes');
-    this.addPlayer('Dragons Rouges','thomascaprio',5);
-    this.addPlayer('Dragons Rouges','solalgoldstein',1);
-    this.addRound();
-    this.addPoolToRound(0);
-    this.addTeamToPool(0,0,0);
-    this.addTeamToPool(1,0,0);
-    this.addTeamToPool('Dragons Jaunes',0,0);
-    this.addSetScoreToPool(0,0,1,0,25,21);
-    console.log(this.whoWonMatch(0,0,1,0));
- }
 
-  getTournament(){
-    return JSON.parse(window.localStorage.getItem('tournament'));
+  addTournament(nom){
+    this.setTournament(nom,['',[],[]]);
   }
 
-  setTournament(value:any){
-    window.localStorage.setItem('tournament',JSON.stringify(value));
+  getTournament(nom){
+    return JSON.parse(window.localStorage.getItem("tournament"))[nom];
+  }
+
+  setTournament(tournamentName,value:any){
+    let tournament = JSON.parse(window.localStorage.getItem("tournament"));
+    tournament[tournamentName] = value;
+    window.localStorage.setItem("tournament",JSON.stringify(tournament));
   }
 
   errorm1(methodeN:string){
@@ -46,24 +35,16 @@ export class TournoisService {
   }
   
   //Gestion information du tournois--------------------------------------------------------------------------
-  setTournamentName(tournamentName:string){
-    var tournament = this.getTournament();
-    tournament[0] = tournamentName;
-    this.setTournament(tournament);
-  }
 
-  getTournamentName() {
-    return this.getTournament()[0];
-  }
 
   //Gestion des Equipes--------------------------------------------------------------------------------------
-  getTeams(){
-    return this.getTournament()[1];
+  getTeams(tournamentName){
+    return this.getTournament(tournamentName)[1];
   }
 
-  getTeamNumberByName(teamN:any) {
+  getTeamNumberByName(tournamentName,teamN:any) {
     var teamNumber = 0;
-    for (let team of this.getTournament()[1]) {
+    for (let team of this.getTournament(tournamentName)[1]) {
       if (team[0] === teamN) {
         return teamNumber;
       }
@@ -73,63 +54,63 @@ export class TournoisService {
     return -1;
   }
 
-  getTeamNumber(teamN:any){
+  getTeamNumber(tournamentName, teamN:any){
     if(isNaN(teamN)){
-        return this.getTeamNumberByName(teamN);
+        return this.getTeamNumberByName(tournamentName,teamN);
     }
     else{
       return teamN;
     }
   }
 
-  getTeam(teamN:any){
+  getTeam(tournamentName, teamN:any){
     if(isNaN(teamN)){
-        return this.getTeam(this.getTeamNumberByName(teamN));
+        return this.getTeam(tournamentName,this.getTeamNumberByName(tournamentName, teamN));
     }
     else{
-      return this.getTeams()[teamN];
+      return this.getTeams(tournamentName)[teamN];
     }
   }
 
-  addTeam(teamName:string){
-    var tournament = this.getTournament();
+  addTeam(tournamentName, teamName:string){
+    var tournament = this.getTournament(tournamentName);
     tournament[1].push([teamName,,[]]);
-    this.setTournament(tournament);
+    this.setTournament(tournamentName,tournament);
   }
 
-  removeTeam(teamN:any){
+  removeTeam(tournamentName, teamN:any){
     if (isNaN(teamN)) {
-      this.removeTeam(this.getTeamNumberByName(teamN));
+      this.removeTeam(tournamentName, this.getTeamNumberByName(tournamentName, teamN));
     }
     else {
-      var tournament = this.getTournament(), newTeamList = [];
+      var tournament = this.getTournament(tournamentName), newTeamList = [];
       for(let i =0; i < tournament[1].length; i++){
         if(i != teamN){
           newTeamList.push(tournament[1][i]);
         }
       }
       tournament[1] = newTeamList;
-      this.setTournament(tournament);
+      this.setTournament(tournamentName,tournament);
     }
   }
 
-  setTeamLevel(teamN:any,teamLevel:number){
+  setTeamLevel(tournamentName,teamN:any,teamLevel:number){
     if (isNaN(teamN)) {
-      this.setTeamLevel(this.getTeamNumberByName(teamN),teamLevel);
+      this.setTeamLevel(tournamentName,this.getTeamNumberByName(tournamentName, teamN),teamLevel);
     }
     else {
-      var tournament = this.getTournament();
+      var tournament = this.getTournament(tournamentName);
       tournament[1][teamN][1] = teamLevel;
-      this.setTournament(tournament);
+      this.setTournament(tournamentName,tournament);
     }
   }
 
-  calcTeamLevel(teamN:any){
+  calcTeamLevel(tournamentName,teamN:any){
     if (isNaN(teamN)) {
-      this.calcTeamLevel(this.getTeamNumberByName(teamN));
+      this.calcTeamLevel(tournamentName,this.getTeamNumberByName(tournamentName,teamN));
     }
     else {
-      var playerList= this.getTeamPlayers(teamN);
+      var playerList= this.getTeamPlayers(tournamentName,teamN);
       var level=0, nbPlayer=0;
       for(let player of playerList){
         level += parseInt(player[1]);
@@ -140,53 +121,53 @@ export class TournoisService {
   }
 
   //-------------------Gestion Joueurs-------------------------------------------------------------------
-  getTeamPlayers(teamN:any){
+  getTeamPlayers(tournamentName,teamN:any){
     if(isNaN(teamN)){
-      this.getTeamPlayers(this.getTeamNumberByName(teamN));
+      this.getTeamPlayers(tournamentName,this.getTeamNumberByName(tournamentName,teamN));
     }
     else{
-      return this.getTournament()[1][teamN][2];
+      return this.getTournament(tournamentName)[1][teamN][2];
     }
   }
 
-  addPlayer(teamN:any, playerName:string, playerLevel:number) {
+  addPlayer(tournamentName,teamN:any, playerName:string, playerLevel:number) {
     if (isNaN(teamN)) {
-      this.addPlayer(this.getTeamNumberByName(teamN),playerName,playerLevel);
+      this.addPlayer(tournamentName,this.getTeamNumberByName(tournamentName,teamN),playerName,playerLevel);
     }
     else {
-      var tournament = this.getTournament();
+      var tournament = this.getTournament(tournamentName);
       tournament[1][teamN][2].push([playerName, playerLevel]);
-      this.setTournament(tournament);
-      this.setTeamLevel(teamN,this.calcTeamLevel(teamN));
+      this.setTournament(tournamentName,tournament);
+      this.setTeamLevel(tournamentName,teamN,this.calcTeamLevel(tournamentName,teamN));
     }
   }
 
-  removePlayer(teamN:any,playerName:string){
+  removePlayer(tournamentName,teamN:any,playerName:string){
     if (isNaN(teamN)) {
-      this.removePlayer(this.getTeamNumberByName(teamN),playerName);
+      this.removePlayer(tournamentName,this.getTeamNumberByName(tournamentName,teamN),playerName);
     }
     else {
-      var tournament = this.getTournament(), newPlayerList = [];
+      var tournament = this.getTournament(tournamentName), newPlayerList = [];
       for(let player of tournament[1][teamN][2]){
         if(player[0] != playerName){
           newPlayerList.push(player);
         }
       }
     tournament[1][teamN][2] = newPlayerList;
-    this.setTournament(tournament);
-    this.setTeamLevel(teamN,this.calcTeamLevel(teamN));
+    this.setTournament(tournamentName,tournament);
+    this.setTeamLevel(tournamentName,teamN,this.calcTeamLevel(tournamentName,teamN));
     }
   }
 
   //Gestion Round-----------------------------------------------------------------
-  getRounds(){
-    return this.getTournament()[2];
+  getRounds(tournamentName){
+    return this.getTournament(tournamentName)[2];
   }
 
-  addRound(){
-    var tournament = this.getTournament();
+  addRound(tournamentName){
+    var tournament = this.getTournament(tournamentName);
     tournament[2].push([]);
-    this.setTournament(tournament);
+    this.setTournament(tournamentName,tournament);
   }
 
   //------------Gestion poule-----------------------------------------------------
@@ -194,46 +175,47 @@ export class TournoisService {
     console.log('cote cote cote');
   }
 
-  getPoolsFromRound(roundN:number){
-    return this.getTournament()[2][roundN];
+  getPoolsFromRound(tournamentName,roundN:number){
+    return this.getTournament(tournamentName)[2][roundN];
   }
 
-  getPoolFromRound(roundN:number,poolN:number){
-    return this.getTournament()[2][roundN][poolN];
+  getPoolFromRound(tournamentName,roundN:number,poolN:number){
+    return this.getTournament(tournamentName)[2][roundN][poolN];
   }
 
-  addPoolToRound(roundN:number){
-    var tournament = this.getTournament();
+  addPoolToRound(tournamentName,roundN:number){
+    var tournament = this.getTournament(tournamentName);
     tournament[2][roundN].push([[],[]]);
-    this.setTournament(tournament);
+    this.setTournament(tournamentName,tournament);
   }
 
-  addTeamToPool(teamN:any,roundN:number,poolN:number){
-    var numTeam = this.getTeamNumber(teamN);
-    var tournament = this.getTournament();
+  addTeamToPool(tournamentName,teamN:any,roundN:number,poolN:number){
+    var numTeam = this.getTeamNumber(tournamentName,teamN);
+    var tournament = this.getTournament(tournamentName);
     for(let team of tournament[2][roundN][poolN][0]){
-      this.addMatchToPool(roundN,poolN,numTeam,team);
+      this.addMatchToPool(tournamentName,roundN,poolN,numTeam,team);
     }
-    tournament = this.getTournament();
+    tournament = this.getTournament(tournamentName);
     tournament[2][roundN][poolN][0].push(numTeam);
-    this.setTournament(tournament);
+    this.setTournament(tournamentName,tournament);
   }
+
 
   //--------------------------Gestion Match---------------------------------------
   getScoresFromPool(roundN:number,poolN:number){
     //à définir
   }
 
-  addMatchToPool(roundN:number,poolN:number,team1N:any,team2N:any){
-    var tournament = this.getTournament();
-    tournament[2][roundN][poolN][1].push([this.getTeamNumber(team1N),this.getTeamNumber(team2N),[]]);
-    this.setTournament(tournament);
+  addMatchToPool(tournamentName,roundN:number,poolN:number,team1N:any,team2N:any){
+    var tournament = this.getTournament(tournamentName);
+    tournament[2][roundN][poolN][1].push([this.getTeamNumber(tournamentName,team1N),this.getTeamNumber(tournamentName,team2N),[]]);
+    this.setTournament(tournamentName,tournament);
   }
 
-  getMatchNumberFromTeam(pool:any,teamN1:any,teamN2:any){
+  getMatchNumberFromTeam(tournamentName,pool:any,teamN1:any,teamN2:any){
     var matchN = 0;
     for(let match of pool[1]){
-      if(match[0] == this.getTeamNumber(teamN1) && match[1] == this.getTeamNumber(teamN2)){
+      if(match[0] == this.getTeamNumber(tournamentName,teamN1) && match[1] == this.getTeamNumber(tournamentName,teamN2)){
         return matchN;
       }
       matchN++;
@@ -242,17 +224,17 @@ export class TournoisService {
     return -1;
   }
 
-  addSetScoreToPool(roundN:number,poolN:number,team1N:any,team2N:any,score1:number,score2:number){
-    var matchN = this.getMatchNumberFromTeam(this.getPoolFromRound(roundN,poolN),this.getTeamNumber(team1N),this.getTeamNumber(team2N));
-    var tournament = this.getTournament();
+  addSetScoreToPool(tournamentName,roundN:number,poolN:number,team1N:any,team2N:any,score1:number,score2:number){
+    var matchN = this.getMatchNumberFromTeam(tournamentName,this.getPoolFromRound(tournamentName,roundN,poolN),this.getTeamNumber(tournamentName,team1N),this.getTeamNumber(tournamentName,team2N));
+    var tournament = this.getTournament(tournamentName);
     tournament[2][roundN][poolN][1][matchN][2].push([score1,score2]);
-    this.setTournament(tournament);
+    this.setTournament(tournamentName,tournament);
   }
 
-  whoWonMatch(roundN:number,poolN:number,team1N:any,team2N:any){
-    var matchN =  this.getMatchNumberFromTeam(this.getPoolFromRound(roundN,poolN),this.getTeamNumber(team1N),this.getTeamNumber(team2N));
+  whoWonMatch(tournamentName,roundN:number,poolN:number,team1N:any,team2N:any){
+    var matchN =  this.getMatchNumberFromTeam(tournamentName,this.getPoolFromRound(tournamentName,roundN,poolN),this.getTeamNumber(tournamentName,team1N),this.getTeamNumber(tournamentName,team2N));
     var team1 = 0, team2 = 0;
-    for(let set of this.getPoolFromRound(roundN,poolN)[1][matchN][2]){
+    for(let set of this.getPoolFromRound(tournamentName,roundN,poolN)[1][matchN][2]){
       if(set[0]>set[1]){
         team1++;
       }
@@ -260,32 +242,32 @@ export class TournoisService {
         team2++;
       }
     }
-    return team1>team2?this.getTeamNumber(team1N):this.getTeamNumber(team2N);
+    return team1>team2?this.getTeamNumber(tournamentName,team1N):this.getTeamNumber(tournamentName,team2N);
 
   }
 
   // Gestion de la programmation des tours suivants
   
 
-  getQualified(nbQualifByPool,numRound){
+  getQualified(tournamentName,nbQualifByPool,numRound){
     var qualified=[];
-    var pools = this.getPoolsFromRound(numRound);
+    var pools = this.getPoolsFromRound(tournamentName,numRound);
     for(var i in pools){
       //mettre les qualifiés dans le tableau qualified
     }
     return qualified;
   }
 
-  nextRandRound(nbPool,nbTeamByPool){
-    this.addRound();
-    var numRound = this.getRounds().length-1;
-    var qualified = this.getQualified(nbTeamByPool,numRound-1);
+  nextRandRound(tournamentName,nbPool,nbTeamByPool){
+    this.addRound(tournamentName);
+    var numRound = this.getRounds(tournamentName).length-1;
+    var qualified = this.getQualified(tournamentName,nbTeamByPool,numRound-1);
     for(var i=0;i<nbPool;i++){
-      this.addPoolToRound(numRound);
+      this.addPoolToRound(tournamentName,numRound);
       for(var j=0;j<nbTeamByPool;j++){
         var t = getRandomInt(qualified.length);
         var team = qualified[t];
-        this.addTeamToPool(team,numRound,i);
+        this.addTeamToPool(tournamentName,team,numRound,i);
         qualified.splice(t,1);
       }
     }
