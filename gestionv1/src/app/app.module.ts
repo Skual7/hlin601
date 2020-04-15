@@ -22,6 +22,9 @@ import { NewTeamComponent } from './new-team/new-team.component';
 import { TeamService } from './services/team.service';
 import { TeamComponent } from './team/team.component';
 import { NewEventComponent } from './new-event/new-event.component';
+import { TournamentViewComponent } from './tournament-view/tournament-view.component';
+import { PouleComponent } from './poule/poule.component';
+import { RoundComponent } from './round/round.component';
 
 
 
@@ -32,8 +35,9 @@ const appRoutes: Routes = [
   {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
   { path: 'connection', component: ConnectionComponent},
   { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
-  { path: '', component: HomeComponent},
-  { path: '**', redirectTo: '/home'}
+ // { path: '', component: HomeComponent},
+  //{ path: '**', redirectTo: '/home'},
+  { path: 'events/:id/:trn', component: TournamentViewComponent}
 ];
 
 @NgModule({
@@ -48,7 +52,10 @@ const appRoutes: Routes = [
     TournamentComponent,
     NewTeamComponent,
     TeamComponent,
-    NewEventComponent
+    NewEventComponent,
+    TournamentViewComponent,
+    PouleComponent,
+    RoundComponent
 
   ],
   imports: [

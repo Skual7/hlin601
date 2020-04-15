@@ -1,0 +1,17 @@
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Numero</th>
+        <th scope="col">Equipe</th>
+        <th scope="col">Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of teamArray">
+          <th scope="row">{{ item }}</th>
+          <td>{{ getTeamName(item) }}</td>
+          <td> 90</td>
+      </tr>  
+    </tbody>
+  </table>
+  

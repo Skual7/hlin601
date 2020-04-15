@@ -43,13 +43,13 @@ export class SingleEventComponent implements OnInit {
     this.tournois.forEach(tournoisName => {
         //console.log(tournoisName);
         //console.log(this.tournamentService.getTournamentById(tournoisName+this.dateEv));
-        T.push(this.tournamentService.getTournamentById(tournoisName+this.dateEv));
+       // T.push(this.tournamentService.getTournamentById(tournoisName+this.dateEv));
     })
     return T;
   }
   onClickTournament(nameT: string){
     // 
-    this.Tournaments = this.getTournaments();
+    this.Tournaments = this.tournamentService.getTournament(nameT);
    // console.log(this.currentTournament.id);
   //  this.tournamentService.setTournament(nameT+this.dateEv);
     // this.descTourn = true;

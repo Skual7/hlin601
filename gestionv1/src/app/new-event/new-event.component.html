@@ -52,7 +52,7 @@
           <button type="button" class="btn btn-success" (click)="onAddTournament()">Ajouter un tournois</button>
         </div>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">Créer</button>
+      <button class="btn btn-primary" type="submit" [disabled]="eventForm.invalid" (click)="addEvent()">Créer</button>
     </form>
   
 </div>

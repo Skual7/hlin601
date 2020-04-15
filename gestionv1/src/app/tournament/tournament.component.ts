@@ -32,11 +32,11 @@ export class TournamentComponent implements OnInit {
   }
 
 
-  onClickInscrire(id: string){
+  /*onClickInscrire(id: string){
     if(this.inscritpion) this.inscritpion = !this.inscritpion;
     else this.inscritpion = !this.inscritpion;
     this.tournamentService.setTournament(id); // init tournois courant ds service correspondant
-  }
+  }*/
   // gère l'affichage/désaffichage des équipes // 
   displayTeams(){
     
