@@ -1,6 +1,15 @@
 /*
 La structure de l'objet stocké dans le locat storage est la suivante :
 nomDuTournoi : [format,tableau des équipes, tableau des rounds]
+
+Les équipes sont formées de la sorte en local storage :
+[0] nom de l'équipe
+[1] niveau moyen
+[2] array contenant les joueurs de l'équipe
+
+Les joueurs sont formés de la sorte en local storage :
+[0] nom du joueur
+[1] niveau du joueur
 */
 
 import { Injectable, Inject } from '@angular/core';
