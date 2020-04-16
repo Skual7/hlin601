@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TournamentService } from '../services/tournament.service';
 import { TestObject } from 'protractor/built/driverProviders';
-import * as $ from 'jquery'
+//import * as $ from 'jquery'
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
