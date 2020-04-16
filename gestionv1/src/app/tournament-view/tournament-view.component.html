@@ -1,8 +1,9 @@
+<button class="btn btn-success" (click)="addR()">Ajouter un round</button>
 <div class="container-fluid" style="height:100%; background-color: white">
     <div style="align-content: center; align-items: center; height: 100%">
     <div [ngStyle]="monStyle()" class="" *ngFor="let item of rounds;index as i">
         <div>
-               <app-round [pouleArray]="rounds[i]"></app-round>
+               <app-round [pouleArray]="rounds[i]" [numRound]="i"></app-round>
         </div>
     </div>
     </div>

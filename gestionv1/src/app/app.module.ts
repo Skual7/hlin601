@@ -35,9 +35,9 @@ const appRoutes: Routes = [
   {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
   { path: 'connection', component: ConnectionComponent},
   { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
- // { path: '', component: HomeComponent},
-  //{ path: '**', redirectTo: '/home'},
-  { path: 'events/:id/:trn', component: TournamentViewComponent}
+  { path: 'events/:id/:trn', component: TournamentViewComponent},
+  { path: '', component: HomeComponent},
+  { path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

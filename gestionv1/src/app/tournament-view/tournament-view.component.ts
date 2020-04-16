@@ -31,6 +31,11 @@ export class TournamentViewComponent implements OnInit {
     }
   }
 
+  addR(){
+    this.tournamentService.addRound(this.name);
+    this.rounds = this.tournamentService.getRounds(this.name);
+  }
+
   /*renvoie(){
     this.tournamentService.addTournament(this.name,3);
     this.tournamentService.addTeam(this.name,'Dragons Bleus');

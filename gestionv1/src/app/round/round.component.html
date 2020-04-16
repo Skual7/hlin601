@@ -1,3 +1,4 @@
 <div *ngFor="let item of pouleArray;index as i">
     <app-poule [teamArray]=pouleArray[i][0]></app-poule>
 </div>
+<button class="btn btn-success" (click)="addP()">Ajouter une poule</button>
