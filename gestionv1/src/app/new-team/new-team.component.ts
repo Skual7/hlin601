@@ -38,7 +38,7 @@ export class NewTeamComponent implements OnInit {
   }
 
   // pour gérer la validation du formulaire + création team // 
- /* onSubmitForm(){   
+  onSubmitForm(){   
     const formValue = this.teamForm.value;
     const newTeam = new Team (
       this.tournamentService.tournament.id,
@@ -49,7 +49,7 @@ export class NewTeamComponent implements OnInit {
     console.log(newTeam);
    // this.tournamentService.addTeamToTournament(newTeam);
    this.teamService.addTeam(newTeam);
-  }*/
+  }
   // pour transformer correctement les players // 
   getPlayers(){
     return this.teamForm.get('players') as FormArray;
@@ -103,10 +103,10 @@ export class NewTeamComponent implements OnInit {
 
   // savoir le nombre minimum de joueur à ajouter avant validation formulaire //
   // pas encore utilisé pour l'instant                                        // 
-  /*getNbMinPlayers(){
+  getNbMinPlayers(){
     return this.tournamentService.tournament.format;
 
-  }*/
+  }
 
 
 }

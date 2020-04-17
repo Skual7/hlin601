@@ -10,7 +10,6 @@
             <ul class="form-group">
                 <li *ngFor="let tournoi of tournois">
                     <a (click)="onClickTournament(tournoi)">{{ tournoi}}</a>
-                    <p><a [routerLink] = "['/events',this.name,tournoi]">{{ tournoi }}</a> </p>    
                 </li>
             </ul>
         </div>

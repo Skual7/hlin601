@@ -84,14 +84,10 @@ export class NewEventComponent implements OnInit {
   // s'occupe de créer les tournois entièrement puis les ajoute à la BDD //
   makeAndAddTournaments(){
     const formValues = this.eventForm.value;
-    let event = new Object();
     formValues['tournaments'].forEach( t => {
-      //this.tournamentService.addTournament(new Tournament ( t['nameT']+formValues['dateEv'], 
-      //t['nameT'], t['format'] as number, [],"" ));
-      this.tournamentService.addTournament(t['nameT'],t['format']);
-      event[t['nameT']] = ["",[],[]];
+      this.tournamentService.addTournament(new Tournament ( t['nameT']+formValues['dateEv'], 
+      t['nameT'], t['format'] as number, [],"" ));
     });
-    console.log(event);
   }
 
 }

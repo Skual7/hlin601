@@ -8,12 +8,7 @@ import { ConnectionService } from './services/connection.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  
-  ngOnInit(): void {
-    if(window.localStorage.getItem('tournament') == null){
-      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
-    }
-  }
+
   
   title = 'gestionv1';
   constructor(private connectionService: ConnectionService){}
