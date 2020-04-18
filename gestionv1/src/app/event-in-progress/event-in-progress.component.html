@@ -1,0 +1,26 @@
+<div class="col-sm-8 col-sm-offset-1" *ngIf="valide()">
+  <h1>Vous êtes sur le point de débuter l'événement</h1>
+  <app-event [name]="event.name"
+  [dateEv]="event.dateEv"
+  [dateLimite]="event.dateLimite"
+  [tournois]="event.tournois"
+  [description]="event.description">    
+  </app-event>
+  <label>Cliquez sur lancer pour activer la gestion des tournois</label>
+  <button class="btn btn-primary" (click)="startLocalStorage()">Lancer</button>
+  <small> et aussi lancer le localstorage</small>
+
+  <div class="col-sm-8 col-sm-offset-2" *ngFor="let t of tournaments">
+    <button class="btn btn-success" [disabled]="!local" [routerLink]="[t.nameT]">{{t.nameT }}</button>
+  </div>
+
+
+</div>
+
+<div class="col-sm-8 col-sm-offset-1" *ngIf="!valide()">
+  <h1>Aucun événement n'a été lancé</h1>
+  <p>Pour lancer correctement le tournois aller dans votre profils et lancez votre tournois
+    (faurdra que je modifie plus tard.)
+  </p>
+
+</div>
