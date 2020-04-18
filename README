@@ -15,3 +15,5 @@ git branch - d nombranche
 
 //puis en distant
 git push origin :nombranche
+
+test 
