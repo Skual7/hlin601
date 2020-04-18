@@ -21,11 +21,8 @@ export class TeamService {
     }
 
     addTeam(T : Team){
-        console.log(this.teams);
-        this.teams.push(T);
-        this.emitTeam();
-        console.log(this.teams);
-        // rajouter les instructions pour rajouter dans la BDD
+        // rajouter les instructions pour rajouter la team dans la BDD
+        // rajouter le nom de la team dans teamRegistered du tournois qui a le tournamentid
     }
 
     getTeamByTournament(teamRegitered: string[]){ 
@@ -47,12 +44,4 @@ export class TeamService {
 
         return team;
     }
-
-
-    ////////////// GESTION AJOUT TEAM /////////
-  /*   addTeam(T: Team){
-        console.log(this.teams)
-        this.teams.push(T as any);
-        console.log(this.teams);
-    } */
 }

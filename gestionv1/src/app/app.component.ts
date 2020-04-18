@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from './services/connection.service';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,10 @@ export class AppComponent {
       window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
     }
   }
+
   title = 'gestionv1';
-  constructor(private connectionService: ConnectionService){}
+  constructor(private connectionService: ConnectionService,
+              private userService : UserService){}
 
 
 

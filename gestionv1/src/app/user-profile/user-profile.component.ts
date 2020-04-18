@@ -49,13 +49,10 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-  test(){
-    console.log(this.userService.user);
-  }
-  /*
   CommencerEvent(name: string){
-    this.router.navigate(['event/gestion/'+name])
-  }*/
+    this.userService.eventInProgress = name;
+    console.log(this.userService.eventInProgress);
+  }
 
 /*
   onSubmitForm(){

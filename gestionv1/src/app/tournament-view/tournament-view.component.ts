@@ -12,12 +12,12 @@ export class TournamentViewComponent implements OnInit {
 
   constructor(private route : ActivatedRoute, private localStorageService : LocalStorageService,
             private router : Router) { }
-  // nameEv = "";
+  nameEv = "";
   name ="";
 
   ngOnInit(): void {
-      this.name = this.route.snapshot.params['trn'];
-  //   this.nameEv = this.route.snapshot.params['name'];
+    this.name = this.route.snapshot.params['trn'];
+    this.nameEv = this.route.snapshot.params['name'];
   }
   
   rounds = this.localStorageService.getRounds(this.name);

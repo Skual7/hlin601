@@ -43,12 +43,11 @@ export class NewTeamComponent implements OnInit {
     const newTeam = new Team (
       this.tournamentService.tournament.id,
       formValue['teamName'],
-       this.extPlayersName(),
-       this.extPlayersLevel()
+      this.extPlayers()
     );
     console.log(newTeam);
-   // this.tournamentService.addTeamToTournament(newTeam);
    this.teamService.addTeam(newTeam);
+
   }
   // pour transformer correctement les players // 
   getPlayers(){
@@ -62,38 +61,24 @@ export class NewTeamComponent implements OnInit {
     });
     this.getPlayers().push(player);
   }
-  // pour supprimer des joueurs // 
+  // pour supprimer des joueurs dans formulaire // 
   onDeletePlayer(i){
     this.getPlayers().removeAt(i);
   }
 
-  // pour extraire le tableau des niveaux du form dans un array seul // 
-  extPlayersLevel(){ 
+  // pour extraire les joueurs du formulaires // 
+  extPlayers(){
     const formValues = this.teamForm.value;
-    const levels : number[] = [];
-    formValues['players'].forEach(element => {
-      levels.push( +element['level']);//  + pour convertir string -> int 
+    const players : any[] = [];
+    formValues['players'].forEach( p => {
+      players.push( [p.name,p.level]);
     });
-    if(formValues['selfInsc']){
-      levels.push(this.userService.user.niveau);
-    }
-    return levels;
+    return players;
   }
-  // pour extraites les noms des joueurs du form dans array seul //
-  extPlayersName(){
-    const formValues = this.teamForm.value;
-    const names : string[] = [];
-    formValues['players'].forEach( elt => {
-      names.push(elt['name']);
-    })
-    if(formValues['selfInsc']){
-      names.push(this.userService.user.firstName);
-    } 
-    return names;
-  }
-
-
-  // ----- Pour vérifier l'intégrité des données ----- //
+  //////////////////////////////////////////////////////////////////////
+  ////////// ----- Pour vérifier l'intégrité des données -----//////////
+  //////////////////////////////////////////////////////////////////////
+  
   get teamName() { // nouvelle syntaxe plus "jolie"
     return this.teamForm.get('teamName');
   }

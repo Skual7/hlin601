@@ -1,17 +1,28 @@
 <div class="col-sm-8 col-sm-offset-1" *ngIf="valide()">
-  <h1>Vous êtes sur le point de débuter l'événement</h1>
-  <app-event [name]="event.name"
-  [dateEv]="event.dateEv"
-  [dateLimite]="event.dateLimite"
-  [tournois]="event.tournois"
-  [description]="event.description">    
-  </app-event>
-  <label>Cliquez sur lancer pour activer la gestion des tournois</label>
-  <button class="btn btn-primary" (click)="startLocalStorage()">Lancer</button>
-  <small> et aussi lancer le localstorage</small>
+  <h1 *ngIf="!this.localStorageService.local" >Vous êtes sur le point de débuter l'événement</h1>
+  <h1 *ngIf="this.localStorageService.local" >L'événement est lancé !</h1>
+  <li class="list-group-item">
+    <h1 style="text-align: center;">{{event.name}}</h1>
+    <p style="display: inline;">Date de l'événement: {{event.dateEv}}</p>
+    <p style="display: inline; float: right;"> Date limite d'inscription: {{event.dateLimite}}</p>
+    <p *ngFor="let desc of event.description">{{desc}}</p>
+  </li>
+  <div *ngIf="!this.localStorageService.local">
+    <label>Cliquez sur lancer pour activer la gestion des tournois</label><br>
+    <button class="btn btn-primary"   (click)="startLocalStorage()">Lancer</button>
+    <small> le localstorage</small>
+  </div>
+  <div *ngIf="this.localStorageService.local">
+    <label>Cliquez pour nettoyer le localstorage</label><br>
+    <button class="btn btn-primary"  (click)="clearLocalStorage()">Nettoyer</button>
+    <small> le localstorage</small>
+  </div>
+  
+  
+  
 
   <div class="col-sm-8 col-sm-offset-2" *ngFor="let t of tournaments">
-    <button class="btn btn-success" [disabled]="!local" [routerLink]="[t.nameT]">{{t.nameT }}</button>
+    <button class="btn btn-success" [disabled]="!this.localStorageService.local" [routerLink]="[t.nameT]">{{t.nameT }}</button>
   </div>
 
 

@@ -19,9 +19,13 @@ function getRandomInt(max) {
 }
 @Injectable()
 export class LocalStorageService {
-
-  constructor() {
+  // Pour affichage (activat° des buttons)
+  local = false;
+  setLocal(){
+    this.local = !this.local;
   }
+
+  constructor() {  }
 
   // GESTIONS des tournois // 
   addTournament(nom: String, format: number){

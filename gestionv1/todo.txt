@@ -2,7 +2,6 @@ README:
 
 
 TODO: 
-- ajouter Event que user peut gérer
 
 1) implémenter les tournois  
 (done)    -> dans event, on doit pouvoir cliquer sur les tournois présennt pour voir le détails et s'y inscrire 

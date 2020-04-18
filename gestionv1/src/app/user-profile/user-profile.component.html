@@ -8,9 +8,7 @@
     <app-team  *ngFor="let t of userService.user['inscrit']"
         [tournamentid] = "t.tournamentId"
         [teamName]="t.teamName"
-        [players]="t.players"
-        [playersLevel]="t.playersLevel">
-
+        [players]="t.players">
     </app-team>
     <button class="btn btn-primary" *ngIf="modifying === false" (click)="modifying = true;">Modifier vos informations</button>
     <button class="btn btn-primary" *ngIf="modifying === true" (click)="modifying = false;">Annuler</button>
@@ -24,7 +22,7 @@
     [tournois]="ev.tournois"
     [description]="ev.description">
     </app-event>
-    <button class="btn btn-success" [routerLink]="[ev.name]">Commencer</button> <!-- (click)="CommencerEvent(ev.name)" -->   
+    <button class="btn btn-success" [routerLink]="[ev.name]" (click)="CommencerEvent(ev.name)">Commencer</button>
 </div>
 
 <div *ngIf="modifying" class="col-sm-8 col-sm-offset-1">

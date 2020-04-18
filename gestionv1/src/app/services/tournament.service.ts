@@ -28,6 +28,7 @@ export class TournamentService {
         // Rajouter les instructions pour ajouter le tournois à la bdd
     }
 
+
     getTournaments(tournoisName: string[], dateEv : string){
         const T : Tournament[] = [];
         tournoisName.forEach(tournoisName => {
