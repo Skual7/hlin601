@@ -3,7 +3,7 @@ Si un attribut de méthode est formé de la sorte "type1/type2 nomvariable", la 
 La clef du tournois est 'tournament' en local storage.
 Le tournois est formé de la sorte en local storage :
 [0] nom du tournois
-[1] array contenat les équipes
+[1] array contenant les équipes
 [2] array des tours
 
 Les équipes sont formées de la sorte en local storage :
@@ -66,7 +66,11 @@ removePlayer(string/number teamN, string playerName) : supprime le joueur ayant 
 ---------- Methodes gestion Tour ---------------------
 getRounds() : renvoie l'array contenant tous les rounds.
 
+getRoundByNumber() : renvoie le round passé en paramètre.
+
 addRound() : ajoute un round à la suite.
+
+addRoundAutomate() : ajoute un round composé de poule et des équipes de façon prédéfinie.
 
 
 ---------- Methodes gestions Poule ---------------------
@@ -80,7 +84,7 @@ addTeamToPool(any teamN, number roundN, number poolN) :  ajoute une équipe à u
 
 
 ---------- Methode gestion Poule/Match -------------------
-getScoresFromPool(?) : ?
+getMatchsFromPool() : retourne l'array contenant les matchs d'une poule.
 
 addMatchToPool(number roundN, number poolN, any team1N, any team2N) : ajoute le match team1N vs team2N à la poule poolN du tour roundN.
 
@@ -89,6 +93,24 @@ getMatchNumberFromTeam(any pool, any teamN1, any teamN2) : renvoie l'index du ma
 addSetScoreToPool(number roundN, number poolN, any team1N, any team2N, number score1, number score2) : ajoute un set au match team1N vs team2N avec le score.
 
 whoWonMatch(number roundN, number poolN, any team1N, any team2N) : renvoie l'index de l'équipe ayant gagné le match.
+
+whoWonMatchN(): renvoie l'index de l'équipe ayant gagné le match n° matchN de poolN.
+
+teamPlayedWichPool() : renvoie l'index de la poule dans laquelle a joué l'équipe teamN.
+
+teamPlayedWichMatchs() : renvoie l'array contenant les index des matchs de poulN où a joué l'équipe teamN.
+
+calcTeamPoolMatchWin() : renvoie le nombre de victoire de teamN dans poolN.
+
+calcTeamPoolPointsTaken() : revoie le nombre de point encaissé par teamN dans poolN.
+
+calcTeamPoolSetLoss() : renoie le nombre de set perdu par teamN dans poolN.
+
+getResultPool() : renvoie un array composé de la sorte
+    - [0] Equipe, [1][0] nb victoire,[1][1] nb set perdu, [1][2] nb point encaissé.
+
+calcQualifiedAUtomate() :renvoie l'array des qualifiés pour le tour suivant de façon prédéfinie.
+On considère une équipe qualifiée si elle fait partie de la moitiée supérieure de son classement.
 
 
 
