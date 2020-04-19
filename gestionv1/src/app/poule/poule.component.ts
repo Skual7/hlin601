@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from '../services/localstorage.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Tournament } from '../models/tournament.modele';
+
 
 @Component({
   selector: 'app-poule',
@@ -10,10 +13,16 @@ import { LocalStorageService } from '../services/localstorage.service';
 export class PouleComponent implements OnInit {
   
   @Input() teamArray: Array<object>;
-  constructor(private localStorageService:  LocalStorageService, private route : ActivatedRoute) {
+  @Input() numRound: number;
+  @Input() numPoule: number;
+
+  constructor(private fb : FormBuilder, private localStorageService:  LocalStorageService, private route : ActivatedRoute) {
    }
 
   name="";
+  form : FormGroup;
+  displayForm: boolean;
+  displayForm2: boolean;
 
   getTeamName(num){
     var teamName='';
@@ -25,6 +34,23 @@ export class PouleComponent implements OnInit {
 
   ngOnInit(): void {
     this.name = this.route.snapshot.params['trn'];
+    this.form = this.fb.group(
+      {
+        nameF : '',
+      }
+    )
+    this.displayForm = false;
+    this.displayForm2 = false;
+  }
+
+  addT(){
+    this.displayForm = true;
+  }
+
+  onSubmit(){
+    this.localStorageService.addTeam(this.name, this.form.value.nameF);
+    this.localStorageService.addTeamToPool(this.name, this.form.value.nameF, this.numRound, this.numPoule);
+    this.teamArray =  this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
   }
 
 }

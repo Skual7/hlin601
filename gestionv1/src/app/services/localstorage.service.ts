@@ -401,9 +401,9 @@ export class LocalStorageService {
     let pool = this.getPoolFromRound(tournamentName,roundN,poolN);
     let res = [];
     for(let team of pool[0]){
-      let nbMatchWin = this.calcTeamPoolMatchWin("Garçon Elite",0,team);
-      let nbSetLoss = this.calcTeamPoolSetLoss("Garçon Elite",0,team);
-      let nbPointsTaken = this.calcTeamPoolPointsTaken("Garçon Elite",0,team);
+      let nbMatchWin = this.calcTeamPoolMatchWin(tournamentName,0,team);
+      let nbSetLoss = this.calcTeamPoolSetLoss(tournamentName,0,team);
+      let nbPointsTaken = this.calcTeamPoolPointsTaken(tournamentName,0,team);
       res.push(team,[nbMatchWin,nbSetLoss,nbPointsTaken]);
     }
     return res;
@@ -460,5 +460,17 @@ export class LocalStorageService {
       }
     }
     return listQualified;
+  }
+
+  getTeamsFromPool(tournamentName: String, roundN: number, poolN: number){
+    return this.getPoolFromRound(tournamentName, roundN, poolN)[0];
+  }
+
+  getTeamName(tournamentName: string, numTeam: number){
+    return this.getTeam(tournamentName, numTeam)[0];
+  }
+
+  getScoreFromMatch(tournamentName: string, numRound: number, numPoule: number, numMatch: number){
+    return this.getMatchsFromPool(tournamentName, numRound, numPoule)[numMatch][2];
   }
 }

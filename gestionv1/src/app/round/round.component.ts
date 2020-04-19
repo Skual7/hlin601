@@ -21,7 +21,6 @@ export class RoundComponent implements OnInit {
   }
   ngOnInit(): void {
     this.nameTourament = this.route.snapshot.params['trn'];
-
   }
 
 }

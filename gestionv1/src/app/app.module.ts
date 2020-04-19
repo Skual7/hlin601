@@ -27,6 +27,8 @@ import { LocalStorageService } from './services/localstorage.service';
 import { PouleComponent } from './poule/poule.component';
 import { TournamentViewComponent } from './tournament-view/tournament-view.component';
 import { RoundComponent } from './round/round.component';
+import { ResultsComponent } from './results/results.component';
+import { SetResultsComponent } from './set-results/set-results.component';
 
 
 
@@ -62,7 +64,9 @@ const appRoutes: Routes = [
     EventInProgressComponent,
     PouleComponent,
     TournamentViewComponent,
-    RoundComponent
+    RoundComponent,
+    ResultsComponent,
+    SetResultsComponent
 
   ],
   imports: [

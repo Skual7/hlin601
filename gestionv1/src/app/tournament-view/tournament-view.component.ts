@@ -14,13 +14,15 @@ export class TournamentViewComponent implements OnInit {
             private router : Router) { }
   nameEv = "";
   name ="";
+  rounds;
 
   ngOnInit(): void {
     this.name = this.route.snapshot.params['trn'];
     this.nameEv = this.route.snapshot.params['name'];
+    this.rounds = this.localStorageService.getRounds(this.name);
+
   }
   
-  rounds = this.localStorageService.getRounds(this.name);
 
   monStyle(){
     let taille = 100/this.rounds.length
@@ -34,7 +36,7 @@ export class TournamentViewComponent implements OnInit {
   }
 
   addR(){
-    this.localStorageService.addRound(this.name);
+    this.localStorageService.addRoundAutomate(this.name);
     this.rounds = this.localStorageService.getRounds(this.name);
   }
  
