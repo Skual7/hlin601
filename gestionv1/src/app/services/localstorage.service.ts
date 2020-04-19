@@ -20,6 +20,10 @@ function getRandomInt(max) {
 @Injectable()
 export class LocalStorageService {
 
+  local = false;
+  setLocal(){
+    this.local = !this.local;
+  }
   constructor() {
   }
 
