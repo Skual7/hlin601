@@ -70,7 +70,9 @@ getRoundByNumber() : renvoie le round passé en paramètre.
 
 addRound() : ajoute un round à la suite.
 
-addRoundAutomate() : ajoute un round composé de poule et des équipes de façon prédéfinie.
+addRoundAutomate() : ajoute un round composé de poule et des équipes de façon prédéfinie. Renvoie true si un round est créer, false sinon.
+
+roundEnded() : renvoie true si le toutes les poules de celui-ci sont terminées.
 
 
 ---------- Methodes gestions Poule ---------------------
@@ -82,8 +84,12 @@ addPoolToRound(number roundN) : ajoute une poule à la suite au tour roundN.
 
 addTeamToPool(any teamN, number roundN, number poolN) :  ajoute une équipe à une poule et ajoute les confrontations nouvelles.
 
+poolEnded() : renvoie true si tous les matchs de poolN sont terminés (de la façon définie dans matchEnded() ).
+
 
 ---------- Methode gestion Poule/Match -------------------
+matchEnded() : renvoie true si une des deux équipes d'un match a au moins deux sets victorieux et plus de sets victorieux qu'une autre équipe.
+
 getMatchsFromPool() : retourne l'array contenant les matchs d'une poule.
 
 addMatchToPool(number roundN, number poolN, any team1N, any team2N) : ajoute le match team1N vs team2N à la poule poolN du tour roundN.

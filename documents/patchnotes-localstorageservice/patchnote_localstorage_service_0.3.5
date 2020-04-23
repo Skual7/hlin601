@@ -1,0 +1,16 @@
+V.0.3.5(fonctionnel):
+Différents fix et ajout de méthode de "status".
+
+-> modification du fichier localstorage.service.ts :
+    méthodes:
+    ----Round-----
+    (fix)addRoundAutomate : La méthode ne crée pas de round si le round n'est pas terminé.
+    La méthode renvoie true si un round a été créé, false sinon.
+    +roundEnded()
+
+    ----Pool------
+    +poolEnded()
+
+    ----Match------
+    +matchEnded()
+    (fix)calcTeamPoolMatchWin() : affiche le nombre de victoire d'une équipe même quand certains matchs ne sont pas terminés.

@@ -209,8 +209,10 @@ export class LocalStorageService {
         }
         this.addTeamToPool(tournamentName,this.getTeams(tournamentName).length-1,0,0);
       }
+      return true;
     }
     else{
+      if(this.roundEnded(tournamentName,this.getRounds(tournamentName).length-1)){
       let qualifiedTeam = this.calcQualifiedTeamRoundAutomate(tournamentName,this.getRounds(tournamentName).length-1);
       
       this.addRound(tournamentName);
@@ -229,12 +231,34 @@ export class LocalStorageService {
         }
         this.addTeamToPool(tournamentName,qualifiedTeam[qualifiedTeam.length-1],this.getRounds(tournamentName).length-1,0);
       }
+      return true;
+    }else{
+      return false;
     }
+    }
+  }
+
+  roundEnded(tournamentName: String, roundN: number){
+    for(let poolN=0; poolN < this.getRoundByNumber(tournamentName,roundN).length; poolN++){
+      if(!this.poolEnded(tournamentName,roundN,poolN)){
+        return false;
+      }
+    }
+    return true;
   }
 
   //------------Gestion poule-----------------------------------------------------
   cocote(){
     console.log('cote cote cote');
+  }
+
+  poolEnded(tournamentName: String, roundN: number, poolN: number){
+    for(let matchN=0; matchN < this.getPoolFromRound(tournamentName,roundN,poolN)[1].length; matchN++){
+      if(!this.matchEnded(tournamentName,roundN,poolN,matchN)){
+        return false;
+      }
+    }
+    return true;
   }
 
   getPoolsFromRound(tournamentName,roundN:number){
@@ -264,6 +288,19 @@ export class LocalStorageService {
 
 
   //--------------------------Gestion Match---------------------------------------
+
+  matchEnded(tournamentName: String, roundN: number, poolN: number, matchN: number){
+    let t1 = 0, t2 = 0;
+    for(let set of this.getPoolFromRound(tournamentName,roundN,poolN)[1][matchN][2]){
+      if(set[0]>set[1]){
+        t1++;
+      }
+      else{
+        t2++;
+      }
+    }
+    return ((t1>=2 || t2>=2) && (t1 != t2));
+  }
 
   getMatchsFromPool(tournamentName: String, roundN: number, poolN: number){
     return this.getPoolFromRound(tournamentName, roundN,poolN)[1];
@@ -351,7 +388,7 @@ export class LocalStorageService {
 
     let nbWin = 0;
     for(let match of this.teamPlayedWichMatchs(tournamentName,roundN,teamN)){
-      if(this.whoWonMatchN(tournamentName,roundN,poolN,match) == teamN){
+      if(this.whoWonMatchN(tournamentName,roundN,poolN,match) == teamN && this.matchEnded(tournamentName,roundN,poolN,match)){
         nbWin++;
       }
     }
@@ -454,7 +491,6 @@ export class LocalStorageService {
     for(let i = 0; i<round.length;i++){
       let res = this.rankingTeamByScore(tournamentName,roundN,i);
       let nbQualified = Math.floor(res.length/2) + res.length%2;
-      this.m(nbQualified);
       for(let j = 0; j < nbQualified; j++){
         listQualified.push(res[j]);
       }
