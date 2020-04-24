@@ -53,6 +53,8 @@ removeTeam(string/number teamN) : supprime l'équipe ayant pour nom/index teamN.
 
 setTeamLevel(string/number teamN, number teamLevel) : attribue teamLevel comme niveau à l'équipe teamN.
 
+suprTeamFromTournament() : supprime une équipe du tournois (ainsi que tous ses matchs passés comme finis). Actualise tous les index des autres équipes.
+
 
 ---------- Methodes gestion joueur ------------------
 
@@ -85,6 +87,10 @@ addPoolToRound(number roundN) : ajoute une poule à la suite au tour roundN.
 addTeamToPool(any teamN, number roundN, number poolN) :  ajoute une équipe à une poule et ajoute les confrontations nouvelles.
 
 poolEnded() : renvoie true si tous les matchs de poolN sont terminés (de la façon définie dans matchEnded() ).
+
+suprTeamFromPool() : supprime teamN d'une poule.
+
+moveTeamFromPool() : déplace une équipe de sa poule initiale vers la poule poolN.
 
 
 ---------- Methode gestion Poule/Match -------------------

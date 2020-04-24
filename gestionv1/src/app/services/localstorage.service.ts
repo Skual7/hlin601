@@ -122,7 +122,7 @@ export class LocalStorageService {
     }
   }
 
-  calcTeamLevel(tournamentName,teamN:any){
+  calcTeamLevel(tournamentName: String,teamN:any){
     if (isNaN(teamN)) {
       this.calcTeamLevel(tournamentName,this.getTeamNumberByName(tournamentName,teamN));
     }
@@ -135,6 +135,40 @@ export class LocalStorageService {
       }
       return level/nbPlayer;
     }
+  }
+
+  suprTeamFromTournament(tournamentName: String,teamN:any){
+    let teamsupr = this.getTeamNumber(tournamentName,teamN);
+    for(let round = 0; round <= this.getLastRoundNumber(tournamentName); round++){
+      this.suprTeamFromPool(tournamentName,round,teamsupr);
+    }
+    for(let team = teamsupr+1; team < this.getTeams(tournamentName).length; team++){
+      for(let round = 0; round <= this.getLastRoundNumber(tournamentName); round++){
+        let poolN = this.teamPlayedWichPool(tournamentName,round,team);
+        let newPool = this.getPoolFromRound(tournamentName,round,poolN);
+        for(let t = 0; t < newPool[0].length;t++){
+          if(newPool[0][t] == team){
+            newPool[0][t]=newPool[0][t]-1;
+          }
+        }
+        for(let match of newPool[1]){
+          if(match[0]==team){
+            match[0]-=1;
+          }
+          else if(match[1]==team){
+            match[1]-=1;
+          }
+        }
+        let newTournament = this.getTournament(tournamentName);
+        newTournament[2][round][poolN] = newPool;
+        this.setTournament(tournamentName,newTournament);
+      }
+    }
+    let newTournament = this.getTournament(tournamentName);
+    let newTeamList = this.getTeams(tournamentName);
+    newTeamList.splice(teamsupr,1);
+    newTournament[1] = newTeamList;
+    this.setTournament(tournamentName,newTournament);
   }
 
   //-------------------Gestion Joueurs-------------------------------------------------------------------
@@ -177,12 +211,16 @@ export class LocalStorageService {
   }
 
   //Gestion Round-----------------------------------------------------------------
-  getRounds(tournamentName){
+  getRounds(tournamentName: String){
     return this.getTournament(tournamentName)[2];
   }
 
   getRoundByNumber(tournamentName: String, roundN: number){
     return this.getRounds(tournamentName)[roundN];
+  }
+
+  getLastRoundNumber(tournamentName: String){
+    return this.getRounds(tournamentName).length-1;
   }
 
   addRound(tournamentName){
@@ -284,6 +322,26 @@ export class LocalStorageService {
     tournament = this.getTournament(tournamentName);
     tournament[2][roundN][poolN][0].push(numTeam);
     this.setTournament(tournamentName,tournament);
+  }
+
+  suprTeamFromPool(tournamentName: String,roundN:number, teamN:number){
+    let poolN = this.teamPlayedWichPool(tournamentName,roundN,teamN);
+    let matchsN = this.teamPlayedWichMatchs(tournamentName,roundN,teamN);
+    let pool = this.getPoolFromRound(tournamentName,roundN,poolN);
+    pool[0] = pool[0].filter(elem => elem != teamN);
+    for(let i = pool[1].length-1; i>=0;i--){
+      if(i in matchsN){
+        pool[1].splice(i,1);
+      }
+    }
+    let newTournament = this.getTournament(tournamentName);
+    newTournament[2][roundN][poolN] = pool;
+    this.setTournament(tournamentName,newTournament);
+  }
+
+  moveTeamFromPool(tournamentName: String,roundN:number, teamN:number, poolN:number){
+    this.suprTeamFromPool(tournamentName,roundN,teamN);
+    this.addTeamToPool(tournamentName,teamN,roundN,poolN);
   }
 
 
