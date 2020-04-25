@@ -9,9 +9,11 @@
     <tbody>
 <tr *ngFor="let match of localStorageService.getMatchsFromPool(this.tournamentName, this.numRound, this.numPoule); index as i">
     <th>{{ this.localStorageService.getTeamName(this.tournamentName, match[0]) }} </th>
-    <th>   {{ this.getScore(this.tournamentName, this.numRound, this.numPoule, i)}}</th>
+    <th>   
+        <button style="display: block" class="btn btn-link" (click)="this.modifScore(this.localStorageService.getTeamName(this.tournamentName, match[0]),this.localStorageService.getTeamName(this.tournamentName, match[1]))">Modifier le score</button>
+        {{ this.getScore(this.tournamentName, this.numRound, this.numPoule, i)}}
+    </th>
     <th>{{ this.localStorageService.getTeamName(this.tournamentName, match[1]) }}</th>
-    <button class="btn" (click)="this.modifScore(this.localStorageService.getTeamName(this.tournamentName, match[0]),this.localStorageService.getTeamName(this.tournamentName, match[1]))">Modifier le score</button>
 </tr>
 </tbody>
 </table>

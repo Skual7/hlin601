@@ -37,6 +37,7 @@ export class PouleComponent implements OnInit {
     this.form = this.fb.group(
       {
         nameF : '',
+        niveau: undefined
       }
     )
     this.displayForm = false;
@@ -49,9 +50,11 @@ export class PouleComponent implements OnInit {
 
   onSubmit(){
     this.localStorageService.addTeam(this.name, this.form.value.nameF);
+    this.localStorageService.setTeamLevel(this.name, this.form.value.nameF, this.form.value.niveau);
     this.localStorageService.addTeamToPool(this.name, this.form.value.nameF, this.numRound, this.numPoule);
     console.log("j'ajoute la team "+this.form.value.nameF+" à la poule numero "+this.numPoule+" du round numero "+this.numRound)
     this.teamArray =  this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
+    this.displayForm = false;
   }
 
 }

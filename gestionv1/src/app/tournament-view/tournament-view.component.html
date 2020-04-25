@@ -1,9 +1,11 @@
 <a routerLink=".."> Retours à {{ nameEv }} </a>
 <button class="btn btn-success" (click)="addR()">Ajouter un round</button>
-<div class="container-fluid" style="height:100%; background-color: white">
+<button class="btn btn-success">Sauvegarder le tournoi</button>
+<div class="container-fluid" style="height:100%; background-color: white; margin-top:1%">
     <div style="align-content: center; align-items: center; height: 100%">
-    <div [ngStyle]="monStyle()" class="" *ngFor="let item of rounds;index as i">
+    <div [ngStyle]="monStyle()" class="col-lg-5" *ngFor="let item of rounds;index as i">
         <div class="d1">
+               <h3>Round n°{{i+1}}</h3>
                <app-round [pouleArray]="rounds[i]" [numRound]="i"></app-round>
         </div>
     </div>

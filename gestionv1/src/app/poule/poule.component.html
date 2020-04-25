@@ -1,26 +1,37 @@
-<table class="table table-bordered">
+
+<table style="z-index:1" class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">Numero</th>
       <th scope="col">Equipe</th>
       <th scope="col">Points</th>
+      <th scope="col">Sets perdus</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of teamArray; index as i">
         <th scope="row">{{ item }}</th>
         <td>{{ getTeamName(item) }}</td>
-        <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)}}</td>
-    </tr>  
+        <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)*3}}</td>
+        <td>{{ localStorageService.calcTeamPoolSetLoss(this.name, this.numRound, item) }}</td>
+    </tr>
+    <tr>
+      <th scope="row">
+        <button class="btn btn-link" (click)="addT()">Ajouter une équipe</button>
+      </th>
+      <td>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="displayForm">
+          <div class="form-group">
+            <input type="text" placeholder="nom Equipe" formControlName="nameF"/>
+            <input type="number" class="form-control" formControlName="niveau" placeholder="niveau">
+            <button class="btn btn-success" type="submit">Confirmer</button>
+          </div>
+          </form>
+      </td>
+    </tr>
   </tbody>
 </table>
-<button class="btn btn-success" (click)="addT()">Ajouter une équipe</button>
-<button class="btn btn-success" (click)="this.displayForm2 = true">Afficher les scores</button>
+<button style="margin-bottom: 1%" class="btn btn-success" (click)="this.displayForm2 = true">Afficher les scores</button>
+
 <app-results *ngIf="displayForm2" [numRound]=this.numRound [numPoule]=this.numPoule></app-results>
-<button *ngIf="this.displayForm2" (click)="this.displayForm2 = false">cacher les scores</button>
-<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="displayForm">
-<div class="form-group">
-  <input type="text" placeholder="nom Equipe" formControlName="nameF"/>
-  <button class="btn btn-success" type="submit">Confirmer</button>
-</div>
-</form>
+<button style="margin-bottom: 1%" class="btn" *ngIf="this.displayForm2" (click)="this.displayForm2 = false">cacher les scores</button>
