@@ -1,46 +1,30 @@
 README:
-
+- affichage des tournois avant "détails et inscriptions" pour que même si pas co on puisse voir les tournois 
+et si on veut s'inscrire ou quoi la demande de co 
 
 TODO: 
 
-1) implémenter les tournois  
-(done)    -> dans event, on doit pouvoir cliquer sur les tournois présennt pour voir le détails et s'y inscrire 
 
-
-2) implémentation des équipes 
-(done)  -> finir implémenter team-list
-        - NE PAS OUBLIER LE ROUTAGE (on peut voir les équipes inscrites que si connecté).
-(done)  - faire affichage des inquipes inscrite
-
-(done) - finir OnSubmitForm() 
-(done) -> doit retourner nouvelle équipe parfaitement crée et ajoutée dans TEAMS de teamservice (marche pas bien à revoir .. )
-(done)  -> rajouter le cast des nombre pour faciliter les calculs pour après
-(done)  -> rajouter checkbox pour inscrire personne renseignant l'équipe 
-(¬ urg)        -> rajouter calcul en "direct" du niv moyen de l'équipe pour dire si niv est suffisant ???
+2) new-team
 (¬ urg) -> finir d'ajouter  Validators pour intégrité des données + directive ngIF   
                 -> vérifier que nom d'équipe n'existe pas déjà !
                 -> tous ceux liés aux formulaires
                 -> dont le nombre de joueur min avant validation ?? 
 
-
-3) refaire event 
-(¬ urg) -> Refaire la page d'affichage des events
-(done)  -> enlever "participe" 
+3) Event: 
 (¬ urg) -> ajouter par exemple le nombre de personnes y participant (foreachTeam nbP += players.length etc etc  )
 
+
 4) refaire les users
-        -> enlever tournoisInscrit et rajouter Team à la place (buggué donc évité de toucher)
+        -> ajouter tournoisInscrit des  Team affichées
 (¬ urg) -> gérer anniversaire avec Date ?? 
 (¬ urg) -> refaire interface user pour avoir les tournois / events participé
 
 5) Ajouter formulaire pour creer event 
-(done)  -> faire formulaire 
 (¬ urg) -> rajouter les vaidators
-
-// AU NIVEAU DE l'intégrité des donénes faut aussi rajouter le fait que nom d'équipe est unique par tournois 
-
+https://angular.io/guide/form-validation
 
 
-- revoir à quoi servent les Subject et si obligatoire// revoir à quoi servent les Subject et si obligatoire
-
+6) Finir 404
+// AU NIVEAU DE l'intégrité des donnes faut aussi rajouter le fait que nom d'équipe est unique par tournois 
 

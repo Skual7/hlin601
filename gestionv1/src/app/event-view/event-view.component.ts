@@ -20,15 +20,3 @@ export class EventViewComponent implements OnInit {
   }
 
 }
-
-
-/*
-  eventSubscription: Subscription;
-  ngOnInit() {
-    this.eventSubscription = this.eventService.eventSubject.subscribe(
-      (events) => { this.events = events;}
-    );
-    this.eventService.emitEvent();
-    
-  }
-*/

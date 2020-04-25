@@ -1,28 +1,27 @@
 <div class="container">
     <a routerLink='/events'>Retour</a>
     <div class="row" style="border: solid 1px black;">
-        <div class="col-md-6" style="border: solid 1px black;"> 
-            <h2>{{name}} </h2>
+        <div class="col-md-6" > 
+            <h1>{{name}} </h1>
             <p>Date de l'événement: {{ dateEv }} </p>
             <p>Date limite pour les inscriptions: {{ dateLimite }}</p>
-            <p>Tournois présent: </p>
-            
-            <ul class="form-group">
+<!--             <ul class="form-group">
                 <li *ngFor="let tournoi of tournois">
                     <a (click)="onClickTournament(tournoi)">{{ tournoi}}</a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
-        <div class="col-md-6" style="border: solid 1px black;">
+        <div class="col-md-6">
             <p>Description: </p>
             <p *ngFor="let desc of description">
                 - {{desc }}
             </p>
         </div>
     </div>
-    <div class="row">
+        <h3>Tournois présent: </h3>
+    <div class="row" *ngFor="let t of Tournaments">
         <ul class="list-group">
-            <app-tournament *ngFor="let t of Tournaments" 
+            <app-tournament  
                 [id] = "t.id"
                 [nameT] = "t.nameT"
                 [format] = "t.format"

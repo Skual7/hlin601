@@ -29,6 +29,7 @@ import { TournamentViewComponent } from './tournament-view/tournament-view.compo
 import { RoundComponent } from './round/round.component';
 import { ResultsComponent } from './results/results.component';
 import { SetResultsComponent } from './set-results/set-results.component';
+import { Four0fourComponent } from './four0four/four0four.component';
 
 
 
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   {path: 'events', component: EventViewComponent},
   {path: 'events/new-event', canActivate:[ConnectionGuard], component: NewEventComponent},
   {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
+  {path: 'events/**', component: Four0fourComponent},
   { path: 'connection', component: ConnectionComponent},
   { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
   
@@ -44,8 +46,10 @@ const appRoutes: Routes = [
   {path: 'gestion', canActivate:[ConnectionGuard], component: EventInProgressComponent},
   {path: 'gestion/:name', canActivate:[ConnectionGuard], component: EventInProgressComponent},
   {path: 'gestion/:name/:trn', canActivate:[ConnectionGuard], component: TournamentViewComponent},
+  {path: 'gestion/:name/**', component: Four0fourComponent},
+  { path: '404', component: Four0fourComponent},
   { path: '', component: HomeComponent},
-  { path: '**', redirectTo: '/home'}
+  { path: '**', component: Four0fourComponent}
 ];
 
 @NgModule({
@@ -66,7 +70,8 @@ const appRoutes: Routes = [
     TournamentViewComponent,
     RoundComponent,
     ResultsComponent,
-    SetResultsComponent
+    SetResultsComponent,
+    Four0fourComponent
 
   ],
   imports: [

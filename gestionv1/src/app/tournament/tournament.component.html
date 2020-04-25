@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-4">
     <li class="list-group-item">
         <h3 style="text-align: center;">{{nameT}}</h3>
         <p>Format de jeu: {{format}} x {{ format }}</p>
@@ -11,11 +11,11 @@
         <button class="btn btn-success" *ngIf="inscritpion === true"(click)="onClickInscrire(id)" >Annuler</button>
     </li>
 </div>
-<div class="col-md-6" *ngIf="inscritpion">
+<div class="col-md-5" *ngIf="inscritpion">
     <app-new-team></app-new-team>
 </div>
 <div class="row" >
-    <div class="col-md-6"  *ngIf="listerEquipe === true">
+    <div class="col-md-3"  *ngIf="listerEquipe === true">
         <ul class="list-group">
             <app-team *ngFor="let team of teams"
             [tournamentid]="team.tournamentid"
@@ -24,6 +24,7 @@
             </app-team>
         </ul>  
     </div>
-</div>    
+</div>
+
 
 

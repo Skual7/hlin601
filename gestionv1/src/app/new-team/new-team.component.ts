@@ -50,20 +50,20 @@ export class NewTeamComponent implements OnInit {
 
   }
   // pour transformer correctement les players // 
-  getPlayers(){
+  get playersForms(){
     return this.teamForm.get('players') as FormArray;
   }
   // Pour rajouter des joueurs au formulaire lors du click sur ajouter Joueur //
   onAddPlayer(){
     const player = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[A-Za-z]+')]],
-      level: [null, [Validators.required,Validators.minLength(1),Validators.maxLength(1),Validators.min(0),Validators.max(5)] ]
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      level: [null, [Validators.required,Validators.min(1),Validators.max(5)] ] /* , Validators.pattern('[A-Za-z]+') */
     });
-    this.getPlayers().push(player);
+    this.playersForms.push(player);
   }
   // pour supprimer des joueurs dans formulaire // 
   onDeletePlayer(i){
-    this.getPlayers().removeAt(i);
+    this.playersForms.removeAt(i);
   }
 
   // pour extraire les joueurs du formulaires // 
@@ -79,12 +79,10 @@ export class NewTeamComponent implements OnInit {
   ////////// ----- Pour vérifier l'intégrité des données -----//////////
   //////////////////////////////////////////////////////////////////////
   
-  get teamName() { // nouvelle syntaxe plus "jolie"
+  get teamName() { 
     return this.teamForm.get('teamName');
   }
-  get name(){
-    return this.teamForm.get('name');
-  }
+
 
   // savoir le nombre minimum de joueur à ajouter avant validation formulaire //
   // pas encore utilisé pour l'instant                                        // 
