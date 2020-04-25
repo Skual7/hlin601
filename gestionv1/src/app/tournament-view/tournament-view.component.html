@@ -3,7 +3,7 @@
 <div class="container-fluid" style="height:100%; background-color: white">
     <div style="align-content: center; align-items: center; height: 100%">
     <div [ngStyle]="monStyle()" class="" *ngFor="let item of rounds;index as i">
-        <div>
+        <div class="d1">
                <app-round [pouleArray]="rounds[i]" [numRound]="i"></app-round>
         </div>
     </div>

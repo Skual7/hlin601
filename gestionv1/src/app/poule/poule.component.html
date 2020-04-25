@@ -10,7 +10,7 @@
     <tr *ngFor="let item of teamArray; index as i">
         <th scope="row">{{ item }}</th>
         <td>{{ getTeamName(item) }}</td>
-        <td>90</td>
+        <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)}}</td>
     </tr>  
   </tbody>
 </table>

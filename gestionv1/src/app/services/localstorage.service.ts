@@ -496,9 +496,9 @@ export class LocalStorageService {
     let pool = this.getPoolFromRound(tournamentName,roundN,poolN);
     let res = [];
     for(let team of pool[0]){
-      let nbMatchWin = this.calcTeamPoolMatchWin(tournamentName,0,team);
-      let nbSetLoss = this.calcTeamPoolSetLoss(tournamentName,0,team);
-      let nbPointsTaken = this.calcTeamPoolPointsTaken(tournamentName,0,team);
+      let nbMatchWin = this.calcTeamPoolMatchWin(tournamentName,roundN,team);
+      let nbSetLoss = this.calcTeamPoolSetLoss(tournamentName,roundN,team);
+      let nbPointsTaken = this.calcTeamPoolPointsTaken(tournamentName,roundN,team);
       res.push(team,[nbMatchWin,nbSetLoss,nbPointsTaken]);
     }
     return res;

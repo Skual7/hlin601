@@ -28,10 +28,13 @@ export class TournamentViewComponent implements OnInit {
     let taille = 100/this.rounds.length
     console.log(100/this.rounds.length)
     return {
-      'width': taille+'%',
+      'width': (taille-5)+'%',
       'height': '100%',
       'display':'inline-block',
-      'text-align':'center'
+      'text-align':'center',
+      'margin-left': '10px',
+      'margin-right': '10px',
+      'float' : 'left'
     }
   }
 
