@@ -23,4 +23,8 @@ export class RoundComponent implements OnInit {
     this.nameTourament = this.route.snapshot.params['trn'];
   }
 
+  refreshRound(){
+    this.pouleArray = this.localstorageService.getPoolsFromRound(this.nameTourament, this.numRound);
+  }
+
 }
