@@ -2,30 +2,28 @@
 <table style="z-index:1" class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">Numero</th>
       <th scope="col">Equipe</th>
       <th scope="col">Points</th>
-      <th scope="col">Sets perdus</th>
-      <th scope="col">Envoyer vers:</th>
+      <th scope="col">Envoyer vers :</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of teamArray; index as i">
-        <th scope="row">{{ item }}</th>
         <td>{{ getTeamName(item) }}</td>
         <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)*3}}</td>
-        <td>{{ localStorageService.calcTeamPoolSetLoss(this.name, this.numRound, item) }}</td>
         <td>
-          <form [formGroup]="form2" (ngSubmit)="changeTeam(item)">
-            <select formControlName="numPool">
-               <option [ngValue]="null" disabled>Choose your profile</option>
-              <option *ngFor="let item of this.localStorageService.getPoolsFromRound(this.name, this.numRound); index as i">
+          <form class="form-inline" [formGroup]="form2" (ngSubmit)="changeTeam(item)">
+            <div class="form-group">
+            <select style="display: inline" formControlName="numPool">
+              <option [ngValue]="null" disabled>Choisir Poule</option>
+              <option [ngValue]="i" *ngFor="let item of this.localStorageService.getPoolsFromRound(this.name, this.numRound); index as i">
                 Poule {{ i+1 }}
               </option>
             </select>
-            <button class="btn btn-link">
-              Valider
+            <button style="display: inline" class="btn btn-link">
+              OK
             </button>
+            </div>
           </form>
         </td>
     </tr>

@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from '../services/localstorage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Tournament } from '../models/tournament.modele';
+//import { EventEmitter } from 'events';
+import { EventEmitter } from '@angular/core'; 
+
 
 
 @Component({
@@ -12,13 +15,14 @@ import { Tournament } from '../models/tournament.modele';
 })
 export class PouleComponent implements OnInit {
   
-  @Input() teamArray: Array<object>;
   @Input() numRound: number;
   @Input() numPoule: number;
+  @Output() refreshPool = new EventEmitter();
 
   constructor(private fb : FormBuilder, private localStorageService:  LocalStorageService, private route : ActivatedRoute) {
    }
 
+  teamArray: Array<object>
   name="";
   form : FormGroup;
   form2: FormGroup;
@@ -43,11 +47,16 @@ export class PouleComponent implements OnInit {
     )
     this.form2 = this.fb.group(
       {
-        numPool : ''
+        numPool : undefined
       }
     )
     this.displayForm = false;
     this.displayForm2 = false;
+    this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
+  }
+
+  fctCmp(team1, team2){
+    return (this.localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, team2)- (this.localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, team1)));
   }
 
   addT(){
@@ -55,12 +64,9 @@ export class PouleComponent implements OnInit {
   }
 
   changeTeam(team){
-    let str = this.form2.value.numPool;
-    let n = str.charAt(str.length-1);
-    console.log(str);
-    console.log(n);
-    this.localStorageService.moveTeamFromPool(this.name, this.numRound, team, n-1);
+    this.localStorageService.moveTeamFromPool(this.name, this.numRound, team, this.form2.value.numPool);
     this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
+    this.refreshPool.emit(null);
   }
 
   onSubmit(){
