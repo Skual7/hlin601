@@ -21,6 +21,7 @@ export class PouleComponent implements OnInit {
 
   name="";
   form : FormGroup;
+  form2: FormGroup;
   displayForm: boolean;
   displayForm2: boolean;
 
@@ -40,12 +41,26 @@ export class PouleComponent implements OnInit {
         niveau: undefined
       }
     )
+    this.form2 = this.fb.group(
+      {
+        numPool : ''
+      }
+    )
     this.displayForm = false;
     this.displayForm2 = false;
   }
 
   addT(){
-    this.displayForm = true;
+    this.displayForm = !this.displayForm;
+  }
+
+  changeTeam(team){
+    let str = this.form2.value.numPool;
+    let n = str.charAt(str.length-1);
+    console.log(str);
+    console.log(n);
+    this.localStorageService.moveTeamFromPool(this.name, this.numRound, team, n-1);
+    this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
   }
 
   onSubmit(){

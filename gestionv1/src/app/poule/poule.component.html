@@ -6,6 +6,7 @@
       <th scope="col">Equipe</th>
       <th scope="col">Points</th>
       <th scope="col">Sets perdus</th>
+      <th scope="col">Envoyer vers:</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,19 @@
         <td>{{ getTeamName(item) }}</td>
         <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)*3}}</td>
         <td>{{ localStorageService.calcTeamPoolSetLoss(this.name, this.numRound, item) }}</td>
+        <td>
+          <form [formGroup]="form2" (ngSubmit)="changeTeam(item)">
+            <select formControlName="numPool">
+               <option [ngValue]="null" disabled>Choose your profile</option>
+              <option *ngFor="let item of this.localStorageService.getPoolsFromRound(this.name, this.numRound); index as i">
+                Poule {{ i+1 }}
+              </option>
+            </select>
+            <button class="btn btn-link">
+              Valider
+            </button>
+          </form>
+        </td>
     </tr>
     <tr>
       <th scope="row">
