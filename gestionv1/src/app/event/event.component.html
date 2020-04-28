@@ -1,15 +1,13 @@
-<div class="col-md-6">
-    <li class="list-group-item">
-        <h3>Nom: {{ name }}</h3>
-        <p>Date: {{ dateEv }} </p>
-        <p>Date limite inscritpion sur le site: {{ dateLimite}}</p>
-     <p><a [routerLink] = "[name]">Détails et inscriptions</a> </p>
-    </li>
-</div>
-
-<div class="col-md-6">
-    <li class="list-group-item">
-        <h4 style="text-align: center;">Tournois présents sur l'événement</h4>
-        <p id="tournois" *ngFor="let tournoi of tournois">{{tournoi}} / </p>
-    </li>
+<div class="card text-center bg-primary">
+    <div class="card-header">
+        <h3> {{ name }} </h3>
+    </div>
+    <div class="card-body">
+        <li class="list-group-item">
+            <h3 class="car1">{{ name }}</h3>
+            <p class="car1">Date: {{ dateEv }} </p>
+            <p class="car1">Date limite inscritpion sur le site: {{ dateLimite}}</p>
+            <p><a [routerLink]="[name]">Détails et inscriptions</a> </p>
+        </li>
+    </div>
 </div>
