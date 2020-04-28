@@ -8,8 +8,8 @@
 </div>
 
 <div class="col-md-6">
+    <li class="list-group-item">
         <h4 style="text-align: center;">Tournois présents sur l'événement</h4>
-        <div class="col-md-4" *ngFor="let tournoi of tournois">
-            <li><p >{{tournoi }}</p></li>
-        </div>
+        <p id="tournois" *ngFor="let tournoi of tournois">{{tournoi}} / </p>
+    </li>
 </div>

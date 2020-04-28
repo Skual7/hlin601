@@ -1,27 +1,46 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
 export class RequestService {
-  // Ici mettre toutes les requêtes liées à la BDD
-  
-  // pour toutes les tables et leurs attributs se référer au dossier Models/ qui
-  // contiens les objets et leurs forme.
 
-  // un exemple des objets utilisés dans pseudoBDD/
-  // un exemple de l'objet user dans services/user.service.ts
 
-  ///////// Requêtes à fournir pour l'instant /////////
-  /////////////////////////////////////////////////////
+  url = "https://s6projet.000webhostapp.com/get.php";
+
+  constructor(private http: HttpClient){}
+
+ request(req) {
+	var user = "id13334617_user";
+	var pass = "ThisIsA_Password12";
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://s6projet.000webhostapp.com/get.php', false);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    var params = 'user='+user+'&pass='+pass+'&request='+req;
+    xhr.send(params);
+    if(xhr.status == 200) {
+      // return xhr.responseText;
+        if (xhr.responseText == "user,pass ou request non renseigné.") {
+        	return "-1"; //Mauvais user/pass
+        } else if (xhr.responseText == "MySQL connection error.") {
+        	return "-2"; //Problème de connexion à la base de donnée
+        } else {
+        	return (xhr.responseText) //Si select on recupère la réponse
+        }
+    }
+}
+/*  (!isNaN(xhr.responseText)) {
+        	return (xhr.responseText + "ligne(s) modifiée(s)."); //Nombre de lignes modifiée(s) (si update/delete...) */
+
+
+//console.log(request("SELECT * FROM comptes"));
+
   /*
   - qui récup toutes les infos d'un user pour quand il se connectera
   - qui récup tous les elt d'un événements donnés
   - qui récup tous les elt d'un tournois donnés
   - qui récup tous les elts d'une team donnés (on l'identifie grâce à son nom et tournamentid ici)
   
-  - voir avec louis pour si besoin de stocker les rounds etc 
-
-
 
   */
 }

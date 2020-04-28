@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { EventComponent } from './event/event.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { EventService } from './services/event.service';
 import { EventViewComponent } from './event-view/event-view.component';
@@ -30,6 +30,7 @@ import { RoundComponent } from './round/round.component';
 import { ResultsComponent } from './results/results.component';
 import { SetResultsComponent } from './set-results/set-results.component';
 import { Four0fourComponent } from './four0four/four0four.component';
+import { RequestService } from './services/request.service';
 
 
 
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+     HttpClientModule,
     RouterModule.forRoot(appRoutes)
 
   ],
@@ -87,7 +89,8 @@ const appRoutes: Routes = [
     ConnectionGuard,
     TournamentService,
     TeamService,
-    LocalStorageService
+    LocalStorageService,
+    RequestService
 
   ],
   bootstrap: [AppComponent]

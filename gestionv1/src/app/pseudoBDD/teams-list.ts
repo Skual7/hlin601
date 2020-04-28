@@ -12,8 +12,13 @@ export const TEAMS: Team[] = [
     players: [["Romain", "2" ], ["Victor","1"] ,["Damien", "3"]]
   },
   {
+    tournamentid: "Elite G20/06/20",
+    teamName: "champ",
+    players: [[ "Benjamin","5"] ,["Julien","5"] ,["Nicolas","4"] ,["Earvin","5"]]
+  },
+  {
     tournamentid: "Elite F20/06/20",
-    teamName: "TeamTest",
-    players: [[ "Jean","2"] ,["Perd","1"] ,["laBoule","3"] ,["Marie","4"]]
-  } 
+    teamName: "MJCBD",
+    players: [[ "Marie","3"] ,["Joana","2"] ,["Clara","4"]]
+  }
 ]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { EventVB } from '../models/event.modele';
+import { RequestService } from '../services/request.service';
 
 
 @Component({
@@ -14,9 +15,11 @@ export class EventViewComponent implements OnInit {
   events : EventVB[];
 
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private requestService: RequestService) { }
   ngOnInit(){
     this.events = this.eventService.events;
+
+    //console.log(this.requestService.request("SELECT * FROM comptes"));
   }
 
 }

@@ -11,12 +11,12 @@
         </div>
         <div class="form-group">
           <label for="dateEv">Date de l'événement
-            <input type="text" class="form-control" formControlName="dateEv">
+            <input type="date" class="form-control" formControlName="dateEv">
           </label>
         </div>
         <div class="form-group">
           <label for="dateLimite">Date limite d'inscription sur le site
-            <input type="text" class="form-control" formControlName="dateLimite">
+            <input type="date" class="form-control" formControlName="dateLimite">
           </label>
         </div>
         <div class="input-group">
@@ -30,9 +30,7 @@
       </div>
       <!-- Partie ajout de tournois  -->
       <div class="col-md-6">
-        
         <div formArrayName="tournaments">
-          
           <h3>Tournois: </h3>
           <div class="form-group"
             *ngFor="let tournament of getTournaments().controls; let i = index"

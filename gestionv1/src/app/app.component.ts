@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from './services/connection.service';
 import { UserService } from './services/user.service';
 import { Router } from '@angular/router';
+import { RequestService } from './services/request.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent {
  */  title = 'gestionv1';
   constructor(private connectionService: ConnectionService,
               private userService : UserService,
-              private router : Router){}
+              private router : Router,
+              private requestService: RequestService){}
 
 
 
