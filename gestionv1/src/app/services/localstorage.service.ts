@@ -31,19 +31,41 @@ export class LocalStorageService {
     console.log(message);
   }
 
-  // GESTIONS des tournois // 
+  // GESTIONS des tournois //
+  getTournamentsName(){
+    let res = [];
+    let tournament = JSON.parse(window.localStorage.getItem("tournament"));
+    for(let tournois of tournament){
+      res.push(tournois[3]);
+    }
+    return res;
+  }
+
   addTournament(nom: String, format: number){
-    this.setTournament(nom,[format,[],[]]);
+    let tournament = JSON.parse(window.localStorage.getItem("tournament"));
+    tournament.push([format,[],[],nom]);
+    window.localStorage.setItem("tournament",JSON.stringify(tournament));
   }
 
 
-  getTournament(nom){
-    return JSON.parse(window.localStorage.getItem("tournament"))[nom];
+  getTournament(tournamentName:String){
+    let tournois;
+    let tournament = JSON.parse(window.localStorage.getItem("tournament"));
+    for(let i=0; i<tournament.length; i++){
+      if(tournament[i][3]==tournamentName){
+        tournois = tournament[i];
+      }
+    }
+    return tournois;
   }
 
   setTournament(tournamentName,value:any){
     let tournament = JSON.parse(window.localStorage.getItem("tournament"));
-    tournament[tournamentName] = value;
+    for(let i=0; i<tournament.length; i++){
+      if(tournament[i][3]==tournamentName){
+        tournament[i] = value;
+      }
+    }
     window.localStorage.setItem("tournament",JSON.stringify(tournament));
   }
 
