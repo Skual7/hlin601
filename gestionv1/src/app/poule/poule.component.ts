@@ -78,4 +78,14 @@ export class PouleComponent implements OnInit {
     this.displayForm = false;
   }
 
+  deleteT(teamN){
+    this.localStorageService.suprTeamFromPool(this.name, this.numRound, teamN);
+    this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
+  }
+
+  deleteP(){
+    this.localStorageService.suprPool(this.name, this.numRound, this.numPoule);
+    this.refreshPool.emit(null);
+  }
+
 }
