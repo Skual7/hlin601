@@ -43,7 +43,7 @@
     </tr>
   </tbody>
 </table>
-<button style="margin-bottom: 1%" class="btn btn-success" (click)="this.displayForm2 = true">Afficher les scores</button>
+<button style="margin-bottom: 1%" class="btn btn-primary" (click)="this.displayForm2 = true">Afficher les scores</button>
 
 <app-results *ngIf="displayForm2" [numRound]=this.numRound [numPoule]=this.numPoule></app-results>
 <button style="margin-bottom: 1%" class="btn" *ngIf="this.displayForm2" (click)="this.displayForm2 = false">cacher les scores</button>

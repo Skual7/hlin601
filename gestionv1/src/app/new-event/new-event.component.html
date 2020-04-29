@@ -1,56 +1,79 @@
+<section id="home" class="page overlay">
+  <a style="float: left" routerLink='/events'>
+    <i class="material-icons">arrow_back</i>
+  </a>
+  <div id="con" class="container">
+    <div id="d2" class="content cover text-center">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 id="titre" class="mt-0 mb-4 h1" data-animation="fadeInDown" data-delay="300">Créez votre propre évènement
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="container">
-  <h3 *ngIf="name === NULL || name.length === 0">Créer un événement</h3>
-  <h3 *ngIf="!(name === NULL)">{{ name }}</h3>
-    <form [formGroup]="eventForm" (ngSubmit)= "onSubmitForm()">
-      <div class="col-md-6" style="border: 1px solid black;">
-        <div class="form-group">
-          <label for="name">Nom de l'événement
-            <input type="text" class="form-control" formControlName="name" [(ngModel)]="name"> 
-            <!-- Apparement pas une bonne idée ngModele mais pour l'instant on garde (voir console pour raisons) -->
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="dateEv">Date de l'événement
-            <input type="date" class="form-control" formControlName="dateEv">
-          </label>
-        </div>
-        <div class="form-group">
-          <label for="dateLimite">Date limite d'inscription sur le site
-            <input type="date" class="form-control" formControlName="dateLimite">
-          </label>
-        </div>
-        <div class="input-group">
-          <label for="description">Description
-            <textarea class="form-control" formControlName="description"></textarea>
-          </label><br>
-          <small class="form-text text-muted">Renseignez le/les lieux avec précision, 
-            l'heure de fin des inscriptions en présentiel, l'heure de début des tournois
-             et toute information essentielle au bon déroulement de votre événement.</small>
-        </div>
+  <form [formGroup]="eventForm" (ngSubmit)="onSubmitForm()">
+    <div class="card bg-primary text-center">
+      <div class="card-header">
+        <h3 *ngIf="name === NULL || name.length === 0">Mon évènement</h3>
+        <h3 *ngIf="!(name === NULL)">{{ name }}</h3>
       </div>
-      <!-- Partie ajout de tournois  -->
-      <div class="col-md-6">
-        <div formArrayName="tournaments">
-          <h3>Tournois: </h3>
-          <div class="form-group"
-            *ngFor="let tournament of getTournaments().controls; let i = index"
-            [formGroupName]="i">
-            <label for="nameT">Nom du tournois</label>
-            <input type="text" class="form-control" formControlName="nameT" placeholder="Loisir Garçon">
-            <label for="format">Format du tournois</label>
-            <select class="form-control" formControlName="format" aria-placeholder="2 pour du 2 x 2">
-              <option  value="2">2 x 2</option>
-              <option  value="3">3 x 3</option>
-              <option  value="4">4 x 4</option>
-              <option  value="5">5 x 5</option>
-              <option  value="6">6 x 6</option>
-            </select>
-            <button type="button" class="btn btn-danger" (click)="onDeleteTournament(i)">Supprimer le tournois</button>
+      <div style="margin-top:-1rem" class="card-body">
+        <div class="col-md-12" style="border: 1px solid black;">
+          <div class="form-group">
+            <label style="margin-top: 2rem" for="name">Nom de l'événement
+              <input placeholder="Nom de l'évènement" type="text" class="form-control" formControlName="name"
+                [(ngModel)]="name">
+              <!-- Apparement pas une bonne idée ngModele mais pour l'instant on garde (voir console pour raisons) -->
+            </label>
           </div>
-          <button type="button" class="btn btn-success" (click)="onAddTournament()">Ajouter un tournois</button>
+          <div class="form-group">
+            <label for="dateEv">Date de l'événement
+              <input type="date" class="form-control" formControlName="dateEv">
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="dateLimite">Date limite d'inscription sur le site
+              <input type="date" class="form-control" formControlName="dateLimite">
+            </label>
+          </div>
+
+          <label for="description">Description
+            <textarea style="margin-bottom: 3rem"
+              placeholder="Renseignez le/les lieux avec précision, l'heure de fin des inscriptions en présentiel, l'heure de début des tournois et toute information essentielle au bon déroulement de votre événement."
+              id="description" class="form-control" formControlName="description"></textarea>
+          </label><br>
         </div>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">Créer</button>
-    </form>
-  
+    </div>
+
+
+
+
+    <!-- Partie ajout de tournois  -->
+    <div style="text-align: center" class="col-md-12">
+      <div style="text-align:center" formArrayName="tournaments">
+        <h3>Tournois: </h3>
+        <div class="form-group" *ngFor="let tournament of getTournaments().controls; let i = index" [formGroupName]="i">
+          <label for="nameT">Nom du tournois</label>
+          <input type="text" class="form-control" formControlName="nameT" placeholder="Loisir Garçon">
+          <label for="format">Format du tournois</label>
+          <select class="form-control" formControlName="format" aria-placeholder="2 pour du 2 x 2">
+            <option value="2">2 x 2</option>
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+            <option value="6">6 x 6</option>
+          </select>
+          <button type="button" class="btn btn-danger" (click)="onDeleteTournament(i)">Supprimer le tournois</button>
+        </div>
+        <button type="button" class="btn btn-success" (click)="onAddTournament()">Ajouter un tournois</button>
+      </div>
+          <button style="margin-top: 5rem; margin-bottom: 5rem" class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">Confirmer et créer l'évènement</button>
+    </div>
+  </form>
+
 </div>
