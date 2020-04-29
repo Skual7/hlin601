@@ -63,6 +63,21 @@ export class LocalStorageService {
     return score;
   }
 
+  getWinner(tournamentName:String){
+    if(this.isFinal(tournamentName, this.getLastRoundNumber(tournamentName))){ 
+      if(this.roundEnded(tournamentName,this.getLastRoundNumber(tournamentName))){
+        return this.rankingTeamByScore(tournamentName, this.getLastRoundNumber(tournamentName),0)[0];
+      }else{
+        console.error("Final not ended.");
+        return -2;
+      }
+    }
+    else{
+      console.error("Not final.");
+      return -1;
+    }
+  }
+
 
   //Gestion des Equipes--------------------------------------------------------------------------------------
   getTeams(tournamentName){
@@ -295,6 +310,10 @@ export class LocalStorageService {
     return true;
   }
 
+  isFinal(tournamentName:String, roundN: number){
+    return (this.getPoolsFromRound(tournamentName,roundN).length == 1 && this.getPoolFromRound(tournamentName,roundN,0)[0].length == 2);
+  }
+
   //------------Gestion poule-----------------------------------------------------
   cocote(){
     console.log('cote cote cote');
@@ -455,7 +474,7 @@ export class LocalStorageService {
     }
     if(listmatch.length == 0){
       this.errorm1('teamPlayedWichMatch('+tournamentName+' , '+roundN+' , '+teamN+')');
-      return [-1];
+      return [];
     }
     return listmatch;
   }
