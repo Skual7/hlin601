@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { ConnectionService } from '../services/connection.service';
 import { Router } from '@angular/router';
 import { RequestService } from '../services/request.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-connection',
@@ -14,7 +15,7 @@ export class ConnectionComponent implements OnInit {
 
   constructor(private connectionService: ConnectionService,
               private router : Router, private formBuilder: FormBuilder,
-              private requestService: RequestService) { }
+              private requestService: RequestService, private  userService: UserService) { }
 
   formConnexion : FormGroup;
   formInscription: FormGroup;
@@ -52,6 +53,7 @@ export class ConnectionComponent implements OnInit {
 
   onSignIn(){
     const connexionValues = this.formConnexion.value;
+   this.userService.setUser(this.requestService.request('SELECT * FROM user where user.email = "'+connexionValues['email']+'"'));
     this.connectionService.connexion(connexionValues['email'],connexionValues['mdp']);
     if(this.connectionService.isConnected){
       this.router.navigate(['/events']);
@@ -61,10 +63,23 @@ export class ConnectionComponent implements OnInit {
     } if (this.connectionService.pbCoBdd){
       console.log("Une erreur de connexion à la BDD est survenue: Réessayer")
     }
+    this.requestService.request('Select * from User where email = "'+connexionValues['email']+'"');
   }
   onInscription(){
-    const inscriptionValues = this.formInscription.value;
-    // rajouter l'insertion dans la bdd 
+    const inscValues = this.formInscription.value;
+    // insertion dans la bdd
+    let t = this.requestService.request('INSERT INTO user VALUES ('+'"'+inscValues['email']+'"'+', "'+inscValues['prenom']+'", "'+
+    inscValues['nom']+'", "'+inscValues['niveau']+'", "'+inscValues['birthday']+'", "'+inscValues['mdp']+'")');
+    console.log(t);
+    // connexion automatique si insertion pas torp longue ... 
+    this.autoCo(inscValues['email'], inscValues['mdp']);
+    
   }
-
+  autoCo(email : string , pwd: string){
+    this.connectionService.connexion(email,pwd);
+    if(this.connectionService.isConnected){
+      this.router.navigate(['/events']);
+    }
+    
+  }
 }

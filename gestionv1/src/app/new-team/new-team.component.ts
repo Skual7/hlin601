@@ -30,11 +30,10 @@ export class NewTeamComponent implements OnInit {
   // Pour initialiser le formulaire // 
   initForm(){
     this.teamForm = this.formBuilder.group({ // on rajoute les controles qui seront dans le formulaires
-        teamName: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(20), Validators.pattern('[A-Za-z0-9]+')]],
+        teamName: ['',[Validators.required,Validators.minLength(5),Validators.maxLength(20), Validators.pattern('[A-Za-z0-9_-]+')]],
         players: this.formBuilder.array([]),
         selfInsc: [false]
       });
-   //this.teamForm.valueChanges.subscribe(console.log); // pr voir saisie au fur et à mesure (pas nécessaire)
   }
 
   // pour gérer la validation du formulaire + création team // 
@@ -49,10 +48,7 @@ export class NewTeamComponent implements OnInit {
    this.teamService.addTeam(newTeam);
 
   }
-  // pour transformer correctement les players // 
-  get playersForms(){
-    return this.teamForm.get('players') as FormArray;
-  }
+
   // Pour rajouter des joueurs au formulaire lors du click sur ajouter Joueur //
   onAddPlayer(){
     const player = this.formBuilder.group({
@@ -82,13 +78,9 @@ export class NewTeamComponent implements OnInit {
   get teamName() { 
     return this.teamForm.get('teamName');
   }
-
-
-  // savoir le nombre minimum de joueur à ajouter avant validation formulaire //
-  // pas encore utilisé pour l'instant                                        // 
-  getNbMinPlayers(){
-    return this.tournamentService.tournament.format;
-
+    // pour transformer correctement les players // 
+  get playersForms(){
+      return this.teamForm.get('players') as FormArray;
   }
 
 

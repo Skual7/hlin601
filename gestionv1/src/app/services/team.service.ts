@@ -10,10 +10,6 @@ export class TeamService {
     tournamentid: string;
     newTeam : Team; // nouvelle équipe à ajouter
 
-    /*teamName: string;
-    players: string[];
-    playersLevel: number[];
- */
      teamSubject = new Subject<Team[]>();
     team : Team;
     emitTeam(){

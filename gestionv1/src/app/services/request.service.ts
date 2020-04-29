@@ -35,12 +35,4 @@ export class RequestService {
 
 //console.log(request("SELECT * FROM comptes"));
 
-  /*
-  - qui récup toutes les infos d'un user pour quand il se connectera
-  - qui récup tous les elt d'un événements donnés
-  - qui récup tous les elt d'un tournois donnés
-  - qui récup tous les elts d'une team donnés (on l'identifie grâce à son nom et tournamentid ici)
-  
-
-  */
 }

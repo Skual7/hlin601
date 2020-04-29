@@ -30,9 +30,9 @@ export class NewEventComponent implements OnInit {
       dateEv: ['',[Validators.required]],
       dateLimite: ['',[Validators.required]],
       tournaments: this.formBuilder.array([]),
-      description: ['',[Validators.required]]
+      description: ['',[Validators.required, Validators.maxLength(500)]]
     });
-    this.eventForm.valueChanges.subscribe(console.log);
+    //this.eventForm.valueChanges.subscribe(console.log);
   }
 
   // retourne le tableau de tournois correctement formé // 
@@ -88,6 +88,11 @@ export class NewEventComponent implements OnInit {
       this.tournamentService.addTournament(new Tournament ( t['nameT']+formValues['dateEv'], 
       t['nameT'], t['format'] as number, [],"" ));
     });
+  }
+
+  // getter pour factoriser le code dans template 
+  get description(){
+    return this.eventForm.get('description');
   }
 
 }

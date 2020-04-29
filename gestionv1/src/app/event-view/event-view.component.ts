@@ -15,9 +15,10 @@ export class EventViewComponent implements OnInit {
   events : EventVB[];
 
 
-  constructor(private eventService: EventService, private requestService: RequestService) { }
+  constructor(private eventService: EventService, private requestService: RequestService ) { }
   ngOnInit(){
     this.events = this.eventService.events;
+    
 
     //console.log(this.requestService.request("SELECT * FROM comptes"));
   }

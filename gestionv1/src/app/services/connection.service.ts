@@ -11,7 +11,8 @@ export class ConnectionService {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://s6projet.000webhostapp.com/login.php',false);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      var params = 'username='+username+'&password='+password;
+      //var params = 'username='+username+'&password='+password;
+      var params = 'email='+username+'&password='+password;
       xhr.send(params);
         if(xhr.status == 200) {
           if (xhr.responseText == "Echoué") {

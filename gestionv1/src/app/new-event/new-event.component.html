@@ -45,10 +45,13 @@
             <textarea style="margin-bottom: 3rem"
               placeholder="Renseignez le/les lieux avec précision, l'heure de fin des inscriptions en présentiel, l'heure de début des tournois et toute information essentielle au bon déroulement de votre événement."
               id="description" class="form-control" formControlName="description"></textarea>
-          </label><br>
+          </label><!-- ici surement refaire le style --><br>
+          <small *ngIf='description.errors?.maxlength' class="text-danger">Max 500 caractères</small> <br>
         </div>
       </div>
     </div>
+<!-- 501 caractères pour pouvoir tester  -->
+    <!-- azertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopa -->
 
 
 
