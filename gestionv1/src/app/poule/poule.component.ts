@@ -17,7 +17,7 @@ export class PouleComponent implements OnInit {
   
   @Input() numRound: number;
   @Input() numPoule: number;
-  @Output() refreshPool = new EventEmitter();
+  @Output() refreshPool = new EventEmitter(); //evenement envoyé au component poule lorsqu'il faut rafraichir le tab des poules
 
   constructor(private fb : FormBuilder, private localStorageService:  LocalStorageService, private route : ActivatedRoute) {
    }
@@ -29,6 +29,7 @@ export class PouleComponent implements OnInit {
   displayForm: boolean;
   displayForm2: boolean;
 
+  /* Retourne le nom d'une équipe en fonction de son numéro*/
   getTeamName(num){
     var teamName='';
     let t=this.localStorageService.getTeam(this.name,num);
@@ -37,6 +38,7 @@ export class PouleComponent implements OnInit {
     return teamName;
   } 
 
+  /* initialisation du formulaire*/
   ngOnInit(): void {
     this.name = this.route.snapshot.params['trn'];
     this.form = this.fb.group(
@@ -55,34 +57,35 @@ export class PouleComponent implements OnInit {
     this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
   }
 
-  fctCmp(team1, team2){
-    return (this.localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, team2)- (this.localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, team1)));
-  }
 
+  /* affiche/cache le formulaire d'ajout d'équipe */ 
   addT(){
     this.displayForm = !this.displayForm;
   }
 
+  /* effectue le changement de poule d'une équipe */
   changeTeam(team){
     this.localStorageService.moveTeamFromPool(this.name, this.numRound, team, this.form2.value.numPool);
     this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
     this.refreshPool.emit(null);
   }
 
+  /* Ajoute l'equipe du formulaire au local storage */
   onSubmit(){
     this.localStorageService.addTeam(this.name, this.form.value.nameF);
     this.localStorageService.setTeamLevel(this.name, this.form.value.nameF, this.form.value.niveau);
     this.localStorageService.addTeamToPool(this.name, this.form.value.nameF, this.numRound, this.numPoule);
-    console.log("j'ajoute la team "+this.form.value.nameF+" à la poule numero "+this.numPoule+" du round numero "+this.numRound)
     this.teamArray =  this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
     this.displayForm = false;
   }
 
+  /* Supprime une equipe d'une poule lorsqu'on clique sur la croix */
   deleteT(teamN){
     this.localStorageService.suprTeamFromPool(this.name, this.numRound, teamN);
     this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
   }
 
+  /* Supprime une poule lorqu'on clique sur le bouton de suppression */
   deleteP(){
     this.localStorageService.suprPool(this.name, this.numRound, this.numPoule);
     this.refreshPool.emit(null);
