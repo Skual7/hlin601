@@ -41,7 +41,7 @@
     </div>
 
     <div *ngIf="modifying" class="col-sm-8 col-sm-offset-1">
-        <form [formGroup]="userForm" (ngSubmit)="test()">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
             <div class="form-group">
                 <label for="firstName">Prénom</label>
                 <input type="text" class="form-control" id="firstName" formControlName="firstName">
@@ -54,10 +54,10 @@
                 <label for="birthday">Date de naissance</label>
                 <input type="text" class="form-control" id="birthday" value="{{userService.user.birthday}}" disabled>
             </div>
-            <div class="form-group">
+<!--             <div class="form-group">
                 <label for="email">Adresse Mail</label>
-                <input type="text" class="form-control" id="email" formControlName="email">
-            </div>
+                <input type="text" class="form-control" id="email" value="{{userService.user.email}}" disabled>
+            </div> -->
             <div class="form-group">
                 <label for="niveau">Quel niveau avez-vous ? /5</label>
                 <select id="niveau" class="form-control" formControlName="niveau">

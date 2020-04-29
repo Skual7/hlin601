@@ -63,7 +63,8 @@ export class ConnectionComponent implements OnInit {
     } if (this.connectionService.pbCoBdd){
       console.log("Une erreur de connexion à la BDD est survenue: Réessayer")
     }
-    this.requestService.request('Select * from User where email = "'+connexionValues['email']+'"');
+    //let r = this.requestService.request('Select * from User where email = "'+connexionValues['email']+'"');
+    //console.log(r.JSON.parse);
   }
   onInscription(){
     const inscValues = this.formInscription.value;

@@ -28,7 +28,9 @@ export class RequestService {
         	return (xhr.responseText) //Si select on recupère la réponse
         }
     }
+    
 }
+
 /*  (!isNaN(xhr.responseText)) {
         	return (xhr.responseText + "ligne(s) modifiée(s)."); //Nombre de lignes modifiée(s) (si update/delete...) */
 

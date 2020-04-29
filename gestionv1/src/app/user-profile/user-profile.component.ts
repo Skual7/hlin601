@@ -6,6 +6,7 @@ import { EventVB } from '../models/event.modele';
 import { EventService } from '../services/event.service';
 import { Team } from '../models/team.modele';
 import { Router } from '@angular/router';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -44,7 +45,6 @@ export class UserProfileComponent implements OnInit {
       {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', Validators.required],
         niveau: [ , Validators.required]
       }
     );
@@ -54,14 +54,15 @@ export class UserProfileComponent implements OnInit {
     console.log(this.userService.eventInProgress);
   }
 
-/*
+
   onSubmitForm(){
     const formValue = this.userForm.value;
-    const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, formValue['email'], formValue['niveau'], this.tournoisInscrit);
+    const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, this.userService.user.email , formValue['niveau'], [],[]);
     this.userService.user = newUser;
+    this.userService.modifUser(formValue['firstName'], formValue['lastName'], this.userService.user.email , formValue['niveau']);
     this.modifying = false;
   }
-  */
+  
   
 
 } 
