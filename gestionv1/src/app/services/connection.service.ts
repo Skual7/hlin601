@@ -1,5 +1,5 @@
 export class ConnectionService {
-    isConnected = false;
+    isConnected = true;
     wrongPwd = false;
     pbCoBdd = false;
 

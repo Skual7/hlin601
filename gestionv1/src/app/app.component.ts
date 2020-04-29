@@ -14,11 +14,11 @@ export class AppComponent {
   
   ngOnInit(){
     if(window.localStorage.getItem('tournament') == null){
-      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
+      window.localStorage.setItem('tournament',JSON.stringify([]));
     }
     // pour clear le localstorage
     if(window.localStorage.getItem('tournament') != null){
-      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
+      window.localStorage.setItem('tournament',JSON.stringify([]));
     }
   }
 /*   go(){

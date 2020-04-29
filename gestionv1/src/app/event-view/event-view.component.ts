@@ -10,6 +10,7 @@ import { RequestService } from '../services/request.service';
   styleUrls: ['./event-view.component.scss']
 })
 export class EventViewComponent implements OnInit {
+
   //importation via le service d'events du tableau
   // des events contenu dans events-list
   events : EventVB[];
@@ -18,6 +19,7 @@ export class EventViewComponent implements OnInit {
   constructor(private eventService: EventService, private requestService: RequestService ) { }
   ngOnInit(){
     this.events = this.eventService.events;
+    this.eventService.getEventFromBDD();
     
 
     //console.log(this.requestService.request("SELECT * FROM comptes"));
