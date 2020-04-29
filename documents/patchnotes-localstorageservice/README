@@ -37,6 +37,11 @@ setTournamentName(string tournamentName) : mets tournamentName en place 0 de de 
 
 getTournamentName() : renvoie le nom du tournois.
 
+getWinner() : renvois un int :
+    -1 : erreur le dernier round n'est pas une finale
+    -2 : erreur le round est une finale mais pas finie
+    autre : index de l'equipe gagnante
+
 
 ---------- Methodes gestion équipe ------------------
 getTeams() : renvoie l'array qui contient toutes les équipes du tournois.
@@ -76,6 +81,8 @@ addRoundAutomate() : ajoute un round composé de poule et des équipes de façon
 
 roundEnded() : renvoie true si le toutes les poules de celui-ci sont terminées.
 
+isFinal() : renvoie true si le dernier round est composé d'une seule poule de deux équipes.
+
 
 ---------- Methodes gestions Poule ---------------------
 getPoolsFromRound(number roundN) : renvoie l'array des poules du tour roundN.
@@ -91,6 +98,8 @@ poolEnded() : renvoie true si tous les matchs de poolN sont terminés (de la fa�
 suprTeamFromPool() : supprime teamN d'une poule.
 
 moveTeamFromPool() : déplace une équipe de sa poule initiale vers la poule poolN.
+
+suprPool() : supprime une poule.
 
 
 ---------- Methode gestion Poule/Match -------------------
@@ -120,6 +129,8 @@ calcTeamPoolSetLoss() : renoie le nombre de set perdu par teamN dans poolN.
 
 getResultPool() : renvoie un array composé de la sorte
     - [0] Equipe, [1][0] nb victoire,[1][1] nb set perdu, [1][2] nb point encaissé.
+
+rankingTeamByScore() : renvoie un array de n° d'equipe d'une poule, trié en fonction de result pool. 
 
 calcQualifiedAUtomate() :renvoie l'array des qualifiés pour le tour suivant de façon prédéfinie.
 On considère une équipe qualifiée si elle fait partie de la moitiée supérieure de son classement.
