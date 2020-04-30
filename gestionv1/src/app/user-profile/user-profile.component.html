@@ -21,14 +21,14 @@
                     <li class="list-group-item">Date de naissance: {{ userService.user.birthday }} </li>
                     <li class="list-group-item">Votre email: {{ userService.user.email }}</li>
                     <li class="list-group-item">Votre niveau: {{ userService.user.niveau }} /5</li>
-                    <li class="list-group-item">Votre équipe: {{ userService.user['inscrit'].tournamentid}} </li>
+                    <!-- <li class="list-group-item">Votre équipe: {{ userService.user['inscrit'].tournamentid}} </li> -->
                 </ul>
             </div>
         </div>
 
-        <app-team *ngFor="let t of userService.user['inscrit']" [tournamentid]="t.tournamentId" [teamName]="t.teamName"
+        <!-- <app-team *ngFor="let t of userService.user['inscrit']" [tournamentid]="t.tournamentId" [teamName]="t.teamName"
             [players]="t.players">
-        </app-team>
+        </app-team> -->
         <button class="btn btn-primary" *ngIf="modifying === false" (click)="modifying = true;">Modifier vos
             informations</button>
         <button class="btn btn-primary" *ngIf="modifying === true" (click)="modifying = false;">Annuler</button>

@@ -20,6 +20,7 @@ export class EventInProgressComponent implements OnInit {
   event: EventVB;
   tournaments: Tournament[];
   teams : Team[];
+  
   constructor(private eventService: EventService,
               private tournamentService: TournamentService, 
               private teamService : TeamService,
@@ -27,10 +28,12 @@ export class EventInProgressComponent implements OnInit {
               private localStorageService: LocalStorageService){}
   ngOnInit() {
     if(this.valide()){
+
         this.event = this.eventService.getEventByName(this.route.snapshot.params['name']);
         //console.log(this.event); // ok 
-        this.tournaments = this.tournamentService.getTournaments(this.event.tournois, this.event.dateEv);
-        //console.log(this.tournaments); 
+        this.tournaments = this.eventService.getTournamentsFromString(this.event.name);
+        //this.tournamentService.getTournaments(this.event.tournois, this.event.dateEv);
+        console.log(this.tournaments); 
         let t  = [];
         this.tournaments.forEach(tournament => {
           tournament.teamRegistered.forEach(team => {
@@ -51,7 +54,7 @@ export class EventInProgressComponent implements OnInit {
   ////////// PARTIE TRANSFERT DANS LOCALE STORAGE //////////
   //////////////////////////////////////////////////////////
 
-  startLocalStorage(){
+/*   startLocalStorage(){
     this.initLocalStorage();
     this.localStorageService.setLocal();
   }
@@ -75,13 +78,8 @@ export class EventInProgressComponent implements OnInit {
       team.players.forEach( (player) => {
         this.localStorageService.addPlayer(tournamentName,team.teamName,player[0],player[1])
       });
-    }); 
-
-      
-      
-
-
-  }
+    });       
+  } */
 
 
 }

@@ -12,6 +12,8 @@ export class EventService {
     
     events : EventVB[] = [];// = EVENTS;
     constructor(private rs: RequestService, private localStorageService : LocalStorageService, private userService : UserService){}
+    
+    // récupères les événements de la bdd // 
     getEventFromBDD(){
         this.events =  [];
         let r = this.rs.request("SELECT * FROM event");
@@ -24,7 +26,7 @@ export class EventService {
             i++;
         }
     }
-    // ajoute l'event à la bdd et récupère son id
+    // ajoute l'event à la bdd //
     addEvent(E: EventVB){
         let str = window.localStorage.getItem('tournament');
         let r = this.rs.request("INSERT INTO event (nom,string, dateE,dateLimite,description, idUser) VALUES ( '"+E.name+"', '"+str+ "', '"+E.dateEv+"', '"+E.dateLimite+"', '"+E.description+"', '"+this.userService.user.email+"')");
@@ -47,7 +49,7 @@ export class EventService {
         );
         return ev;
     }
-    getEventForUser(eventsname: string[]){
+/*     getEventForUser(eventsname: string[]){
         const evs : EventVB[] = [];
         eventsname.forEach(name => {
             evs.push(this.getEventByName(name));
@@ -55,7 +57,7 @@ export class EventService {
         console.log(evs);
         return evs;
     }
-
+ */
     getIdForEvent(name: string, dateEv : string, dateLimite: string){
         let r = this.rs.request('SELECT id FROM event WHERE nom ="'+name+'" AND dateE= "'+dateEv+'" AND dateLimite= "'
         +dateLimite+'"');

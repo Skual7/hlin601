@@ -30,14 +30,16 @@ export class UserProfileComponent implements OnInit {
     @Input() inscrit: Team[];
     @Input() event: string[];
 
+    
+
   constructor(public userService: UserService,
               private formBuilder: FormBuilder,
               private eventService: EventService) { }
 
   ngOnInit() {
     this.initForm();
-    this.birthday = this.userService.user.birthday;
-    this.events = this.eventService.getEventForUser(this.userService.user.event);
+   // this.birthday = this.userService.user.birthday;
+    this.events = this.userService.events;
    
   }
   initForm(){
@@ -51,7 +53,8 @@ export class UserProfileComponent implements OnInit {
   }
   CommencerEvent(name: string){
     this.userService.eventInProgress = name;
-    console.log(this.userService.eventInProgress);
+
+    // console.log("commencer event : "+this.userService.eventInProgress);
   }
 
 

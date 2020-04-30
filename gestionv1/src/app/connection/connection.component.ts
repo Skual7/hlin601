@@ -53,7 +53,6 @@ export class ConnectionComponent implements OnInit {
 
   onSignIn(){
     const connexionValues = this.formConnexion.value;
-   this.userService.setUser(this.requestService.request('SELECT * FROM user where user.email = "'+connexionValues['email']+'"'));
     this.connectionService.connexion(connexionValues['email'],connexionValues['mdp']);
     if(this.connectionService.isConnected){
       this.router.navigate(['/events']);
@@ -63,8 +62,8 @@ export class ConnectionComponent implements OnInit {
     } if (this.connectionService.pbCoBdd){
       console.log("Une erreur de connexion à la BDD est survenue: Réessayer")
     }
-    //let r = this.requestService.request('Select * from User where email = "'+connexionValues['email']+'"');
-    //console.log(r.JSON.parse);
+    this.userService.setUser(this.requestService.request('SELECT * FROM user where email = "'+connexionValues['email']+'"'));
+    this.userService.setUserEvents(this.requestService.request('SELECT * FROM event WHERE idUser = "'+connexionValues['email']+'"'))
   }
   onInscription(){
     const inscValues = this.formInscription.value;

@@ -28,37 +28,40 @@ export class TournamentComponent implements OnInit {
 
   ngOnInit() {
  //   this.teams2 = this.tournamentService.getStringDesTeams(this.nameT,this.id);
-    this.teams = this.getTeams();
+    //this.teams = this.getTeams();
   }
 
 
   onClickInscrire(nameT: string){
     if(this.inscritpion) this.inscritpion = !this.inscritpion;
     else this.inscritpion = !this.inscritpion;
-    console.log("Dans OnclickInscrire " + this.id);
     this.tournamentService.name = nameT;
     this.tournamentService.id = this.id;
   }
   // gère l'affichage/désaffichage des équipes // 
   displayTeams(){
+    this.teams = [];
     if(this.listerEquipe) this.listerEquipe = false
     else this.listerEquipe = !this.listerEquipe;
-    this.teamRegistered.forEach(name => {
-      let x = this.teamService.getTeamByName(name);
-    });
+    let teamsnames = this.ls.getTeams(this.nameT);
+    teamsnames.forEach(t => {
+      let players = this.ls.getTeamPlayers(this.nameT,t[0]);
+      let newTeam = new Team(this.id, t[0], players );
+      this.teams.push(newTeam);
+    })
   }
   // retourne les équipes inscrite au tournois //
-  getTeams(){
+/*   getTeams(){
     const teams : Team[] = [];
     this.teamRegistered.forEach(name => {
       let x = this.teamService.getTeamByName(name);
       teams.push(x);
     });
     return teams;
-  }
+  } */
   // retourne le nombre d'équipes incrites // 
-  get nbTeam(){
+/*   get nbTeam(){
     return this.teamRegistered.length;
-  }
+  } */
 
 }

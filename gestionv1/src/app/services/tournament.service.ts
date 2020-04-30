@@ -57,7 +57,7 @@ export class TournamentService {
         return T;
       }
 // retourne le stournois pour un event
-      getTFromBddByIde(idE: string){
+/*       getTFromBddByIde(idE: string){
           let idEv = +idE;
           let r = this.rs.request("SELECT * from tournaments WHERE idE= '"+idEv+"'");
           r = JSON.parse(r);
@@ -68,13 +68,13 @@ export class TournamentService {
               i++;
           }
           return ts;
-      }
-      getStringFromBDD(nameT: string, idE : string){
+      } */
+/*       getStringFromBDD(nameT: string, idE : string){
           let r = this.rs.request("SELECT string from tournaments WHERE idE = '"+idE+"' AND nameT='"+nameT+"'");
           r = JSON.parse(r);
          // console.log(r[0]['string']);
           return r[0]['string'];
-      }
+      } */
       addTeamtoTournament(teamName: string, players: any){
           this.ls.addTeam(this.name, teamName);
           // ajout des joueurs 

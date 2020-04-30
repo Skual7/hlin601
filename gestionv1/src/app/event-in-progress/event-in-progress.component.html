@@ -27,7 +27,7 @@
 
           <p style="display: inline; margin-right: 5rem ">Date de l'événement: {{event.dateEv}}</p>
           <p style="display: inline; margin-left: 5rem"> Date limite d'inscription: {{event.dateLimite}}</p>
-          <p style="margin-top: 2rem" *ngFor="let desc of event.description">{{desc}}</p>
+          <p style="margin-top: 2rem" >{{description}}</p>
         </li>
       </div>
     </div>
@@ -35,19 +35,19 @@
 
     <div class="col-sm-12" style="display: inline; margin-top:5rem">
       <div class="col-sm-6" style="display: inline">
-        <div style="text-align: center" *ngIf="!this.localStorageService.local">
+        <!-- <div style="text-align: center" *ngIf="!this.localStorageService.local">
           <label>Cliquez sur lancer pour activer la gestion des tournois</label><br>
           <button class="btn btn-primary" (click)="startLocalStorage()">Lancer</button>
         </div>
         <div style="text-align: center" *ngIf="this.localStorageService.local">
           <label>Cliquez pour nettoyer le localstorage</label><br>
           <button class="btn btn-primary" (click)="clearLocalStorage()">Arreter</button>
-        </div>
+        </div> -->
       </div>
       <div class="col-sm-6">
         <div class="col-sm-8 col-sm-offset-2" *ngFor="let t of tournaments">
-          <button class="btn btn-success" [disabled]="!this.localStorageService.local"
-            [routerLink]="[t.nameT]">{{t.nameT }}</button>
+          <button class="btn btn-success" 
+            [routerLink]="[t.nameT]">{{t.nameT }}</button> <!-- [disabled]="!this.localStorageService.local" -->
         </div>
       </div>
     </div>
