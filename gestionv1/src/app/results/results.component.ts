@@ -43,9 +43,13 @@ export class ResultsComponent implements OnInit {
     return results.substring(0,results.length-1);
   }
 
-  /* permet de cacher le composant set results lorsqu'on appuie sur cacher */
+  /* permet de cacher le composant set results lorsqu'on appuie sur cacher et affiche un message si le tournoi à son gagnant */
   hideModifScore(){
     this.displayModifScore = false;
+    let res = this.localStorageService.getWinner(this.tournamentName);
+    if(res>0){
+      alert("Le gagnant est l'équipe "+this.localStorageService.getTeamName(this.tournamentName, res));
+    }
   }
 
 }

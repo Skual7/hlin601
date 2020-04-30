@@ -81,8 +81,11 @@ export class PouleComponent implements OnInit {
 
   /* Supprime une equipe d'une poule lorsqu'on clique sur la croix */
   deleteT(teamN){
+    console.log(this.localStorageService.getPoolFromRound(this.name, this.numRound, this.numPoule));
     this.localStorageService.suprTeamFromPool(this.name, this.numRound, teamN);
     this.teamArray = this.localStorageService.getTeamsFromPool(this.name, this.numRound, this.numPoule);
+    console.log(this.localStorageService.getPoolFromRound(this.name, this.numRound, this.numPoule));
+
   }
 
   /* Supprime une poule lorqu'on clique sur le bouton de suppression */

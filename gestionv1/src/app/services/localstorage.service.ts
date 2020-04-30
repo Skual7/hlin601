@@ -74,6 +74,10 @@ export class LocalStorageService {
   }
   
   //Gestion information du tournois--------------------------------------------------------------------------
+  getFormat(tournamentName:String){
+    return this.getTournament(tournamentName)[0];
+  }
+  
   getScoreTotalEquipe(tournamentName:String, team:any){
     let teamN = this.getTeamNumber(tournamentName,team);
     let score = [0,0,0];
@@ -192,6 +196,9 @@ export class LocalStorageService {
     for(let team = teamsupr+1; team < this.getTeams(tournamentName).length; team++){
       for(let round = 0; round <= this.getLastRoundNumber(tournamentName); round++){
         let poolN = this.teamPlayedWichPool(tournamentName,round,team);
+        if(poolN == -1){
+          continue;
+        }
         let newPool = this.getPoolFromRound(tournamentName,round,poolN);
         for(let t = 0; t < newPool[0].length;t++){
           if(newPool[0][t] == team){
@@ -381,7 +388,7 @@ export class LocalStorageService {
     let pool = this.getPoolFromRound(tournamentName,roundN,poolN);
     pool[0] = pool[0].filter(elem => elem != teamN);
     for(let i = pool[1].length-1; i>=0;i--){
-      if(i in matchsN){
+      if(matchsN.includes(i)){
         pool[1].splice(i,1);
       }
     }
@@ -627,4 +634,6 @@ export class LocalStorageService {
   getScoreFromMatch(tournamentName: string, numRound: number, numPoule: number, numMatch: number){
     return this.getMatchsFromPool(tournamentName, numRound, numPoule)[numMatch][2];
   }
+
+
 }
