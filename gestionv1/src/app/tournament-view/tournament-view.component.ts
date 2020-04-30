@@ -52,7 +52,7 @@ export class TournamentViewComponent implements OnInit {
 
   /* Méthode pour enregistrer la chaine du local storage dans la table évènement de la BDD*/
   save(){
-    let str = JSON.stringify(window.localStorage.getItem("tournament"));
+    let str = window.localStorage.getItem("tournament");
     console.log(this.name+" "+str)
     this.rs.request("UPDATE event SET string = '"+str+"' WHERE nom='"+this.nameEv+"'");
   }

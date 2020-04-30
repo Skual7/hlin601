@@ -37,13 +37,17 @@ export class SingleEventComponent implements OnInit {
     else{
       //console.log(this.eventService.events);
       console.log("dans single");
-      this.name = this.eventService.getEventByNameV2(name).name;
+      let event: EventVB = this.eventService.getEventByNameV2(name);
+      this.name = event.name; this.dateEv = event.dateEv; this.dateLimite = event.dateLimite;
+      this.description = event.description;
+     /*  this.name = this.eventService.getEventByNameV2(name).name;
       this.dateEv = this.eventService.getEventByNameV2(name).dateEv;
       this.dateLimite = this.eventService.getEventByNameV2(name).dateLimite;
       this.tournois = this.eventService.getEventByNameV2(name).tournois;
       this.description = this.eventService.getEventByNameV2(name).description
+      */
       this.Tournaments = this.eventService.getTournamentsFromString(name);
-      
+      console.log(this.Tournaments);
     }
     
   }
