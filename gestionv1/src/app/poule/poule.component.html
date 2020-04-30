@@ -14,7 +14,7 @@
         <button (click)="deleteT(item)" style="float: left" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        {{ getTeamName(item) }} {{item}}</td>
+        {{ getTeamName(item) }}</td>
       <td>{{ localStorageService.calcTeamPoolMatchWin(this.name, this.numRound, item)*3}}</td>
       <td>
         <form class="form-inline" [formGroup]="form2" (ngSubmit)="changeTeam(item)">

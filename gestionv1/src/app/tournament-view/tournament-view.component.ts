@@ -54,7 +54,7 @@ export class TournamentViewComponent implements OnInit {
   save(){
     let str = JSON.stringify(window.localStorage.getItem("tournament"));
     console.log(this.name+" "+str)
-    this.rs.request("INSERT INTO event (string) VALUES ( '"+str+"')");
+    this.rs.request("UPDATE event SET string = '"+str+"' WHERE nom='"+this.nameEv+"'");
   }
 
 }
