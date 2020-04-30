@@ -5,6 +5,7 @@ import { EventService } from '../services/event.service';
 import { TournamentService } from '../services/tournament.service';
 import { Tournament } from '../models/tournament.modele';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-new-event',
@@ -67,8 +68,10 @@ export class NewEventComponent implements OnInit {
       formValue['description']
     );
     console.log(newEvent);
-    this.eventService.addEvent(newEvent); // ajoute ev à BDD
-    this.makeAndAddTournaments();
+      // pour la future string des tournois
+    window.localStorage.setItem('tournament', JSON.stringify([])); // a la création de event
+    let idE = this.eventService.addEvent(newEvent); // ajoute ev à BDD
+    this.makeAndAddTournaments(idE);
     this.router.navigate(['/events']);
 
   }
@@ -82,11 +85,13 @@ export class NewEventComponent implements OnInit {
     return tournaments;
   }
   // s'occupe de créer les tournois entièrement puis les ajoute à la BDD //
-  makeAndAddTournaments(){
+  makeAndAddTournaments(idE : number){
+    var idEvent = idE.toString();
     const formValues = this.eventForm.value;
     formValues['tournaments'].forEach( t => {
-      this.tournamentService.addTournament(new Tournament ( t['nameT']+formValues['dateEv'], 
-      t['nameT'], t['format'] as number, [],"" ));
+        // cast pour bonne insertion dans bdd
+      let format = +t['format']; 
+      this.tournamentService.addTournament(new Tournament ( idEvent, t['nameT'], format, [],"" ));
     });
   }
 

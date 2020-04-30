@@ -3,21 +3,33 @@ import { EventVB } from "../models/event.modele";
 import { EVENTS } from '../pseudoBDD/events-list';
 import { RequestService } from './request.service';
 import { LocalStorageService } from './localstorage.service';
+import { UserService } from './user.service';
 
 @Injectable()
 export class EventService {
 
     
-    events : EventVB[] = EVENTS;
-    constructor(private rs: RequestService, private localStorageService : LocalStorageService){}
+    events : EventVB[] = [];// = EVENTS;
+    constructor(private rs: RequestService, private localStorageService : LocalStorageService, private userService : UserService){}
     getEventFromBDD(){
+        this.events =  [];
         let r = this.rs.request("SELECT * FROM event");
-        r = JSON.parse(r);
         console.log(r);
-        for(let i=0; i < r.length; i++){
-            console.log(r[i][0]);
+        r = JSON.parse(r);
+        let i = 0;
+        while(r[i] != undefined){
+            let e = new EventVB(r[i]['nom'], r[i]['dateE'], r[i]['dateLimite'],[],r[i]['description']);
+           // console.log(e);
+            this.events.push(e);
+            i++;
         }
-        console.log(r[0][0]);
+    }
+    // ajoute l'event à la bdd et récupère son id
+    addEvent(E: EventVB){
+        let r = this.rs.request('INSERT INTO event (nom, dateE,dateLimite,description, idUser) VALUES ( "'+E.name+'", "'+E.dateEv+'", "'+E.dateLimite+'", "'+E.description+'", "'+this.userService.user.email+'")');
+        let r2 = this.rs.request('SELECT id FROM event WHERE nom ="'+E.name+'" AND dateE= "'+E.dateEv+'"');
+        r2 = JSON.parse(r2);
+        return r2[0]['id'];
     }
 
     getEventByName(name : string){
@@ -28,9 +40,6 @@ export class EventService {
         );
         return ev;
     }
-    addEvent(E: EventVB){
-        this.rs.request('INSERT INTO event (nom, dateE,dateLimite,description) VALUES ( "'+E.name+'", "'+E.dateEv+'", "'+E.dateLimite+'", "'+E.description+'")');
-    }
     getEventForUser(eventsname: string[]){
         const evs : EventVB[] = [];
         eventsname.forEach(name => {
@@ -39,8 +48,11 @@ export class EventService {
         console.log(evs);
         return evs;
     }
-    parseEvents(events: string){
-        //events['string'].
-        //const e = new EventVB(events['name'], events['dateE'], events['dateLimite'], events[''])
+
+    getIdForEvent(name: string, dateEv : string, dateLimite: string){
+        let r = this.rs.request('SELECT id FROM event WHERE nom ="'+name+'" AND dateE= "'+dateEv+'" AND dateLimite= "'
+        +dateLimite+'"');
+        r = JSON.parse(r);
+        return r[0]['id'];
     }
 }

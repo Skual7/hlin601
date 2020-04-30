@@ -3,6 +3,7 @@ import { TournamentService } from '../services/tournament.service';
 import { Tournament } from '../models/tournament.modele';
 import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.modele';
+import { LocalStorageService } from '../services/localstorage.service';
 
 @Component({
   selector: 'app-tournament',
@@ -11,12 +12,12 @@ import { Team } from '../models/team.modele';
 })
 export class TournamentComponent implements OnInit {
 
-  @Input() id: string;
+  @Input() id: string; // représente idE 
   @Input() nameT: string;
   @Input() format: number; 
   @Input() teamRegistered: string[];
   @Input() winner: string; 
-  @Input() participe: boolean;
+ // @Input() participe: boolean;
 
   teams: Team[];
   
@@ -24,17 +25,20 @@ export class TournamentComponent implements OnInit {
   listerEquipe : boolean = false;
 
   constructor(private tournamentService: TournamentService,
-              private teamService : TeamService) { }
+              private teamService : TeamService, private ls : LocalStorageService) { }
 
   ngOnInit() {
     this.teams = this.getTeams();
   }
 
 
-  onClickInscrire(id: string){
+  onClickInscrire(nameT: string){
     if(this.inscritpion) this.inscritpion = !this.inscritpion;
     else this.inscritpion = !this.inscritpion;
-    this.tournamentService.setTournament(id); // init tournois courant ds service correspondant
+    this.ls.addTournament(nameT,this.format);
+    
+    this.tournamentService.getStringDesTeams(nameT, this.id);
+    this.tournamentService.setTournament(nameT); // init tournois courant ds service correspondant
   }
   // gère l'affichage/désaffichage des équipes // 
   displayTeams(){

@@ -26,9 +26,7 @@
                 </div>
                 <div class="col-md-6">
                     <p>Description: </p>
-                    <p *ngFor="let desc of description">
-                        - {{ desc }}
-                    </p>
+                    <p >- {{ description }}</p>
                 </div>
             </div>
         </div>
@@ -39,7 +37,7 @@
 <div style="margin-bottom: 5rem" class="container">
     <div class="row" *ngFor="let t of Tournaments">
             <app-tournament [id]="t.id" [nameT]="t.nameT" [format]="t.format" [teamRegistered]="t.teamRegistered"
-                [winner]="t.winner" [participe]="t.participe">
+                [winner]="t.winner" > <!-- [participe]="t.participe" -->
             </app-tournament>
     </div>
 

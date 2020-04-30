@@ -40,18 +40,17 @@ export class SingleEventComponent implements OnInit {
       this.dateLimite = this.eventService.getEventByName(name).dateLimite;
       this.tournois = this.eventService.getEventByName(name).tournois;
       this.description = this.eventService.getEventByName(name).description;
-      this.Tournaments = this.tournamentService.getTournaments(this.tournois, this.dateEv);
+      let idE = this.eventService.getIdForEvent(this.name, this.dateEv, this.dateLimite);
+      //this.tournamentService.getTournaments(this.tournois, this.dateEv);
+      this.Tournaments = this.tournamentService.getTFromBddByIde(idE);
+      
+    
     }
     
   }
 
   onClickTournament(nameT: string){
-    // 
     this.Tournaments = this.tournamentService.getTournaments(this.tournois, this.dateEv);
-   // console.log(this.currentTournament.id);
-  //  this.tournamentService.setTournament(nameT+this.dateEv);
-    // this.descTourn = true;
-    //console.log(this.tournamentService.tournament);
   }
 
 

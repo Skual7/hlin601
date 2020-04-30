@@ -13,10 +13,10 @@
                 <label *ngIf="listerEquipe === true"> Cacher les équipes inscrites
                     <button class="btn btn-primary" *ngIf="listerEquipe === true"
                         (click)="displayTeams()">Cacher</button></label><br>
-                <button class="btn btn-success" *ngIf="inscritpion === false" (click)="onClickInscrire(id)">Inscrire son
+                <button class="btn btn-success" *ngIf="inscritpion === false" (click)="onClickInscrire(nameT)">Inscrire son
                     équipe</button>
                 <button class="btn btn-success" *ngIf="inscritpion === true"
-                    (click)="onClickInscrire(id)">Annuler</button>
+                    (click)="onClickInscrire(nameT)">Annuler</button>
             </li>
         </div>
     </div>
