@@ -35,7 +35,6 @@ export class NewEventComponent implements OnInit {
       tournaments: this.formBuilder.array([]),
       description: ['',[Validators.required, Validators.maxLength(500)]]
     });
-    //this.eventForm.valueChanges.subscribe(console.log);
   }
 
   // retourne le tableau de tournois correctement formé // 

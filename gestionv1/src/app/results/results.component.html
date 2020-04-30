@@ -11,7 +11,8 @@
 <tr *ngFor="let match of localStorageService.getMatchsFromPool(this.tournamentName, this.numRound, this.numPoule); index as i">
     <th>{{ this.localStorageService.getTeamName(this.tournamentName, match[0]) }} </th>
     <th>   
-        <button style="display: block" class="btn btn-link" (click)="this.modifScore(this.localStorageService.getTeamName(this.tournamentName, match[0]),this.localStorageService.getTeamName(this.tournamentName, match[1]))">Modifier le score</button>
+        <button style="display: block" class="btn btn-link" (click)="this.modifScore(this.localStorageService.getTeamName(this.tournamentName, match[0]),this.localStorageService.getTeamName(this.tournamentName, match[1]))">Ajouter un set</button>
+        <button style="display: block" class="btn btn-link" (click)="this.reinitializeScore(this.localStorageService.getTeamName(this.tournamentName, match[0]),this.localStorageService.getTeamName(this.tournamentName, match[1]))">Réinitialiser les scores</button>
         {{ this.getScore(this.tournamentName, this.numRound, this.numPoule, i)}}
     </th>
     <th>{{ this.localStorageService.getTeamName(this.tournamentName, match[1]) }}</th>

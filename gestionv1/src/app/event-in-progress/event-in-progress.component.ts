@@ -30,9 +30,7 @@ export class EventInProgressComponent implements OnInit {
     if(this.valide()){
 
         this.event = this.eventService.getEventByName(this.route.snapshot.params['name']);
-        //console.log(this.event); // ok 
         this.tournaments = this.eventService.getTournamentsFromString(this.event.name);
-        //this.tournamentService.getTournaments(this.event.tournois, this.event.dateEv);
         console.log(this.tournaments); 
         let t  = [];
         this.tournaments.forEach(tournament => {
@@ -40,7 +38,7 @@ export class EventInProgressComponent implements OnInit {
             t.push(this.teamService.getTeamByName(team))
           });
         });
-        this.teams = t; //console.log(this.teams);
+        this.teams = t; 
     }
      
   }
@@ -50,36 +48,6 @@ export class EventInProgressComponent implements OnInit {
     if (this.route.snapshot.params['name'] == undefined) console.log("== undefined");
     return !(this.route.snapshot.params['name'] == ':name' || this.route.snapshot.params['name'] == null || this.route.snapshot.params['name'] == undefined);
   }
-  //////////////////////////////////////////////////////////
-  ////////// PARTIE TRANSFERT DANS LOCALE STORAGE //////////
-  //////////////////////////////////////////////////////////
-
-/*   startLocalStorage(){
-    this.initLocalStorage();
-    this.localStorageService.setLocal();
-  }
-  clearLocalStorage(){
-    window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
-    this.localStorageService.setLocal();
-  }
-  initLocalStorage(){
-    // ajout des tournois dans le localstorage //
-    this.tournaments.forEach( tournament => {
-      this.localStorageService.addTournament(tournament.nameT , tournament.format);
-      // ajout des teams dans le localstorage
-      tournament.teamRegistered.forEach(team => {
-        this.localStorageService.addTeam(tournament.nameT,team);
-      });
-    });
-    // ajout des joueurs dans le localstorage   
-    this.teams.forEach(team => {
-      //  -8 = - dateEvent en gros on split l'id pour récupérer le nom du tournois
-      let tournamentName = team.tournamentid.slice(0, team.tournamentid.length - 8);
-      team.players.forEach( (player) => {
-        this.localStorageService.addPlayer(tournamentName,team.teamName,player[0],player[1])
-      });
-    });       
-  } */
 
 
 }

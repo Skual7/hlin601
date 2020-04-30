@@ -52,4 +52,9 @@ export class ResultsComponent implements OnInit {
     }
   }
 
+  /* reinitialise les scores */
+  reinitializeScore(team1, team2){
+    this.localStorageService.delScoreMatch(this.tournamentName, this.numRound, this.numPoule, team1, team2);
+  }
+
 }

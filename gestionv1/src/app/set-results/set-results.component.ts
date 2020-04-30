@@ -25,28 +25,16 @@ export class SetResultsComponent implements OnInit {
   ngOnInit() {
     this.tournamentName = this.route.snapshot.params['trn'];
     this.form = this.fb.group({
-      set11: undefined,
-      set12: undefined,
-      set21: undefined,
-      set22: undefined,
-      set31: undefined,
-      set32: undefined,
-      set41: undefined,
-      set42: undefined,
-      set51: undefined,
-      set52: undefined
+      score1: undefined,
+      score2: undefined
     }) 
   }
 
   /* Ajoute les scores set par set du match lorsque l'on clique sur confirmer */
   onSubmit(team1: string, team2: string){
-    for(let i=1; i<=5; i++){
-      let score1 = this.form.value["set"+i+"1"];
-      let score2 = this.form.value["set"+i+"2"];
-      console.log(score1);
-      console.log(score2);
-      this.localStorageService.addSetScoreToPool(this.tournamentName, this.numRound, this.numPoule, team1, team2, score1, score2);
-    }
+    let score1 = this.form.value["score1"];
+    let score2 = this.form.value["score2"];
+    this.localStorageService.addSetScoreToPool(this.tournamentName, this.numRound, this.numPoule, team1, team2, score1, score2);
     this.messageToParent.emit("ok");
   }
 }

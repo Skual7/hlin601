@@ -455,6 +455,13 @@ export class LocalStorageService {
     this.setTournament(tournamentName,tournament);
   }
 
+  delScoreMatch(tournamentName: String, roundN: number, poolN: number, team1N: any, team2N:any){
+    var matchN = this.getMatchNumberFromTeam(tournamentName,this.getPoolFromRound(tournamentName,roundN,poolN),this.getTeamNumber(tournamentName,team1N),this.getTeamNumber(tournamentName,team2N));
+    var tournament = this.getTournament(tournamentName);
+    tournament[2][roundN][poolN][1][matchN][2].splice(0,tournament[2][roundN][poolN][1][matchN][2].length);
+    this.setTournament(tournamentName,tournament);
+  }
+
   whoWonMatch(tournamentName: String,roundN:number,poolN:number,team1N:any,team2N:any){
     var matchN =  this.getMatchNumberFromTeam(tournamentName,this.getPoolFromRound(tournamentName,roundN,poolN),this.getTeamNumber(tournamentName,team1N),this.getTeamNumber(tournamentName,team2N));
     var team1 = 0, team2 = 0;

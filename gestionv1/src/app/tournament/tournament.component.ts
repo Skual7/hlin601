@@ -17,7 +17,6 @@ export class TournamentComponent implements OnInit {
   @Input() format: number; 
   @Input() teamRegistered: string[];
   @Input() winner: string; 
- // @Input() participe: boolean;
 
   teams: Team[];
   inscritpion : boolean = false;
@@ -27,8 +26,6 @@ export class TournamentComponent implements OnInit {
               private teamService : TeamService, private ls : LocalStorageService) { }
 
   ngOnInit() {
- //   this.teams2 = this.tournamentService.getStringDesTeams(this.nameT,this.id);
-    //this.teams = this.getTeams();
   }
 
 
@@ -50,18 +47,6 @@ export class TournamentComponent implements OnInit {
       this.teams.push(newTeam);
     })
   }
-  // retourne les équipes inscrite au tournois //
-/*   getTeams(){
-    const teams : Team[] = [];
-    this.teamRegistered.forEach(name => {
-      let x = this.teamService.getTeamByName(name);
-      teams.push(x);
-    });
-    return teams;
-  } */
-  // retourne le nombre d'équipes incrites // 
-/*   get nbTeam(){
-    return this.teamRegistered.length;
-  } */
+
 
 }

@@ -22,7 +22,6 @@ export class EventViewComponent implements OnInit {
     this.events = this.eventService.events;
     
 
-    //console.log(this.requestService.request("SELECT * FROM comptes"));
   }
 
 }
