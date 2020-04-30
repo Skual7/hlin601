@@ -3,6 +3,7 @@ import { EventService } from '../services/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TournamentService } from '../services/tournament.service';
 import { Tournament } from '../models/tournament.modele';
+import { EventVB } from '../models/event.modele';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SingleEventComponent implements OnInit {
 
   // descTourn = false;
 
-
+  singleEvent : EventVB;
   constructor(private eventService: EventService,
             private route : ActivatedRoute,
             private tournamentService: TournamentService,
@@ -30,27 +31,26 @@ export class SingleEventComponent implements OnInit {
 
   ngOnInit(){
     const name = this.route.snapshot.params['id']; //=nom event
-    
-    if(this.eventService.getEventByName(name) == undefined){
+    if(this.eventService.getEventByNameV2(name) == undefined){
       this.router.navigate(['404']);
     }
     else{
-      this.name = this.eventService.getEventByName(name).name;
-      this.dateEv = this.eventService.getEventByName(name).dateEv;
-      this.dateLimite = this.eventService.getEventByName(name).dateLimite;
-      this.tournois = this.eventService.getEventByName(name).tournois;
-      this.description = this.eventService.getEventByName(name).description;
-      let idE = this.eventService.getIdForEvent(this.name, this.dateEv, this.dateLimite);
-      //this.tournamentService.getTournaments(this.tournois, this.dateEv);
-      this.Tournaments = this.tournamentService.getTFromBddByIde(idE);
+      //console.log(this.eventService.events);
+      console.log("dans single");
+      this.name = this.eventService.getEventByNameV2(name).name;
+      this.dateEv = this.eventService.getEventByNameV2(name).dateEv;
+      this.dateLimite = this.eventService.getEventByNameV2(name).dateLimite;
+      this.tournois = this.eventService.getEventByNameV2(name).tournois;
+      this.description = this.eventService.getEventByNameV2(name).description
+      this.Tournaments = this.eventService.getTournamentsFromString(name);
       
-    
     }
     
   }
 
   onClickTournament(nameT: string){
-    this.Tournaments = this.tournamentService.getTournaments(this.tournois, this.dateEv);
+    //this.Tournaments = this.tournamentService.getTournaments(this.tournois, this.dateEv);
+    this.tournamentService.name = nameT;
   }
 
 

@@ -16,11 +16,6 @@ export class TeamService {
         this.teamSubject.next(this.teams.slice());
     }
 
-    addTeam(T : Team){
-        // rajouter les instructions pour rajouter la team dans la BDD
-        // rajouter le nom de la team dans teamRegistered du tournois qui a le tournamentid
-    }
-
     getTeamByTournament(teamRegitered: string[]){ 
         const teams : Team[] = [];
         teamRegitered.forEach( t => {

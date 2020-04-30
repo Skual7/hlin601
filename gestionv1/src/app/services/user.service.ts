@@ -7,10 +7,9 @@ export class UserService {
     user = new User("Earvin","Ngapeth","12/02/1991",
         "Earvin@email.fr",3, [{ tournamentid: "Elite G20/06/20",teamName: "champ",
             players: [[ "Benjamin","5"] ,["Julien","5"] ,["Nicolas","4"] ,["Earvin","5"]]}], ["Green tour de Gignac"]);
-  
    // pour garder le tournois en cours de gestions
     eventInProgress = "";//  marche pas encore
-//    user : User;
+  //  user : User;
 
     constructor(private requestService: RequestService ){}
 

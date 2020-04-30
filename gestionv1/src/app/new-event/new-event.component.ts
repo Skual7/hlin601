@@ -6,6 +6,7 @@ import { TournamentService } from '../services/tournament.service';
 import { Tournament } from '../models/tournament.modele';
 import { Router } from '@angular/router';
 import { stringify } from 'querystring';
+import { LocalStorageService } from '../services/localstorage.service';
 
 @Component({
   selector: 'app-new-event',
@@ -18,7 +19,8 @@ export class NewEventComponent implements OnInit {
   eventForm : FormGroup;
 
   constructor(private formBuilder: FormBuilder, private eventService: EventService,
-              private tournamentService : TournamentService, private router: Router) { }
+              private tournamentService : TournamentService, private router: Router,
+              private ls: LocalStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -70,8 +72,13 @@ export class NewEventComponent implements OnInit {
     console.log(newEvent);
       // pour la future string des tournois
     window.localStorage.setItem('tournament', JSON.stringify([])); // a la création de event
-    let idE = this.eventService.addEvent(newEvent); // ajoute ev à BDD
-    this.makeAndAddTournaments(idE);
+    
+    // ajoute le tournois à la strig
+    formValue['tournaments'].forEach( 
+      t => {
+      this.ls.addTournament(t['nameT'], t['format']);
+      })
+    this.eventService.addEvent(newEvent); // ajoute ev à BDD
     this.router.navigate(['/events']);
 
   }
@@ -85,16 +92,6 @@ export class NewEventComponent implements OnInit {
     return tournaments;
   }
   // s'occupe de créer les tournois entièrement puis les ajoute à la BDD //
-  makeAndAddTournaments(idE : number){
-    var idEvent = idE.toString();
-    const formValues = this.eventForm.value;
-    formValues['tournaments'].forEach( t => {
-        // cast pour bonne insertion dans bdd
-      let format = +t['format']; 
-      this.tournamentService.addTournament(new Tournament ( idEvent, t['nameT'], format, [],"" ));
-    });
-  }
-
   // getter pour factoriser le code dans template 
   get description(){
     return this.eventForm.get('description');

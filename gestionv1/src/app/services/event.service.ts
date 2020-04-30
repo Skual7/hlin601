@@ -4,6 +4,7 @@ import { EVENTS } from '../pseudoBDD/events-list';
 import { RequestService } from './request.service';
 import { LocalStorageService } from './localstorage.service';
 import { UserService } from './user.service';
+import { Tournament } from '../models/tournament.modele';
 
 @Injectable()
 export class EventService {
@@ -14,7 +15,6 @@ export class EventService {
     getEventFromBDD(){
         this.events =  [];
         let r = this.rs.request("SELECT * FROM event");
-        console.log(r);
         r = JSON.parse(r);
         let i = 0;
         while(r[i] != undefined){
@@ -26,10 +26,17 @@ export class EventService {
     }
     // ajoute l'event à la bdd et récupère son id
     addEvent(E: EventVB){
-        let r = this.rs.request('INSERT INTO event (nom, dateE,dateLimite,description, idUser) VALUES ( "'+E.name+'", "'+E.dateEv+'", "'+E.dateLimite+'", "'+E.description+'", "'+this.userService.user.email+'")');
-        let r2 = this.rs.request('SELECT id FROM event WHERE nom ="'+E.name+'" AND dateE= "'+E.dateEv+'"');
-        r2 = JSON.parse(r2);
-        return r2[0]['id'];
+        let str = window.localStorage.getItem('tournament');
+        let r = this.rs.request("INSERT INTO event (nom,string, dateE,dateLimite,description, idUser) VALUES ( '"+E.name+"', '"+str+ "', '"+E.dateEv+"', '"+E.dateLimite+"', '"+E.description+"', '"+this.userService.user.email+"')");
+    }
+    getEventByNameV2(name :string){
+        let event : EventVB;
+        this.events.forEach(ev => {
+            if(ev.name === name){
+                event = ev;
+            }
+        });
+        return event;
     }
 
     getEventByName(name : string){
@@ -54,5 +61,21 @@ export class EventService {
         +dateLimite+'"');
         r = JSON.parse(r);
         return r[0]['id'];
+    }
+
+    getTournamentsFromString(name:string){
+        let r = this.rs.request("SELECT string, id from event WHERE nom = '"+name+"'");
+      //  console.log(r);
+        r = JSON.parse(r);
+        let idE = r[0]['id']; // console.log(idE);
+        window.localStorage.setItem('tournament',r[0]['string']);
+        let tournoisName : any[] =  this.localStorageService.getTournamentsName();
+        const tournaments :  Tournament[] = [];
+        tournoisName.forEach( t => {
+            let newTournois = new Tournament(idE, t, this.localStorageService.getFormat(t), this.localStorageService.getTeams(t), "")
+            tournaments.push(newTournois);
+        })
+     //    console.log(tournaments)
+        return tournaments;
     }
 }

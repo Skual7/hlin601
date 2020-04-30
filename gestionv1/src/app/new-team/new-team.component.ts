@@ -40,12 +40,12 @@ export class NewTeamComponent implements OnInit {
   onSubmitForm(){   
     const formValue = this.teamForm.value;
     const newTeam = new Team (
-      this.tournamentService.tournament.id,
+      this.tournamentService.id,
       formValue['teamName'],
       this.extPlayers()
     );
     console.log(newTeam);
-   this.teamService.addTeam(newTeam);
+    this.tournamentService.addTeamtoTournament(formValue['teamName'],newTeam.players)
 
   }
 
