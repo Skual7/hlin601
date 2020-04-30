@@ -30,7 +30,7 @@ export class TournamentService {
         console.log(T);
         // ajout de la string du tournois
         this.ls.addTournament(T.nameT, T.format); // a la création du tournois
-        let str =   window.localStorage.getItem('tournament'); // vers SQL
+        let str =   this.ls.getTournament(T.nameT) // vers SQL
         console.log(str);
         let r = this.rs.request("INSERT INTO tournaments (nameT,format, string, idE) VALUES ( '"+T.nameT+"', "+T.format+", '"+str+"' , '"+T.id+"' )");
         console.log(r);
