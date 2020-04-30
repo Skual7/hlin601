@@ -12,46 +12,26 @@ export class ResultsComponent implements OnInit {
   @Input() numRound: number;
   @Input() numPoule: number;
   tournamentName: string;
-  form: FormGroup;
   displayModifScore: boolean;
   team1: "";
   team2: "";
 
   constructor(private route: ActivatedRoute, private localStorageService: LocalStorageService, private fb: FormBuilder) { }
+  
+  /* initialise le formulaire des scores du match à vide */
   ngOnInit() {
     this.displayModifScore = false;
     this.tournamentName = this.route.snapshot.params['trn'];
-    this.form = this.fb.group({
-      set11: '',
-      set12: '',
-      set21: '',
-      set22: '',
-      set31: '',
-      set32: '',
-      set41: '',
-      set42: '',
-      set51: '',
-      set52: ''
-    }) 
   }
 
+  /* permet l'affichage du composant set results lorsqu'on clique sur modifier les scores */
   modifScore(team1, team2){
     this.team1 = team1;
     this.team2 = team2;
     this.displayModifScore = true;
   }
 
- /* onSubmit(team1: string, team2: string){
-    this.displayForm = false;
-    for(let i=1; i<=5; i++){
-      let score1 = this.form.value["set"+i+"1"];
-      let score2 = this.form.value["set"+i+"2"];
-      console.log(score1);
-      console.log(score2);
-      this.localStorageService.addSetScoreToPool(this.tournamentName, this.numRound, this.numPoule, team1, team2, score1, score2);
-    }
-  }*/
-
+  /* Retourne les scores du matchs numero numMatch */
   getScore(tournamentName: string, numRound: number, numPoule: number, numMatch: number){
     let score = this.localStorageService.getScoreFromMatch(tournamentName, numRound, numPoule, numMatch);
     let results = "";
@@ -63,6 +43,7 @@ export class ResultsComponent implements OnInit {
     return results.substring(0,results.length-1);
   }
 
+  /* permet de cacher le composant set results lorsqu'on appuie sur cacher */
   hideModifScore(){
     this.displayModifScore = false;
   }

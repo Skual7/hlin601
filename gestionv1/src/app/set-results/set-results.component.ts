@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from '../services/localstorage.service';
 import { EventComponent } from '../event/event.component';
-//import { EventEmitter } from 'events';
 import { EventEmitter } from '@angular/core'; 
 
 @Component({
@@ -18,10 +17,11 @@ export class SetResultsComponent implements OnInit {
   form: FormGroup;
   @Input() numRound: number;
   @Input() numPoule: number;
-  @Input() team1: string;
-  @Input() team2: string;
-  @Output() messageToParent = new EventEmitter();
+  @Input() team1: string; //premiere équipe du match
+  @Input() team2: string; // deuxième équipe du match
+  @Output() messageToParent = new EventEmitter(); //Evenement pour mettre à jour les scores
 
+  /* Initialise le formulaire des scores à 0 */
   ngOnInit() {
     this.tournamentName = this.route.snapshot.params['trn'];
     this.form = this.fb.group({
@@ -38,6 +38,7 @@ export class SetResultsComponent implements OnInit {
     }) 
   }
 
+  /* Ajoute les scores set par set du match lorsque l'on clique sur confirmer */
   onSubmit(team1: string, team2: string){
     for(let i=1; i<=5; i++){
       let score1 = this.form.value["set"+i+"1"];

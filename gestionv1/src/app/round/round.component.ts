@@ -15,14 +15,17 @@ export class RoundComponent implements OnInit {
 
   constructor(private route : ActivatedRoute, private localstorageService : LocalStorageService) {}
 
+  /* Ajoute une poule lorsque l'on clique sur le bouton correspondant */
   addP(){
     this.localstorageService.addPoolToRound(this.nameTourament,this.numRound);
     this.pouleArray = this.localstorageService.getPoolsFromRound(this.nameTourament,this.numRound);
   }
+
   ngOnInit(): void {
     this.nameTourament = this.route.snapshot.params['trn'];
   }
 
+  /* met a jour le tableau des poules quand un poule émet un message refreshround */
   refreshRound(){
     this.pouleArray = this.localstorageService.getPoolsFromRound(this.nameTourament, this.numRound);
   }
