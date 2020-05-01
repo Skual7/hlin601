@@ -1,3 +1,6 @@
+# NB Pour Romain
+- Toutes les infos sont dans le fichier services/request.service.ts
+
 # NB
 - "pas terminé" c'est surtout pas implémenté du tout. En soit rien n'est terminé
 - Pour la liste des choses à faire voir todo.txt
@@ -39,7 +42,7 @@ composant présent dans single-event qui permet l'inscription à un évènement
 - user-profile
 Pas encore modifié, j'ai ajouté le type Team comme attribut du modèle mais ça fonctionne pas trop ... à revoir il est buggué mais grossièrement il affiche (simulé ici) les info de la personne connectée.
 
-# Explication des models:
+# Explication des models
 - modèle correspond à une classe, donc un nouveau type. Permet de faire new quelque chose.
 - ici Team dans le modèle de User fait bugger un peu le User
 

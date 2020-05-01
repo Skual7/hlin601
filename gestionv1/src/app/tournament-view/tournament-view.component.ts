@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../services/localstorage.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-vue-generale',
@@ -10,49 +11,55 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class TournamentViewComponent implements OnInit {
 
-  constructor(private route : ActivatedRoute, private localStorageService : LocalStorageService,
+  constructor(private rs: RequestService, private route : ActivatedRoute, private localStorageService : LocalStorageService,
             private router : Router) { }
-  // nameEv = "";
-  name ="";
+  nameEv = "";//nom de l'évènement
+  name ="";//nom du tournoi
+  rounds;//rounds du tounoi
 
   ngOnInit(): void {
-      this.name = this.route.snapshot.params['trn'];
-  //   this.nameEv = this.route.snapshot.params['name'];
+    this.name = this.route.snapshot.params['trn'];
+    this.nameEv = this.route.snapshot.params['name'];
+    this.rounds = this.localStorageService.getRounds(this.name);
+
   }
   
-  rounds = this.localStorageService.getRounds(this.name);
 
   monStyle(){
     let taille = 100/this.rounds.length
     console.log(100/this.rounds.length)
     return {
-      'width': taille+'%',
       'height': '100%',
-      'display':'inline-block',
-      'text-align':'center'
+      'display':'inline',
+      'text-align':'center',
+      'margin-left': '10px',
+      'margin-right': '10px',
+      'float' : 'left',
     }
   }
 
+  /* Méthode pour ajouter le round automatiquement si c'est possible. Met a jour les rounds*/
   addR(){
-    this.localStorageService.addRound(this.name);
-    this.rounds = this.localStorageService.getRounds(this.name);
+    if(!this.localStorageService.addRoundAutomate(this.name)){
+       alert("Le round actuel n est pas fini ou le nombre de poule est inssuffisant pour passer au round suivant")
+      }
+    else {
+      this.rounds = this.localStorageService.getRounds(this.name);
+    }
   }
- 
-  /*renvoie(){
-    this.tournamentService.addTournament(this.name,3);
-    this.tournamentService.addTeam(this.name,'Dragons Bleus');
-    this.tournamentService.addTeam(this.name,'Dragons Rouge');
-    this.tournamentService.addRound(this.name);
-    this.tournamentService.addPoolToRound(this.name,0);
-    this.tournamentService.addTeamToPool(this.name,'Dragons Bleus',0,0);
-    this.tournamentService.addTeamToPool(this.name,'Dragons Rouge',0,0);
-    this.rounds=this.tournamentService.getRounds(this.name);
-    console.log("je suis le nom "+this.name)
-  }*/
 
-  /*ajout(){
-    this.tournamentService.addRound(name);
-    this.rounds=this.tournamentService.getRounds(name);
-  }*/
+  /* Méthode pour enregistrer la chaine du local storage dans la table évènement de la BDD*/
+  save(){
+    let str = window.localStorage.getItem("tournament");
+    console.log(this.name+" "+str)
+    this.rs.request("UPDATE event SET string = '"+str+"' WHERE nom='"+this.nameEv+"'");
+    alert("La requête a été envoyé coté serveur.");
+  }
+
+  reiTournament(){
+    this.localStorageService.delRounds(this.name);
+    this.rounds = this.localStorageService.getRounds(this.name);
+    alert("Le tournois a été reinitialisé.");
+  }
 
 }

@@ -10,22 +10,10 @@ export class TeamService {
     tournamentid: string;
     newTeam : Team; // nouvelle équipe à ajouter
 
-    /*teamName: string;
-    players: string[];
-    playersLevel: number[];
- */
      teamSubject = new Subject<Team[]>();
     team : Team;
     emitTeam(){
         this.teamSubject.next(this.teams.slice());
-    }
-
-    addTeam(T : Team){
-        console.log(this.teams);
-        this.teams.push(T);
-        this.emitTeam();
-        console.log(this.teams);
-        // rajouter les instructions pour rajouter dans la BDD
     }
 
     getTeamByTournament(teamRegitered: string[]){ 
@@ -47,12 +35,4 @@ export class TeamService {
 
         return team;
     }
-
-
-    ////////////// GESTION AJOUT TEAM /////////
-  /*   addTeam(T: Team){
-        console.log(this.teams)
-        this.teams.push(T as any);
-        console.log(this.teams);
-    } */
 }

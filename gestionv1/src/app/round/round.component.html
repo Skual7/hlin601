@@ -1,4 +1,6 @@
-<div *ngFor="let item of pouleArray;index as i">
-    <app-poule [teamArray]=pouleArray[i][0]></app-poule>
+<button class="btn btn-primary" (click)="addP()">Ajouter une poule</button>
+
+<!---------------------------------tableau des poules------------------------------------------>
+<div style="margin-top:1%; border-bottom: dashed 1px" *ngFor="let item of pouleArray;index as i">
+    <app-poule (refreshPool)=(refreshRound())  [numRound]=this.numRound [numPoule]=i></app-poule>
 </div>
-<button class="btn btn-success" (click)="addP()">Ajouter une poule</button>

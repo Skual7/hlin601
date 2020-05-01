@@ -4,7 +4,7 @@
       <li routerLinkActive="active"><a routerLink='home'>Accueil</a></li>
       <li routerLinkActive="active"><a routerLink='events'>Evénements</a></li>
       <li routerLinkActive="active"><a routerLink='profile'>Profil</a></li>
-      <li routerLinkActive="active"><a routerLink='gestion'>En cours</a></li>
+      <li routerLinkActive="active"><a *ngIf="this.userService.eventInProgress" routerLink='gestion' (click)="go()">En cours</a></li>
       <li routerLinkActive="active"
       *ngIf='!connectionService.isConnected'><a routerLink='connection'>Connexion</a></li>
         <li routerLinkActive="active"
@@ -14,7 +14,7 @@
 
   </div>
 </nav>
-<div class="container">
+<div style="margin-top: -2rem" class="container-fluid">
   <div class="row">
     <router-outlet></router-outlet>
   </div>

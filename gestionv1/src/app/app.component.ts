@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConnectionService } from './services/connection.service';
+import { UserService } from './services/user.service';
+import { Router } from '@angular/router';
+import { RequestService } from './services/request.service';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +14,21 @@ export class AppComponent {
   
   ngOnInit(){
     if(window.localStorage.getItem('tournament') == null){
-      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
+      window.localStorage.setItem('tournament',JSON.stringify([]));
     }
     // pour clear le localstorage
     if(window.localStorage.getItem('tournament') != null){
-      window.localStorage.setItem('tournament',JSON.stringify({'':['',[],[]]}));
+      window.localStorage.setItem('tournament',JSON.stringify([]));
     }
   }
-  title = 'gestionv1';
-  constructor(private connectionService: ConnectionService){}
+/*   go(){
+    this.router.navigate(['gestion'])
+  }
+ */  title = 'gestionv1';
+  constructor(private connectionService: ConnectionService,
+              private userService : UserService,
+              private router : Router,
+              private requestService: RequestService){}
 
 
 

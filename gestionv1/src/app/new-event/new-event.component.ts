@@ -5,6 +5,8 @@ import { EventService } from '../services/event.service';
 import { TournamentService } from '../services/tournament.service';
 import { Tournament } from '../models/tournament.modele';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
+import { LocalStorageService } from '../services/localstorage.service';
 
 @Component({
   selector: 'app-new-event',
@@ -17,7 +19,8 @@ export class NewEventComponent implements OnInit {
   eventForm : FormGroup;
 
   constructor(private formBuilder: FormBuilder, private eventService: EventService,
-              private tournamentService : TournamentService, private router: Router) { }
+              private tournamentService : TournamentService, private router: Router,
+              private ls: LocalStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -30,9 +33,8 @@ export class NewEventComponent implements OnInit {
       dateEv: ['',[Validators.required]],
       dateLimite: ['',[Validators.required]],
       tournaments: this.formBuilder.array([]),
-      description: ['',[Validators.required]]
+      description: ['',[Validators.required, Validators.maxLength(500)]]
     });
-    this.eventForm.valueChanges.subscribe(console.log);
   }
 
   // retourne le tableau de tournois correctement formé // 
@@ -67,8 +69,15 @@ export class NewEventComponent implements OnInit {
       formValue['description']
     );
     console.log(newEvent);
+      // pour la future string des tournois
+    window.localStorage.setItem('tournament', JSON.stringify([])); // a la création de event
+    
+    // ajoute le tournois à la strig
+    formValue['tournaments'].forEach( 
+      t => {
+      this.ls.addTournament(t['nameT'], t['format']);
+      })
     this.eventService.addEvent(newEvent); // ajoute ev à BDD
-    this.makeAndAddTournaments();
     this.router.navigate(['/events']);
 
   }
@@ -82,12 +91,9 @@ export class NewEventComponent implements OnInit {
     return tournaments;
   }
   // s'occupe de créer les tournois entièrement puis les ajoute à la BDD //
-  makeAndAddTournaments(){
-    const formValues = this.eventForm.value;
-    formValues['tournaments'].forEach( t => {
-      this.tournamentService.addTournament(new Tournament ( t['nameT']+formValues['dateEv'], 
-      t['nameT'], t['format'] as number, [],"" ));
-    });
+  // getter pour factoriser le code dans template 
+  get description(){
+    return this.eventForm.get('description');
   }
 
 }

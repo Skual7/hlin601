@@ -6,6 +6,7 @@ import { EventVB } from '../models/event.modele';
 import { EventService } from '../services/event.service';
 import { Team } from '../models/team.modele';
 import { Router } from '@angular/router';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,14 +30,16 @@ export class UserProfileComponent implements OnInit {
     @Input() inscrit: Team[];
     @Input() event: string[];
 
+    
+
   constructor(public userService: UserService,
               private formBuilder: FormBuilder,
               private eventService: EventService) { }
 
   ngOnInit() {
     this.initForm();
-    this.birthday = this.userService.user.birthday;
-    this.events = this.eventService.getEventForUser(this.userService.user.event);
+   // this.birthday = this.userService.user.birthday;
+    this.events = this.userService.events;
    
   }
   initForm(){
@@ -44,27 +47,25 @@ export class UserProfileComponent implements OnInit {
       {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', Validators.required],
         niveau: [ , Validators.required]
       }
     );
   }
-  test(){
-    console.log(this.userService.user);
-  }
-  /*
   CommencerEvent(name: string){
-    this.router.navigate(['event/gestion/'+name])
-  }*/
+    this.userService.eventInProgress = name;
 
-/*
+    // console.log("commencer event : "+this.userService.eventInProgress);
+  }
+
+
   onSubmitForm(){
     const formValue = this.userForm.value;
-    const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, formValue['email'], formValue['niveau'], this.tournoisInscrit);
+    const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, this.userService.user.email , formValue['niveau'], [],[]);
     this.userService.user = newUser;
+    this.userService.modifUser(formValue['firstName'], formValue['lastName'], this.userService.user.email , formValue['niveau']);
     this.modifying = false;
   }
-  */
+  
   
 
 } 

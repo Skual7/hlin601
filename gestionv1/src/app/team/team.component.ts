@@ -11,7 +11,6 @@ export class TeamComponent implements OnInit {
   @Input() tournamentid: string;
   @Input() teamName: string;
   @Input() players: string[];
-  @Input() playersLevel: number[];
 
   constructor(private teamService : TeamService) { }
 

@@ -1,0 +1,19 @@
+Branche :
+
+	//créer nouvelle branche
+git branch nombranche
+
+	//se déplacer sur une branche
+git checkout nombranche
+
+	//fusionner la brancheB avec la branche actuelle
+git merge brancheB
+
+	//supprimer branche
+//d'abord en local
+git branch - d nombranche
+
+//puis en distant
+git push origin :nombranche
+
+test 

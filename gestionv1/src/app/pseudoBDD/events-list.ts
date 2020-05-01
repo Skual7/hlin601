@@ -17,3 +17,5 @@ export const EVENTS : EventVB[] =
         description: ["Lieu: GGL Stadium","Fin des inscriptions: 9:30","Début des tournois à 10:30"]
     }
 ];
+
+//,"Loisir Garçon","Loisir Fille", "Loisir mixte", "Cadet Garçon", "Cadet Fille", "Cadet Mixte", "Minimes Fille", "Minimes Garçons", "Minime Mixte", "Benjamin"

@@ -1,0 +1,18 @@
+<!--------------------------Formulaire de modification des scores------------------------>
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(this.team1, this.team2)">
+        <div class="form-group">
+            <input type="text" placeholder="Score Equipe 1" formControlName="score1" />
+            <input type="text" placeholder="Score Equipe 2" formControlName="score2" />
+            <!--<input type="text" placeholder="set2 equipe 1" formControlName="set21" />
+            <input type="text" placeholder="set2 equipe 2" formControlName="set22" />
+            <input type="text" placeholder="set3 equipe 1" formControlName="set31" />
+            <input type="text" placeholder="set3 equipe 2" formControlName="set32" />
+            <input type="text" placeholder="set4 equipe 1" formControlName="set41" />
+            <input type="text" placeholder="set4 equipe 2" formControlName="set42" />
+            <input type="text" placeholder="set5 equipe 1" formControlName="set51" />
+            <input type="text" placeholder="set5 equipe 2" formControlName="set52" />-->
+            <button class="btn">Confirmer</button>
+        </div>
+    </form>
+</div>

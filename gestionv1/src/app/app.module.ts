@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { EventComponent } from './event/event.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { EventService } from './services/event.service';
 import { EventViewComponent } from './event-view/event-view.component';
@@ -27,6 +27,11 @@ import { LocalStorageService } from './services/localstorage.service';
 import { PouleComponent } from './poule/poule.component';
 import { TournamentViewComponent } from './tournament-view/tournament-view.component';
 import { RoundComponent } from './round/round.component';
+import { ResultsComponent } from './results/results.component';
+import { SetResultsComponent } from './set-results/set-results.component';
+import { Four0fourComponent } from './four0four/four0four.component';
+import { RequestService } from './services/request.service';
+//import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -35,6 +40,7 @@ const appRoutes: Routes = [
   {path: 'events', component: EventViewComponent},
   {path: 'events/new-event', canActivate:[ConnectionGuard], component: NewEventComponent},
   {path: 'events/:id', canActivate:[ConnectionGuard], component: SingleEventComponent},
+  {path: 'events/**', component: Four0fourComponent},
   { path: 'connection', component: ConnectionComponent},
   { path: 'profile', canActivate:[ConnectionGuard], component: UserProfileComponent },
   
@@ -42,8 +48,10 @@ const appRoutes: Routes = [
   {path: 'gestion', canActivate:[ConnectionGuard], component: EventInProgressComponent},
   {path: 'gestion/:name', canActivate:[ConnectionGuard], component: EventInProgressComponent},
   {path: 'gestion/:name/:trn', canActivate:[ConnectionGuard], component: TournamentViewComponent},
+  {path: 'gestion/:name/**', component: Four0fourComponent},
+  { path: '404', component: Four0fourComponent},
   { path: '', component: HomeComponent},
-  { path: '**', redirectTo: '/home'}
+  { path: '**', component: Four0fourComponent}
 ];
 
 @NgModule({
@@ -62,12 +70,16 @@ const appRoutes: Routes = [
     EventInProgressComponent,
     PouleComponent,
     TournamentViewComponent,
-    RoundComponent
+    RoundComponent,
+    ResultsComponent,
+    SetResultsComponent,
+    Four0fourComponent
 
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+     HttpClientModule,
     RouterModule.forRoot(appRoutes)
 
   ],
@@ -78,7 +90,8 @@ const appRoutes: Routes = [
     ConnectionGuard,
     TournamentService,
     TeamService,
-    LocalStorageService
+    LocalStorageService,
+    RequestService
 
   ],
   bootstrap: [AppComponent]

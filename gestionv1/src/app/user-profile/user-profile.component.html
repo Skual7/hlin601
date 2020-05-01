@@ -1,64 +1,77 @@
-<div class="col-sm-8 col-sm-offset-1" >
-    <h2>{{ userService.user.firstName}} {{ userService.user.lastName }} </h2>
-    <p>Date de naissance: {{ userService.user.birthday }} </p>
-    <p>Votre email: {{ userService.user.email }}</p>
-    <p>Votre niveau: {{ userService.user.niveau }} /5</p>
-    <p>Votre équipe: {{ userService.user['inscrit'].tournamentid}} </p>
+<section id="home" class="page overlay">
+    <div id="con" class="container">
+        <div id="d2" class="content cover text-center">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="mt-0 mb-4 h1" data-animation="fadeInDown" data-delay="300">Votre profil</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <app-team  *ngFor="let t of userService.user['inscrit']"
-        [tournamentid] = "t.tournamentId"
-        [teamName]="t.teamName"
-        [players]="t.players"
-        [playersLevel]="t.playersLevel">
+<div class="container">
+    <div style="float: left; display: inline" class="col-sm-7">
+        <div class="card bg-primary">
+            <div class="card-header">
+                <h2 style="text-align: center">{{ userService.user.firstName}} {{ userService.user.lastName }} </h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">Date de naissance: {{ userService.user.birthday }} </li>
+                    <li class="list-group-item">Votre email: {{ userService.user.email }}</li>
+                    <li class="list-group-item">Votre niveau: {{ userService.user.niveau }} /5</li>
+                    <!-- <li class="list-group-item">Votre équipe: {{ userService.user['inscrit'].tournamentid}} </li> -->
+                </ul>
+            </div>
+        </div>
 
-    </app-team>
-    <button class="btn btn-primary" *ngIf="modifying === false" (click)="modifying = true;">Modifier vos informations</button>
-    <button class="btn btn-primary" *ngIf="modifying === true" (click)="modifying = false;">Annuler</button>
+        <!-- <app-team *ngFor="let t of userService.user['inscrit']" [tournamentid]="t.tournamentId" [teamName]="t.teamName"
+            [players]="t.players">
+        </app-team> -->
+        <button class="btn btn-primary" *ngIf="modifying === false" (click)="modifying = true;">Modifier vos
+            informations</button>
+        <button class="btn btn-primary" *ngIf="modifying === true" (click)="modifying = false;">Annuler</button>
+    </div>
+    <div style="float: right; display: inline" class="col-sm-4" *ngFor="let ev of events; let i = index">
+        <app-event [name]="ev.name" [dateEv]="ev.dateEv" [dateLimite]="ev.dateLimite" [tournois]="ev.tournois"
+            [description]="ev.description">
+        </app-event>
+        <button class="btn btn-primary" [routerLink]="[ev.name]" (click)="CommencerEvent(ev.name)">Commencer</button>
+    </div>
+
+    <div *ngIf="modifying" class="col-sm-8 col-sm-offset-1">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
+            <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            </div>
+            <div class="form-group">
+                <label for="birthday">Date de naissance</label>
+                <input type="text" class="form-control" id="birthday" value="{{userService.user.birthday}}" disabled>
+            </div>
+<!--             <div class="form-group">
+                <label for="email">Adresse Mail</label>
+                <input type="text" class="form-control" id="email" value="{{userService.user.email}}" disabled>
+            </div> -->
+            <div class="form-group">
+                <label for="niveau">Quel niveau avez-vous ? /5</label>
+                <select id="niveau" class="form-control" formControlName="niveau">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <p>ATTENTION: La modification de votre date de naissance est impossible. On ne naît qu'une fois !</p>
+            </div>
+            <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">Enregistrer</button>
+        </form>
+    </div>
 </div>
-<h2>Vos événements: </h2>
-<div  class="col-sm-4 col-sm-offset-10" *ngFor="let ev of events; let i = index">
-    <app-event 
-    [name]="ev.name"
-    [dateEv]="ev.dateEv"
-    [dateLimite]="ev.dateLimite"
-    [tournois]="ev.tournois"
-    [description]="ev.description">
-    </app-event>
-    <button class="btn btn-success" [routerLink]="[ev.name]">Commencer</button> <!-- (click)="CommencerEvent(ev.name)" -->   
-</div>
-
-<div *ngIf="modifying" class="col-sm-8 col-sm-offset-1">
-    <form [formGroup]="userForm" (ngSubmit)="test()">
-        <div class="form-group">
-            <label for="firstName">Prénom</label>
-            <input type="text" class="form-control" id="firstName" formControlName="firstName">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Nom</label>
-            <input type="text" class="form-control" id="lastName" formControlName= "lastName">
-        </div>
-        <div class="form-group">
-            <label for="birthday">Date de naissance</label>
-            <input type="text" class="form-control" id="birthday" value="{{userService.user.birthday}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="email">Adresse Mail</label>
-            <input type="text" class="form-control" id="email" formControlName= "email">
-        </div>
-        <div class="form-group">
-            <label for="niveau">Quel niveau avez-vous ? /5</label>
-            <select  id="niveau" class="form-control" formControlName= "niveau">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <p>ATTENTION: La modification de votre date de naissance est impossible. On ne naît qu'une fois !</p>
-        </div>
-        <button class="btn btn-success" type="submit" [disabled]="userForm.invalid">Enregistrer</button>
-    </form>
-</div>
-
