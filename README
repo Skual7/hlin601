@@ -9,7 +9,7 @@ Installation :
 
 - Une fois le pull effectuer se placer dans le dossier hlin601/gestionv1/
 
-- Effectuer un "npm install" qui installera les éléments d'angular puis un "ng serve open".
+- Effectuer un "npm install" qui installera les éléments d'angular puis un "ng serve --open" pour lancer l'application.
 
 
 Utilisation de l'application :
