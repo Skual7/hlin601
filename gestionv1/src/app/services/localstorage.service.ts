@@ -265,6 +265,12 @@ export class LocalStorageService {
   }
 
   //Gestion Round-----------------------------------------------------------------
+  delRounds(tournamentName: String){
+    let tournament = this.getTournament(tournamentName);
+    tournament[2].splice(0,tournament[2].length);
+    this.setTournament(tournamentName,tournament);
+  }
+  
   getRounds(tournamentName: String){
     return this.getTournament(tournamentName)[2];
   }

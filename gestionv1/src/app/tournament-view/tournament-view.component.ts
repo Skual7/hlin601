@@ -53,6 +53,13 @@ export class TournamentViewComponent implements OnInit {
     let str = window.localStorage.getItem("tournament");
     console.log(this.name+" "+str)
     this.rs.request("UPDATE event SET string = '"+str+"' WHERE nom='"+this.nameEv+"'");
+    alert("La requête a été envoyé coté serveur.");
+  }
+
+  reiTournament(){
+    this.localStorageService.delRounds(this.name);
+    this.rounds = this.localStorageService.getRounds(this.name);
+    alert("Le tournois a été reinitialisé.");
   }
 
 }
