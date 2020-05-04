@@ -1,15 +1,9 @@
 Installation :
-- Initialiser le dépot dans un dossier (git init).
-
-- Cloner le git (git clone https://github.com/Skual7/hlin601).
-
-- Se placer sur la branche "master" du git.
-
-- Effectuer un pull.
-
-- Une fois le pull effectuer se placer dans le dossier hlin601/gestionv1/
-
-- Effectuer un "npm install" qui installera les éléments d'angular puis un "ng serve --open" pour lancer l'application.
+    1/ Installer Angular à l'aide de la commande : "npm install -g @angular/cli"
+    2/ Effectuer un clonage du git à l'aide de la commande : "git clone https://github.com/Skual7/hlin601.git"
+    3/ Se placer dans le dossier gestionv1 à l'aide de la commande : "cd gestionv1"
+    4/ Effectuer la commande suivante : "npm install"
+    5/ Lancer l'application à l'aide de : "ng serve --open"
 
 
 Utilisation de l'application :
