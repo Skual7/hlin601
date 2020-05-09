@@ -2,6 +2,7 @@ import { User } from "../models/user.model";
 import { Injectable } from '@angular/core';
 import { RequestService } from './request.service';
 import { EventVB } from '../models/event.modele';
+
 @Injectable()
 export class UserService {
 
@@ -10,7 +11,7 @@ export class UserService {
   //           players: [[ "Benjamin","5"] ,["Julien","5"] ,["Nicolas","4"] ,["Earvin","5"]]}], ["Green tour de Gignac"]);
 
   //  // pour garder le tournois en cours de gestions
-  eventInProgress = "";//  marche pas encore
+  eventInProgress = "";// sert pour onglet "en cours"
   user: User;
   events: EventVB[];
   constructor(private requestService: RequestService) { }
@@ -21,7 +22,9 @@ export class UserService {
     const u = new User(f[0]['firstname'], f[0]['lastName'], f[0]['dateNaissance'], f[0]['email'], f[0]['level'], [], []);
     this.user = u;
   }
-  setUserEvents(rq: string) {
+  setUserEvents(email : string) {
+    console.log("SetUserEvents has been called");
+    let rq = this.requestService.request('SELECT * FROM event WHERE idUser = "'+email+'"')
     this.events = [];
     if (rq != "]") {
       //console.log(rq);

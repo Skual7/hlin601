@@ -33,12 +33,12 @@ export class EventInProgressComponent implements OnInit {
         this.tournaments = this.eventService.getTournamentsFromString(this.event.name);
         console.log(this.tournaments); 
         let t  = [];
-        this.tournaments.forEach(tournament => {
-          tournament.teamRegistered.forEach(team => {
-            t.push(this.teamService.getTeamByName(team))
-          });
-        });
-        this.teams = t; 
+        //this.tournaments.forEach(tournament => {
+        //   tournament.teamRegistered.forEach(team => {
+        //     t.push(this.teamService.getTeamByName(team))
+        //   });
+        // });
+        //this.teams = t; 
     }
      
   }

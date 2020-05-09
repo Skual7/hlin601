@@ -39,6 +39,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.initForm();
    // this.birthday = this.userService.user.birthday;
+   this.userService.setUserEvents(this.userService.user.email);
     this.events = this.userService.events;
    
   }

@@ -1,10 +1,17 @@
+import { UserService } from './user.service';
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class ConnectionService {
     isConnected = false;
     wrongPwd = false;
     pbCoBdd = false;
+    constructor(private userService: UserService){}
 
     signOut(){
-        this.isConnected = false;  
+        this.isConnected = false;
+        this.userService.eventInProgress = "";
+        window.localStorage.clear();
     }
 
     connexion(username, password): boolean | void {
@@ -32,14 +39,3 @@ export class ConnectionService {
 
 
 }
-
-        /*         return new Promise(
-            (resole, reject) => {
-                setTimeout(
-                    () => {
-                        this.isConnected = true;
-                        resole(true);
-                    }, 1000 // en ms
-                );
-            }
-        ); */

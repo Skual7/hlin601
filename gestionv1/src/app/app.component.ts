@@ -21,10 +21,10 @@ export class AppComponent {
       window.localStorage.setItem('tournament',JSON.stringify([]));
     }
   }
-/*   go(){
-    this.router.navigate(['gestion'])
+   go(){
+    this.router.navigate(['gestion/'+this.userService.eventInProgress])
   }
- */  title = 'gestionv1';
+   title = 'GTV';
   constructor(private connectionService: ConnectionService,
               private userService : UserService,
               private router : Router,

@@ -58,12 +58,12 @@ export class ConnectionComponent implements OnInit {
       this.router.navigate(['/events']);
     }
     else if (this.connectionService.wrongPwd){
-      console.log("Mauvaais identifiant ou mot de passe")
+      console.log("Mauvais identifiant ou mot de passe")
     } if (this.connectionService.pbCoBdd){
       console.log("Une erreur de connexion à la BDD est survenue: Réessayer")
     }
     this.userService.setUser(this.requestService.request('SELECT * FROM user where email = "'+connexionValues['email']+'"'));
-    this.userService.setUserEvents(this.requestService.request('SELECT * FROM event WHERE idUser = "'+connexionValues['email']+'"'))
+    this.userService.setUserEvents(connexionValues['email']);
   }
   onInscription(){
     const inscValues = this.formInscription.value;
@@ -71,12 +71,14 @@ export class ConnectionComponent implements OnInit {
     let t = this.requestService.request('INSERT INTO user VALUES ('+'"'+inscValues['email']+'"'+', "'+inscValues['prenom']+'", "'+
     inscValues['nom']+'", "'+inscValues['niveau']+'", "'+inscValues['birthday']+'", "'+inscValues['mdp']+'")');
     console.log(t);
-    // connexion automatique si insertion pas torp longue ... 
     this.autoCo(inscValues['email'], inscValues['mdp']);
     
   }
+  // Permet la connexion automatique après l'inscription.
   autoCo(email : string , pwd: string){
     this.connectionService.connexion(email,pwd);
+    this.userService.setUser(this.requestService.request('SELECT * FROM user where email = "'+email+'"'));
+    this.userService.setUserEvents(email);
     if(this.connectionService.isConnected){
       this.router.navigate(['/events']);
     }

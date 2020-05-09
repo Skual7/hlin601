@@ -35,37 +35,38 @@
         <h4>Première visite ?  Créez-vous un compte en 2 min !</h4>
         <form [formGroup]="formInscription" (ngSubmit)="onInscription()">
             <div class="form-group">
-                <label>Nom</label>
+                <label>Nom <span>*</span></label>
                 <input type="text" class="form-control" formControlName="nom">
             </div>
             <div class="form-group">
-                <label>Prénom</label>
+                <label>Prénom <span>*</span></label>
                 <input type="text" class="form-control" formControlName="prenom">
                 <label><small class="text-danger" *ngIf="prenom.errors?.minlength && prenom.touched">
                     3 caractères minimum pour le prénom</small></label>
             </div>
             <div class="form-group">
-                <label>Date de naissance</label>
+                <label>Date de naissance <span>*</span></label>
                 <input type="date" class="form-control" formControlName="birthday">
             </div>
             <div class="form-group">
-                <label>Votre niveau sur 5</label>
+                <label>Votre niveau sur 5 <span>*</span></label>
                 <input type="number" class="form-control" formControlName="niveau" placeholder="1 débutant, 3 correct, 5 très bon">
                 <label><small class="text-danger" *ngIf="niveau.errors?.min || niveau.errors?.max">
                 Le niveau doit être compris entre 1 et 5 !</small></label>
             </div>
             <div class="form-group">
-                <label>Adresse email</label>
+                <label>Adresse email <span>*</span></label>
                 <input type="email" class="form-control" formControlName="email" placeholder="gestion@tournois.fr">
                 <label><small class="text-danger" *ngIf="email.touched && email.invalid">
                     Entrez une adresse email valide !</small></label>
             </div>
             <div class="form-group">
-                <label>Mot de passe</label>
+                <label>Mot de passe <span>*</span></label>
                 <input type="password" class="form-control" formControlName="mdp">
                 <label><small class="text-danger" *ngIf="mdp.errors?.minlength && mdp.touched ">
                 Le doit mot de passe doit faire minimum 5 caractères !</small></label>
             </div>
+            <small><span>*</span> Champs obligatoires</small><br>
             <button class="btn btn-primary" [disabled]="formInscription.invalid">S'inscrire</button>
         </form>
     </div>
