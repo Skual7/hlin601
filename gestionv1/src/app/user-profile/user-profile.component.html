@@ -25,7 +25,7 @@
                 </ul>
             </div>
         </div>
-
+<!-- Plus fonctionnel à cause des changement de la bdd etc -->
         <!-- <app-team *ngFor="let t of userService.user['inscrit']" [tournamentid]="t.tournamentId" [teamName]="t.teamName"
             [players]="t.players">
         </app-team> -->
@@ -33,14 +33,17 @@
             informations</button>
         <button class="btn btn-primary" *ngIf="modifying === true" (click)="modifying = false;">Annuler</button>
     </div>
-    <div style="float: right; display: inline" class="col-sm-4" *ngFor="let ev of events; let i = index">
-        <app-event [name]="ev.name" [dateEv]="ev.dateEv" [dateLimite]="ev.dateLimite" [tournois]="ev.tournois"
-            [description]="ev.description">
-        </app-event>
-        <button class="btn btn-primary" [routerLink]="[ev.name]" (click)="CommencerEvent(ev.name)">Commencer</button>
+    <div style="float: right; display: inline" class="col-sm-4">
+        <div *ngFor="let ev of events; let i = index">
+            <app-event [name]="ev.name" [dateEv]="ev.dateEv" [dateLimite]="ev.dateLimite" [tournois]="ev.tournois"
+                [description]="ev.description">
+            </app-event>
+            <button class="btn btn-primary" [routerLink]="[ev.name]" (click)="CommencerEvent(ev.name)">Commencer</button><br><br>
+        </div>
     </div>
 
-    <div *ngIf="modifying" class="col-sm-8 col-sm-offset-1">
+    <!-- Partie modification des données personnelles -->
+    <div *ngIf="modifying" class="col-sm-8">
         <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
             <div class="form-group">
                 <label for="firstName">Prénom</label>
@@ -54,10 +57,6 @@
                 <label for="birthday">Date de naissance</label>
                 <input type="text" class="form-control" id="birthday" value="{{userService.user.birthday}}" disabled>
             </div>
-<!--             <div class="form-group">
-                <label for="email">Adresse Mail</label>
-                <input type="text" class="form-control" id="email" value="{{userService.user.email}}" disabled>
-            </div> -->
             <div class="form-group">
                 <label for="niveau">Quel niveau avez-vous ? /5</label>
                 <select id="niveau" class="form-control" formControlName="niveau">

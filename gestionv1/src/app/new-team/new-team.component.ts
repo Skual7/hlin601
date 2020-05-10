@@ -4,6 +4,7 @@ import { TeamService } from '../services/team.service';
 import { Team } from '../models/team.modele';
 import { TournamentService } from '../services/tournament.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-team',
@@ -17,7 +18,8 @@ export class NewTeamComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private teamService: TeamService,
               private tournamentService: TournamentService,
-              private userService : UserService
+              private userService : UserService,
+              private router : Router
               ) { }
 
   ngOnInit() {
@@ -46,7 +48,8 @@ export class NewTeamComponent implements OnInit {
     );
     console.log(newTeam);
     this.tournamentService.addTeamtoTournament(formValue['teamName'],newTeam.players)
-
+    alert("Votre équipe a bien été enregistré !");
+    this.router.navigate(["events"])
   }
 
   // Pour rajouter des joueurs au formulaire lors du click sur ajouter Joueur //
@@ -70,7 +73,6 @@ export class NewTeamComponent implements OnInit {
       players.push( [p.name,p.level]);
     });
     if(formValues['selfInsc']){
-      console.log("self");
       players.push( [this.userService.user.firstName, this.userService.user.niveau])
     }
     return players;

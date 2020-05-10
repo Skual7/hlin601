@@ -21,11 +21,12 @@ export class TournamentComponent implements OnInit {
   teams: Team[];
   inscritpion : boolean = false;
   listerEquipe : boolean = false;
-
+  NbTeamRegistered: number = 0;
   constructor(private tournamentService: TournamentService,
               private teamService : TeamService, private ls : LocalStorageService) { }
 
   ngOnInit() {
+    this.NbTeamRegistered = this.nbTeams;
   }
 
 
@@ -46,6 +47,12 @@ export class TournamentComponent implements OnInit {
       let newTeam = new Team(this.id, t[0], players );
       this.teams.push(newTeam);
     })
+  }
+  get nbTeams(){
+    let teamsnames = this.ls.getTeams(this.nameT);
+    let nb = 0;
+    teamsnames.forEach(t => nb++ );
+    return nb;
   }
 
 

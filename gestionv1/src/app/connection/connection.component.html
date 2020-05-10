@@ -66,8 +66,9 @@
                 <label><small class="text-danger" *ngIf="mdp.errors?.minlength && mdp.touched ">
                 Le doit mot de passe doit faire minimum 5 caractères !</small></label>
             </div>
-            <small><span>*</span> Champs obligatoires</small><br>
             <button class="btn btn-primary" [disabled]="formInscription.invalid">S'inscrire</button>
+            <br>
+            <small *ngIf="formInscription.invalid"><span>*</span> Champs obligatoires</small><br>
         </form>
     </div>
     

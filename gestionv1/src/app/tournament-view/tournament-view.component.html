@@ -16,10 +16,9 @@
 
 <button style="margin-top: 3rem" class="btn btn-primary" (click)="addR()">Ajouter un round</button>
 <br>
-<button style="margin-top: 1rem" class="btn btn-primary" (click)="save()">Sauvegarder le tournoi</button>
+<button style="margin-top: 3rem" class="btn btn-danger" (click)="reiTournament()">Reinitialiser le tournois</button>
 <br>
-<button style="margin-top: 3rem" class="btn btn-primary" (click)="reiTournament()">Reinitialiser le tournois</button>
-<br>
+
 <div class="container-fluid" style="height:100%; background-color: white; margin-top:1%">
     <div style="align-content: center; align-items: center; height: 100%">
     <div [ngStyle]="monStyle()" class="col-lg-5" *ngFor="let item of rounds;index as i">

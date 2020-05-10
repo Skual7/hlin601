@@ -34,12 +34,10 @@ export class SingleEventComponent implements OnInit {
       this.router.navigate(['404']);
     }
     else{
-      console.log("dans single");
       let event: EventVB = this.eventService.getEventByNameV2(name);
       this.name = event.name; this.dateEv = event.dateEv; this.dateLimite = event.dateLimite;
       this.description = event.description;
       this.Tournaments = this.eventService.getTournamentsFromString(name);
-      console.log(this.Tournaments);
     }
     
   }

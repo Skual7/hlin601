@@ -72,18 +72,24 @@ export class EventService {
 
     getTournamentsFromString(name: string) {
         let r = this.rs.request("SELECT string, id from event WHERE nom = '" + name + "'");
-        console.log(r);
+        //console.log(r);
         r = JSON.parse(r);
         let idE = r[0]['id']; // console.log(idE);
         window.localStorage.setItem('tournament', r[0]['string']);
         let tournoisName: any[] = this.localStorageService.getTournamentsName();
-        console.log("Dans getTournamentsFromString: " + tournoisName);
+      //  console.log("Dans getTournamentsFromString: " + tournoisName);
         const tournaments: Tournament[] = [];
         tournoisName.forEach(t => {
             let newTournois = new Tournament(idE, t, this.localStorageService.getFormat(t), this.localStorageService.getTeams(t), "")
             tournaments.push(newTournois);
         })
-        console.log(tournaments)
+        //console.log(tournaments)
         return tournaments;
+    }
+    beginningEvent(name: string){
+        let r = this.rs.request("SELECT string, id from event WHERE nom = '" + name + "'");
+        console.log(r);
+        r = JSON.parse(r);
+        let idE = r[0]['id'];
     }
 }
