@@ -5,8 +5,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { EventVB } from '../models/event.modele';
 import { EventService } from '../services/event.service';
 import { Team } from '../models/team.modele';
-import { Router } from '@angular/router';
-import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -54,14 +52,13 @@ export class UserProfileComponent implements OnInit {
   }
   CommencerEvent(name: string){
     this.userService.eventInProgress = name;
-
-    // console.log("commencer event : "+this.userService.eventInProgress);
   }
 
 
   onSubmitForm(){
     const formValue = this.userForm.value;
-    const newUser = new User( formValue['firstName'], formValue['lastName'],this.birthday, this.userService.user.email , formValue['niveau'], [],[]);
+    console.log(this.userService.user.birthday)
+    const newUser = new User( formValue['firstName'], formValue['lastName'],this.userService.user.birthday, this.userService.user.email , formValue['niveau'], [],[]);
     this.userService.user = newUser;
     this.userService.modifUser(formValue['firstName'], formValue['lastName'], this.userService.user.email , formValue['niveau']);
     this.modifying = false;

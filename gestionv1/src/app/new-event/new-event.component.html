@@ -24,24 +24,23 @@
       <div style="margin-top:-1rem" class="card-body">
         <div class="col-md-12" style="border: 1px solid black;">
           <div class="form-group">
-            <label style="margin-top: 2rem" for="name">Nom de l'événement
+            <label style="margin-top: 2rem" for="name">Nom de l'événement <span>*</span>
               <input placeholder="Nom de l'évènement" type="text" class="form-control" formControlName="name"
                 [(ngModel)]="name">
-              <!-- Apparement pas une bonne idée ngModele mais pour l'instant on garde (voir console pour raisons) -->
             </label>
           </div>
           <div class="form-group">
-            <label for="dateEv">Date de l'événement
+            <label for="dateEv">Date de l'événement <span>*</span>
               <input type="date" class="form-control" formControlName="dateEv">
             </label>
           </div>
           <div class="form-group">
-            <label for="dateLimite">Date limite d'inscription sur le site
+            <label for="dateLimite">Date limite d'inscription sur le site <span>*</span>
               <input type="date" class="form-control" formControlName="dateLimite">
             </label>
           </div>
 
-          <label for="description">Description
+          <label for="description">Description <span>*</span>
             <textarea style="margin-bottom: 3rem"
               placeholder="Renseignez le/les lieux avec précision, l'heure de fin des inscriptions en présentiel, l'heure de début des tournois et toute information essentielle au bon déroulement de votre événement."
               id="description" class="form-control" formControlName="description"></textarea>
@@ -52,9 +51,6 @@
     </div>
 <!-- 501 caractères pour pouvoir tester  -->
     <!-- azertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopazertyuiopa -->
-
-
-
 
     <!-- Partie ajout de tournois  -->
     <div style="text-align: center" class="col-md-12">
@@ -76,6 +72,8 @@
         <button type="button" class="btn btn-success" (click)="onAddTournament()">Ajouter un tournois</button>
       </div>
           <button style="margin-top: 5rem; margin-bottom: 5rem" class="btn btn-primary" type="submit" [disabled]="eventForm.invalid">Confirmer et créer l'évènement</button>
+          <br>
+          <small *ngIf="eventForm.invalid"><span>*</span> Champs obligatoires</small><br>
     </div>
   </form>
 
