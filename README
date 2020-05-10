@@ -85,10 +85,9 @@ Si des équipes manquent, il est possible de les ajouter manuellement à une pou
 
 
 Bugs et erreurs :
-- Après l'ajout d'un tournois il faut se déconnecter puis se reconnecter pour pouvoir le commencer (???).
-- Après l'ajout d'une équipe il n'y a pas de rafraichissment de la page, mais l'équipe est bien ajouter en appuyant sur "continuer".
-- Les dates des événements sont "factices" puisqu'il est possible d'ajouter des équipes à tout moment.
-- le bouton "En cours" du menu horizontal ne fonctionne pas.
+- Si vous avez modifié, créé, validé quelque chose et que rien ne se passe (par exemple problème de connexion), ouvrez la console dans le navigateur. En présence de l'erreur "error: NetworkError: Failed to execute 'send' on 'XMLHttpRequest': Failed to load" veuillez réessayer ultérieurement. C'est un problème provenant de l'hébergeur.
+ 
+
 
 
 

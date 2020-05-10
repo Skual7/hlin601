@@ -41,7 +41,7 @@ export class TournamentViewComponent implements OnInit {
   /* Méthode pour ajouter le round automatiquement si c'est possible. Met a jour les rounds*/
   addR(){
     if(!this.localStorageService.addRoundAutomate(this.name)){
-       alert("Le round actuel n est pas fini ou le nombre de poule est inssuffisant pour passer au round suivant")
+       alert("Le round actuel n est pas fini ou le nombre de poule est insuffisant pour passer au round suivant")
       }
     else {
       this.rounds = this.localStorageService.getRounds(this.name);
