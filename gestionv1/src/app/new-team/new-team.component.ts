@@ -73,7 +73,6 @@ export class NewTeamComponent implements OnInit {
       players.push( [p.name,p.level]);
     });
     if(formValues['selfInsc']){
-      console.log("self");
       players.push( [this.userService.user.firstName, this.userService.user.niveau])
     }
     return players;

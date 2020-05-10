@@ -37,15 +37,11 @@ export class EventInProgressComponent implements OnInit {
           this.tournaments = this.eventService.getTournamentsFromString(this.event.name);
           this.userService.tournameInProgress = this.tournaments;
           window.localStorage.clear();
-          console.log("y a une couille dans le potage")
         }
         else{
           this.event = this.eventService.getEventByName(this.userService.eventInProgress)
           this.tournaments = this.userService.tournameInProgress;
         }
-
-        
-        console.log("ngOnInit event-int prog" +this.tournaments); 
         //let t  = [];
         //this.tournaments.forEach(tournament => {
         //   tournament.teamRegistered.forEach(team => {

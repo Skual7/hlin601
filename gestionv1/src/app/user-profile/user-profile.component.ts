@@ -57,7 +57,6 @@ export class UserProfileComponent implements OnInit {
 
   onSubmitForm(){
     const formValue = this.userForm.value;
-    console.log(this.userService.user.birthday)
     const newUser = new User( formValue['firstName'], formValue['lastName'],this.userService.user.birthday, this.userService.user.email , formValue['niveau'], [],[]);
     this.userService.user = newUser;
     this.userService.modifUser(formValue['firstName'], formValue['lastName'], this.userService.user.email , formValue['niveau']);
